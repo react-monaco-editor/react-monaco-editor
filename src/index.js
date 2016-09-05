@@ -21,7 +21,6 @@ class MonacoEditor extends React.Component {
         this.initMonaco();
       });
     };
-
     // Load AMD loader if necessary
     if (typeof window.require === 'undefined') {
       var loaderScript = document.createElement('script');
@@ -31,18 +30,6 @@ class MonacoEditor extends React.Component {
       document.body.appendChild(loaderScript);
     } else {
       onGotAmdLoader();
-    }
-  }
-  // Register listeners
-  registerListeners(listeners) {
-    for (let listener in listeners) {
-      if (this.editor[listener]) {
-        this.editor[listener]((e) => {
-          if (this.props.listeners[listener]) {
-            this.props.listeners[listener](e);
-          }
-        });
-      }
     }
   }
   initMonaco() {
@@ -55,7 +42,6 @@ class MonacoEditor extends React.Component {
         theme,
         ...options,
       });
-      //this.registerListeners(listeners);
       // After monaco editor has been initialized
       if (onDidMount) {
         onDidMount(this.editor);
