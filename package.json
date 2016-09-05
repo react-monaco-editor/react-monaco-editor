@@ -1,0 +1,60 @@
+{
+  "name": "react-monaco-editor",
+  "version": "0.1.0",
+  "description": "Monaco Editor for React",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors --port 8886",
+    "clean": "rimraf lib dist coverage",
+    "lint": "eslint src",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "check": "npm run lint",
+    "build": "babel src --out-dir lib",
+    "prepublish": "tnpm run build",
+    "preversion": "npm run clean && npm run check",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm run clean"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
+  "repository": {},
+  "keywords": [],
+  "authors": [
+    "Leon Shi <superRaytin@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^6.0.5",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^1.7.1",
+    "eslint-config-rackt": "1.1.0",
+    "eslint-plugin-react": "^3.6.3",
+    "mocha": "^2.5.3",
+    "pre-commit": "^1.1.2",
+    "rimraf": "^2.5.2"
+  },
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.2.1",
+    "react-hot-loader": "^1.3.0",
+    "monaco-editor": "~0.5.x"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
