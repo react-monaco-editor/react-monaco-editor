@@ -72,6 +72,24 @@ render(
 );
 ```
 
+Note that `react-monaco-editor` requires `webpack` and its plugin `copy-webpack-plugin`, below is an example of `webpack.config.js`:
+
+```js
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+module.exports = {
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/monaco-editor/min/vs',
+        to: 'vs',
+      }
+    ])
+  ]
+};
+```
+
+Fill `from` field with the actual path of `monaco-editor` package in node_modules.  
+
 ## Properties
 
 - `width` width of editor. Defaults to `100%`.
