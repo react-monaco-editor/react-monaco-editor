@@ -72,7 +72,7 @@ render(
 );
 ```
 
-Note that `react-monaco-editor` requires `webpack` and its plugin `copy-webpack-plugin`, below is an example of `webpack.config.js`:
+Note that `react-monaco-editor` requires `webpack` and its plugin `copy-webpack-plugin`, below is an example for `webpack.config.js`:
 
 ```js
 const CopyWebpackPlugin = require('copy-webpack-plugin');

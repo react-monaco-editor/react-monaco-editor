@@ -8,66 +8,7 @@
 
 <h2>Monaco Editor Sample</h2>
 <div id="root" style="display: inline-block; border:1px solid grey"></div>
-
-<!-- loader -->
-<!--
-<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
-<script src="https://os.alipayobjects.com/rmsportal/ePmbPKgVwJCdWxm.js"></script>
--->
 <script src="./common.js"></script>
 <script src="./index.js"></script>
-<script type="text/template">
-	require.config({ paths: { 'vs': '../node_modules/monaco-editor/min/vs' }});
-
-	require(['vs/editor/editor.main'], function() {
-
-		//monaco.languages.register({ id: 'fakeLanguage' });
-
-		monaco.languages.registerCompletionItemProvider('javascript', {
-			provideCompletionItems: function() {
-				return [
-					{
-						label: 'simpleText',
-						kind: monaco.languages.CompletionItemKind.Text
-					}, {
-						label: 'testing',
-						kind: monaco.languages.CompletionItemKind.Keyword,
-						insertText:'testing({{condition}})'
-					},
-					{
-						label: 'ifelse',
-						kind: monaco.languages.CompletionItemKind.Snippet,
-						insertText: [
-							'if ({{condition}}) {',
-							'\t{{}}',
-							'} else {',
-							'\t',
-							'}'
-						].join('\n'),
-						documentation: 'If-Else Statement'
-					}
-				]
-			}
-		});
-
-		var editor = monaco.editor.create(document.getElementById('container'), {
-			value: [
-				'function say() {',
-				'\tconsole.log("Hello world!");',
-				'}'
-			].join('\n'),
-			language: 'javascript'
-		});
-
-		var amodel = editor.getModel();
-		amodel.onDidChangeContent(function() {
-			console.log(666, arguments);
-		})
-		editor.onDidChangeModelContent(function() {
-			console.log(777, arguments);
-		});
-
-	});
-</script>
 </body>
 </html>
