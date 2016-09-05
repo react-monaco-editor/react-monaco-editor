@@ -2,7 +2,7 @@
   "name": "react-monaco-editor-sample",
   "private": true,
   "version": "0.0.0",
-  "description": "Sample of Monaco Editor of React",
+  "description": "Monaco Editor for React",
   "scripts": {
     "start": "webpack-dev-server --progress --colors --port 8886"
   },

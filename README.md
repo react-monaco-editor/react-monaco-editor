@@ -17,7 +17,7 @@ To build the examples locally, run:
 
 ```
 npm install
-cd examples/sample && npm install
+cd examples && npm install
 npm start
 ```
 
