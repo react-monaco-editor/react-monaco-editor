@@ -25,12 +25,21 @@
       "stage-0"
     ]
   },
-  "repository": {},
-  "keywords": [],
+  "keywords": [
+    "monaco",
+    "editor",
+    "react",
+    "vscode"
+  ],
   "authors": [
     "Leon Shi <superRaytin@gmail.com>"
   ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/superRaytin/react-monaco-editor/issues"
+  },
+  "homepage": "https://github.com/superRaytin/react-monaco-editor",
+  "repository": "https://github.com/superRaytin/react-monaco-editor",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.10.1",
