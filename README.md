@@ -2,6 +2,15 @@
 
 > [Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
 
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+
+[![react-monaco-editor](https://nodei.co/npm/react-monaco-editor.png)](https://npmjs.org/package/react-monaco-editor)
+
+[npm-url]: https://npmjs.org/package/react-monaco-editor
+[downloads-image]: http://img.shields.io/npm/dm/react-monaco-editor.svg
+[npm-image]: http://img.shields.io/npm/v/react-monaco-editor.svg
+
 ## Examples
 
 To build the examples locally, run:
@@ -22,7 +31,7 @@ npm install react-monaco-editor
 
 ## Usage
 
-```jsx
+```js
 import React from 'react';
 import { render } from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
