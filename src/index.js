@@ -46,12 +46,13 @@ class MonacoEditor extends React.Component {
     }
   }
   initMonaco() {
-    const { value, language, options, onDidMount } = this.props;
+    const { value, language, theme, options, onDidMount } = this.props;
     const containerElement = this.refs.container;
     if (typeof monaco !== 'undefined') {
       this.editor = monaco.editor.create(containerElement, {
         value,
         language,
+        theme,
         ...options,
       });
       //this.registerListeners(listeners);

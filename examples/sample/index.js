@@ -1,6 +1,6 @@
-import React from 'react'
-import { render } from 'react-dom'
-import MonacoEditor from 'react-monaco-editor'
+import React from 'react';
+import { render } from 'react-dom';
+import MonacoEditor from 'react-monaco-editor';
 
 class SampleEditor extends React.Component {
   updateCode(newCode) {
