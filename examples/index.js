@@ -3,9 +3,6 @@ import { render } from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 
 class SampleEditor extends React.Component {
-  updateCode(newCode) {
-    this.setState({ code: newCode });
-  }
   onDidMount(editor) {
     const { onDidMount } = this.props;
     if (onDidMount) {
@@ -13,16 +10,6 @@ class SampleEditor extends React.Component {
     }
   }
   render() {
-    const listeners = {
-      onChange: (newCode) => {
-        console.log('onChange', arguments);
-        this.updateCode(newCode);
-      },
-      onDidChangeModelContent: (e) => {
-        console.log('onDidChangeModelContent', e);
-      }
-    }
-
     const { width, height, language, value, options } = this.props;
     const finalProps = {
       width,
@@ -50,9 +37,8 @@ class App extends React.Component {
   }
   onDidMount(editor) {
     console.log('onDidMount', editor, editor.model, editor.model.getValue(), editor.getModel());
-    const model = editor.model;
     editor.onDidChangeModelContent((e) => {
-      console.log(777, e, this);
+      console.log(777, e);
     });
   }
   render() {
