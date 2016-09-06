@@ -18,7 +18,6 @@ class SampleEditor extends React.Component {
       value,
       options,
     };
-
     return (
         <MonacoEditor
             {...finalProps}
@@ -29,12 +28,6 @@ class SampleEditor extends React.Component {
 }
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      code: '// type your code...'
-    }
-  }
   onDidMount(editor) {
     console.log('onDidMount', editor, editor.model, editor.model.getValue(), editor.getModel());
     editor.onDidChangeModelContent((e) => {
@@ -42,7 +35,7 @@ class App extends React.Component {
     });
   }
   render() {
-    const code = this.state.code;
+    const initialCode = '// type your code...';
     const options = {
       selectOnLineNumbers: true,
       roundedSelection: false,
@@ -50,14 +43,14 @@ class App extends React.Component {
       theme: 'vs',
       cursorStyle: 'line',
       automaticLayout: false,
-    }
+    };
     return (
         <div>
           <SampleEditor
               width="800"
               height="600"
               language="javascript"
-              value={code}
+              value={initialCode}
               options={options}
               onDidMount={::this.onDidMount}
           />
@@ -72,4 +65,4 @@ class App extends React.Component {
 render(
     <App />,
     document.getElementById('root')
-)
+);

@@ -37,19 +37,13 @@ import { render } from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      code: '// type your code...'
-    }
-  }
   onDidMount(editor) {
     editor.onDidChangeModelContent((e) => {
       console.log('onDidChangeModelContent', e);
     });
   }
   render() {
-    const code = this.state.code;
+    const initialCode = '// type your code...';
     const options = {
       selectOnLineNumbers: true
     };
@@ -58,7 +52,7 @@ class App extends React.Component {
         width="800"
         height="600"
         language="javascript"
-        value={code}
+        value={initialCode}
         options={options}
         onDidMount={::this.onDidMount}
       />
@@ -99,7 +93,7 @@ Fill `from` field with the actual path of `monaco-editor` package in node_module
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
 - `onDidMount` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
 
-## Methods
+## Events & Methods
 
 Refer to [Monaco interface IEditor](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L2813).
 
