@@ -11,7 +11,8 @@
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib dist coverage",
     "lint": "eslint src",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "postinstall": "cd examples && npm install && cd .."
   },
   "babel": {
     "presets": [
