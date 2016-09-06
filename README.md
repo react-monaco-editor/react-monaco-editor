@@ -17,7 +17,7 @@ To build the examples locally, run:
 
 ```
 npm install
-cd examples && npm install
+cd examples
 npm start
 ```
 
@@ -112,7 +112,7 @@ There are 2 ways:
 1. `const value = this.refs.monaco.editor.model.getValue();`
 
 2. via method of `Model` instance:
- 
+
 ```js
 const model = this.refs.monaco.editor.getModel();
 const value = model.getValue();
@@ -121,4 +121,3 @@ const value = model.getValue();
 # License
 
 MIT, see the [LICENSE](/LICENSE.md) file for detail.
-
