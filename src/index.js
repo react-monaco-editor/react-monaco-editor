@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+
+function noop() {
+}
 
 class MonacoEditor extends React.Component {
-  static defaultProps = {
-    width: '100%',
-    height: 500,
-    value: '',
-    language: 'javascript',
-    theme: 'vs-dark',
-  };
   componentDidMount() {
     this.afterViewInit();
   }
   componentWillUnmount() {
     this.destroyMonaco();
+  }
+  onDidMount() {
+    const { onDidMount, onChange } = this.props;
+    const editor = this.editor;
+
+    onDidMount(editor);
+    editor.onDidChangeModelContent(event => {
+      onChange(editor.getValue(), event);
+    });
   }
   afterViewInit() {
     var onGotAmdLoader = () => {
@@ -33,7 +38,7 @@ class MonacoEditor extends React.Component {
     }
   }
   initMonaco() {
-    const { value, language, theme, options, onDidMount } = this.props;
+    const { value, language, theme, options } = this.props;
     const containerElement = this.refs.container;
     if (typeof monaco !== 'undefined') {
       this.editor = monaco.editor.create(containerElement, {
@@ -43,9 +48,7 @@ class MonacoEditor extends React.Component {
         ...options,
       });
       // After monaco editor has been initialized
-      if (onDidMount) {
-        onDidMount(this.editor);
-      }
+      this.onDidMount();
     }
   }
   destroyMonaco() {
@@ -60,5 +63,25 @@ class MonacoEditor extends React.Component {
     )
   }
 }
+
+MonacoEditor.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  value: PropTypes.string,
+  language: PropTypes.string,
+  theme: PropTypes.string,
+  onDidMount: PropTypes.func,
+  onChange: PropTypes.func,
+};
+
+MonacoEditor.defaultProps = {
+  width: '100%',
+  height: '500',
+  value: '',
+  language: 'javascript',
+  theme: 'vs-dark',
+  onDidMount: noop,
+  onChange: noop,
+};
 
 export default MonacoEditor;
