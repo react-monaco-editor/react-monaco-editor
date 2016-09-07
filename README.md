@@ -94,7 +94,7 @@ Fill `from` field with the actual path of `monaco-editor` package in node_module
 - `value` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
-- `onChange` An event emitted when the content of the current model has changed.
+- `onChange` an event emitted when the content of the current model has changed.
 - `onDidMount` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
 
 ## Events & Methods
