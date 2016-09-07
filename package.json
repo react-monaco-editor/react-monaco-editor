@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "files": [
@@ -11,8 +11,7 @@
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib dist coverage",
     "lint": "eslint src",
-    "prepublish": "npm run build",
-    "postinstall": "cd examples && npm install && cd .."
+    "prepublish": "npm run build"
   },
   "babel": {
     "presets": [
