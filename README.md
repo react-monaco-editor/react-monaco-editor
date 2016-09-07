@@ -38,9 +38,11 @@ import MonacoEditor from 'react-monaco-editor';
 
 class App extends React.Component {
   onDidMount(editor) {
-    editor.onDidChangeModelContent((e) => {
-      console.log('onDidChangeModelContent', e);
-    });
+    console.log('onDidMount', editor);
+    editor.focus();
+  }
+  onChange(newValue, e) {
+    console.log('onChange', newValue, e);
   }
   render() {
     const initialCode = '// type your code...';
@@ -54,6 +56,7 @@ class App extends React.Component {
         language="javascript"
         value={initialCode}
         options={options}
+        onChange={::this.onChange}
         onDidMount={::this.onDidMount}
       />
     );
@@ -91,6 +94,7 @@ Fill `from` field with the actual path of `monaco-editor` package in node_module
 - `value` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
+- `onChange` An event emitted when the content of the current model has changed.
 - `onDidMount` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
 
 ## Events & Methods
@@ -107,11 +111,7 @@ Then you can invoke instance methods via `this.refs.monaco.editor`, e.g. `this.r
 
 ### How to get value of editor
 
-There are 2 ways:
-
-1. `const value = this.refs.monaco.editor.model.getValue();`
-
-2. via method of `Model` instance:
+Using `this.refs.monaco.editor.getValue()` or via method of `Model` instance:
 
 ```js
 const model = this.refs.monaco.editor.getModel();
