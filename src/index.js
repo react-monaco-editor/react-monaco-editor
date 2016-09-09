@@ -23,8 +23,8 @@ class MonacoEditor extends React.Component {
     const { requireConfig } = this.props;
     const loaderUrl = requireConfig.url || 'vs/loader.js';
     const onGotAmdLoader = () => {
-      // Do not use webpack
       if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+        // Do not use webpack
         if (requireConfig.paths && requireConfig.paths.vs) {
           window.require.config(requireConfig);
         }
@@ -34,15 +34,12 @@ class MonacoEditor extends React.Component {
       window.require(['vs/editor/editor.main'], () => {
         this.initMonaco();
       });
-      
+
+      // Call the delayed callbacks when AMD loader has been loaded
       if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = false;
         let loaderCallbacks = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__;
-        
-        // Remove first callback when AMD loader has been loaded
-        loaderCallbacks.shift();
-        
-        // Call the rest callbacks
+
         if (loaderCallbacks.length) {
           let currentCallback = loaderCallbacks.shift();
           while (currentCallback) {
@@ -55,6 +52,9 @@ class MonacoEditor extends React.Component {
     
     // Load AMD loader if necessary
     if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+      // We need to avoid loading multiple loader.js when there are multiple editors loading concurrently
+      //  delay to call callbacks except the first one
+      window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
       window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
         context: this,
         fn: onGotAmdLoader
@@ -66,15 +66,7 @@ class MonacoEditor extends React.Component {
         loaderScript.src = loaderUrl;
         loaderScript.addEventListener('load', onGotAmdLoader);
         document.body.appendChild(loaderScript);
-        
-        // We need to avoid loading multiple loader.js when there are multiple editors loading concurrently
-        //  delay to call callbacks except the first one
         window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = true;
-        window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
-        window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
-          context: this,
-          fn: onGotAmdLoader
-        });
       } else {
         onGotAmdLoader();
       }
