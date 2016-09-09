@@ -122,9 +122,9 @@ class App extends React.Component {
 </script>
 ```
 
-Both are valid way to config loader url and relative module path.
+Both them are valid ways to config loader url and relative module path.
 
-> You may note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
+> You may need to note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
 
 ## Properties
 
