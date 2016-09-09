@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 
+// wrapper
 class SampleEditor extends React.Component {
   onDidMount(editor) {
     const { onDidMount } = this.props;
@@ -16,12 +17,13 @@ class SampleEditor extends React.Component {
     }
   }
   render() {
-    const { width, height, language, value, options } = this.props;
+    const { width, height, language, value, requireConfig, options } = this.props;
     const finalProps = {
       width,
       height,
       language,
       value,
+      requireConfig,
       options,
     };
     return (
@@ -34,7 +36,8 @@ class SampleEditor extends React.Component {
   }
 }
 
-class App extends React.Component {
+// Using with webpack
+class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,9 +78,49 @@ class App extends React.Component {
               onDidMount={::this.onDidMount}
           />
           <div onClick={::this.changeEditorValue}>change editor value</div>
+        </div>
+    );
+  }
+}
+
+// Using with require.config
+class AnotherEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      code: '// type your code...',
+    }
+  }
+  render() {
+    const initialCode = this.state.code;
+    const requireConfig = {
+      url: 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js',
+      paths: {
+        'vs': 'https://as.alipayobjects.com/g/cicada/monaco-editor-mirror/0.6.1/min/vs'
+      }
+    };
+    return (
+        <div>
+          <SampleEditor
+              width="800"
+              height="600"
+              language="javascript"
+              value={initialCode}
+              requireConfig={requireConfig}
+          />
+        </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+        <div>
+          <CodeEditor />
           <hr />
           <h2>Another editor</h2>
-          <SampleEditor />
+          <AnotherEditor />
         </div>
     );
   }
