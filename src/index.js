@@ -20,21 +20,64 @@ class MonacoEditor extends React.Component {
     });
   }
   afterViewInit() {
-    var onGotAmdLoader = () => {
+    const { requireConfig } = this.props;
+    const loaderUrl = requireConfig.url || 'vs/loader.js';
+    const onGotAmdLoader = () => {
+      // Do not use webpack
+      if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+        if (requireConfig.paths && requireConfig.paths.vs) {
+          window.require.config(requireConfig);
+        }
+      }
+      
       // Load monaco
       window.require(['vs/editor/editor.main'], () => {
         this.initMonaco();
       });
+      
+      if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+        window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = false;
+        let loaderCallbacks = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__;
+        
+        // Remove first callback when AMD loader has been loaded
+        loaderCallbacks.shift();
+        
+        // Call the rest callbacks
+        if (loaderCallbacks.length) {
+          let currentCallback = loaderCallbacks.shift();
+          while (currentCallback) {
+            currentCallback.fn.call(currentCallback.context);
+            currentCallback = loaderCallbacks.shift();
+          }
+        }
+      }
     };
+    
     // Load AMD loader if necessary
-    if (typeof window.require === 'undefined') {
-      var loaderScript = document.createElement('script');
-      loaderScript.type = 'text/javascript';
-      loaderScript.src = 'vs/loader.js';
-      loaderScript.addEventListener('load', onGotAmdLoader);
-      document.body.appendChild(loaderScript);
+    if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+      window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
+        context: this,
+        fn: onGotAmdLoader
+      });
     } else {
-      onGotAmdLoader();
+      if (typeof window.require === 'undefined') {
+        var loaderScript = document.createElement('script');
+        loaderScript.type = 'text/javascript';
+        loaderScript.src = loaderUrl;
+        loaderScript.addEventListener('load', onGotAmdLoader);
+        document.body.appendChild(loaderScript);
+        
+        // We need to avoid loading multiple loader.js when there are multiple editors loading concurrently
+        //  delay to call callbacks except the first one
+        window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = true;
+        window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
+        window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
+          context: this,
+          fn: onGotAmdLoader
+        });
+      } else {
+        onGotAmdLoader();
+      }
     }
   }
   initMonaco() {
@@ -47,6 +90,7 @@ class MonacoEditor extends React.Component {
         theme,
         ...options,
       });
+      
       // After monaco editor has been initialized
       this.onDidMount();
     }
@@ -72,6 +116,7 @@ MonacoEditor.propTypes = {
   theme: PropTypes.string,
   onDidMount: PropTypes.func,
   onChange: PropTypes.func,
+  requireConfig: PropTypes.object,
 };
 
 MonacoEditor.defaultProps = {
@@ -79,9 +124,10 @@ MonacoEditor.defaultProps = {
   height: '500',
   value: '',
   language: 'javascript',
-  theme: 'vs-dark',
+  theme: 'vs',
   onDidMount: noop,
   onChange: noop,
+  requireConfig: {},
 };
 
 export default MonacoEditor;
