@@ -31,6 +31,8 @@ npm install react-monaco-editor
 
 ## Usage
 
+### Using with webpack
+
 ```js
 import React from 'react';
 import { render } from 'react-dom';
@@ -69,7 +71,7 @@ render(
 );
 ```
 
-Note that `react-monaco-editor` requires `webpack` and its plugin `copy-webpack-plugin`, below is an example for `webpack.config.js`:
+Add a Webpack plugin `copy-webpack-plugin` to your `webpack.config.js`:
 
 ```js
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -87,6 +89,43 @@ module.exports = {
 
 Fill `from` field with the actual path of `monaco-editor` package in node_modules.  
 
+### Using with require.config (do not need Webpack)
+
+```js
+class App extends React.Component {
+  render() {
+    const requireConfig = {
+      url: 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js',
+      paths: {
+        'vs': 'https://www.mycdn.com/monaco-editor/0.6.1/min/vs'
+      }
+    };
+    return (
+      <MonacoEditor
+        width="800"
+        height="600"
+        language="javascript"
+        value="// type your code..."
+        requireConfig={requireConfig}
+      />
+    );
+  }
+}
+```
+
+`requireConfig` is optional, equal to:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js"></script>
+<script>
+    require.config({ paths: { 'vs': 'https://www.mycdn.com/monaco-editor/0.6.1/min/vs' }});
+</script>
+```
+
+Both are valid way to config loader url and relative module path.
+
+> You may note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
+
 ## Properties
 
 - `width` width of editor. Defaults to `100%`.
@@ -96,6 +135,7 @@ Fill `from` field with the actual path of `monaco-editor` package in node_module
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
 - `onChange` an event emitted when the content of the current model has changed.
 - `onDidMount` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
+- `requireConfig` optional, using to config loader url and relative module path, refer to [require.config](http://requirejs.org/docs/api.html#config).
 
 ## Events & Methods
 
