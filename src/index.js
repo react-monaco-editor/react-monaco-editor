@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
-function noop() {
-}
+function noop() {}
 
 class MonacoEditor extends React.Component {
   componentDidMount() {
@@ -13,7 +12,6 @@ class MonacoEditor extends React.Component {
   onDidMount() {
     const { onDidMount, onChange } = this.props;
     const editor = this.editor;
-
     onDidMount(editor);
     editor.onDidChangeModelContent(event => {
       onChange(editor.getValue(), event);
@@ -39,8 +37,7 @@ class MonacoEditor extends React.Component {
       if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = false;
         let loaderCallbacks = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__;
-
-        if (loaderCallbacks.length) {
+        if (loaderCallbacks && loaderCallbacks.length) {
           let currentCallback = loaderCallbacks.shift();
           while (currentCallback) {
             currentCallback.fn.call(currentCallback.context);
@@ -106,6 +103,7 @@ MonacoEditor.propTypes = {
   value: PropTypes.string,
   language: PropTypes.string,
   theme: PropTypes.string,
+  options: PropTypes.object,
   onDidMount: PropTypes.func,
   onChange: PropTypes.func,
   requireConfig: PropTypes.object,
@@ -117,6 +115,7 @@ MonacoEditor.defaultProps = {
   value: '',
   language: 'javascript',
   theme: 'vs',
+  options: {},
   onDidMount: noop,
   onChange: noop,
   requireConfig: {},
