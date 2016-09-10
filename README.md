@@ -122,7 +122,7 @@ class App extends React.Component {
 </script>
 ```
 
-Both them are valid ways to config loader url and relative module path.
+Both them are valid ways to config loader url and relative path of module.
 
 > You may need to note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
 
@@ -135,7 +135,7 @@ Both them are valid ways to config loader url and relative module path.
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
 - `onChange` an event emitted when the content of the current model has changed.
 - `onDidMount` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
-- `requireConfig` optional, using to config loader url and relative module path, refer to [require.config](http://requirejs.org/docs/api.html#config).
+- `requireConfig` optional, using to config loader url and relative path of module, refer to [require.config](http://requirejs.org/docs/api.html#config).
 
 ## Events & Methods
 
