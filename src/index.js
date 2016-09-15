@@ -70,9 +70,10 @@ class MonacoEditor extends React.Component {
     }
   }
   initMonaco() {
-    const { value, language, theme, options } = this.props;
+    const { value, language, theme, options, onMonacoAvailable } = this.props;
     const containerElement = this.refs.container;
     if (typeof monaco !== 'undefined') {
+      onMonacoAvailable(monaco);
       this.editor = monaco.editor.create(containerElement, {
         value,
         language,
@@ -106,6 +107,7 @@ MonacoEditor.propTypes = {
   options: PropTypes.object,
   onDidMount: PropTypes.func,
   onChange: PropTypes.func,
+  onMonacoAvailable: PropTypes.func,
   requireConfig: PropTypes.object,
 };
 
@@ -118,6 +120,7 @@ MonacoEditor.defaultProps = {
   options: {},
   onDidMount: noop,
   onChange: noop,
+  onMonacoAvailable: noop,
   requireConfig: {},
 };
 

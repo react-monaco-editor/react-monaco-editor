@@ -135,6 +135,7 @@ Both them are valid ways to config loader url and relative path of module.
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
 - `onChange` an event emitted when the content of the current model has changed.
 - `onDidMount` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
+- `onMonacoAvailable` an event emitted when the monaco top-level object is available. Passes the `monaco` object as the first argument.
 - `requireConfig` optional, using to config loader url and relative path of module, refer to [require.config](http://requirejs.org/docs/api.html#config).
 
 ## Events & Methods
