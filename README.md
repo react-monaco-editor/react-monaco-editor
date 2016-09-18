@@ -39,6 +39,12 @@ import { render } from 'react-dom';
 import MonacoEditor from 'react-monaco-editor';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      code: '// type your code...',
+    }
+  }
   onDidMount(editor, monaco) {
     console.log('onDidMount', editor);
     editor.focus();
@@ -47,7 +53,7 @@ class App extends React.Component {
     console.log('onChange', newValue, e);
   }
   render() {
-    const initialCode = '// type your code...';
+    const code = this.state.code;
     const options = {
       selectOnLineNumbers: true
     };
@@ -56,7 +62,7 @@ class App extends React.Component {
         width="800"
         height="600"
         language="javascript"
-        value={initialCode}
+        value={code}
         options={options}
         onChange={::this.onChange}
         onDidMount={::this.onDidMount}
