@@ -133,7 +133,7 @@ Both them are valid ways to config loader url and relative path of module.
 - `value` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
-- `onChange(newValue)` an event emitted when the content of the current model has changed.
+- `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `onDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
 - `requireConfig` optional, using to config loader url and relative path of module, refer to [require.config](http://requirejs.org/docs/api.html#config).
 
