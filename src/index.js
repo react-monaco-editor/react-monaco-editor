@@ -20,10 +20,9 @@ class MonacoEditor extends React.Component {
       this.__prevent_trigger_change_event = false;
     }
   }
-  onDidMount() {
+  onDidMount(editor, monaco) {
     const { onDidMount, onChange } = this.props;
-    const editor = this.editor;
-    onDidMount(editor);
+    onDidMount(editor, monaco);
     editor.onDidChangeModelContent(event => {
       const value = editor.getValue();
       // Only invoking when user input changed
@@ -97,7 +96,7 @@ class MonacoEditor extends React.Component {
       });
       
       // After monaco editor has been initialized
-      this.onDidMount();
+      this.onDidMount(this.editor, monaco);
     }
   }
   destroyMonaco() {
