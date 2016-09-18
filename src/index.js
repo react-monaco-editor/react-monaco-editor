@@ -3,18 +3,34 @@ import React, { PropTypes } from 'react'
 function noop() {}
 
 class MonacoEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.__value = props.value;
+  }
   componentDidMount() {
     this.afterViewInit();
   }
   componentWillUnmount() {
     this.destroyMonaco();
   }
+  componentWillUpdate(nextProps) {
+    if (nextProps.value !== this.__value) {
+      this.__prevent_trigger_change_event = true;
+      this.editor.setValue(nextProps.value);
+      this.__prevent_trigger_change_event = false;
+    }
+  }
   onDidMount() {
     const { onDidMount, onChange } = this.props;
     const editor = this.editor;
     onDidMount(editor);
     editor.onDidChangeModelContent(event => {
-      onChange(editor.getValue(), event);
+      const value = editor.getValue();
+      // Only invoking when user input changed
+      if (!this.__prevent_trigger_change_event) {
+        onChange(value, event);
+      }
+      this.__value = value;
     });
   }
   afterViewInit() {
