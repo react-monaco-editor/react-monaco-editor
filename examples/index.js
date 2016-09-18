@@ -41,7 +41,7 @@ class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: '// type your code...',
+      code: '// type your code... \n',
     }
   }
   onDidMount(editor) {
@@ -53,8 +53,11 @@ class CodeEditor extends React.Component {
   }
   changeEditorValue() {
     if (this.editor) {
-      this.editor.setValue('// code changed!');
+      this.editor.setValue('// code changed! \n');
     }
+  }
+  changeBySetState() {
+    this.setState({code: '// code changed by setState! \n'});
   }
   render() {
     const initialCode = this.state.code;
@@ -68,6 +71,11 @@ class CodeEditor extends React.Component {
     };
     return (
         <div>
+          <div>
+            <button onClick={::this.changeEditorValue}>Change value</button>
+            <button onClick={::this.changeBySetState}>Change by setState</button>
+          </div>
+          <hr />
           <SampleEditor
               width="800"
               height="600"
@@ -77,7 +85,6 @@ class CodeEditor extends React.Component {
               onChange={::this.onChange}
               onDidMount={::this.onDidMount}
           />
-          <div onClick={::this.changeEditorValue}>change editor value</div>
         </div>
     );
   }
