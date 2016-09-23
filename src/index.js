@@ -5,6 +5,7 @@ function noop() {}
 class MonacoEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.__current_value = props.value;
   }
   componentDidMount() {
     this.afterViewInit();
@@ -13,7 +14,7 @@ class MonacoEditor extends React.Component {
     this.destroyMonaco();
   }
   componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.props.value) {
+    if (nextProps.value !== this.__current_value) {
       this.__prevent_trigger_change_event = true;
       this.editor.setValue(nextProps.value);
       this.__prevent_trigger_change_event = false;
@@ -23,11 +24,13 @@ class MonacoEditor extends React.Component {
     const { onDidMount, onChange } = this.props;
     onDidMount(editor, monaco);
     editor.onDidChangeModelContent(event => {
+      const value = editor.getValue();
       // Only invoking when user input changed
       if (!this.__prevent_trigger_change_event) {
-        const value = editor.getValue();
         onChange(value, event);
       }
+      // Always refer to the latest value
+      this.__current_value = value;
     });
   }
   afterViewInit() {
@@ -105,15 +108,27 @@ class MonacoEditor extends React.Component {
   }
   render() {
     const { width, height } = this.props;
+    const fixedWidth = width.toString().indexOf('%') !== -1 ? width : `${width}px`;
+    const fixedHeight = height.toString().indexOf('%') !== -1 ? height : `${height}px`;
+    const style = {
+      width: fixedWidth,
+      height: fixedHeight,
+    };
     return (
-      <div ref="container" style={{ width, height }} className="react-monaco-editor-container"></div>
+      <div ref="container" style={style} className="react-monaco-editor-container"></div>
     )
   }
 }
 
 MonacoEditor.propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]),
+  height: PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]),
   value: PropTypes.string,
   defaultValue: PropTypes.string,
   language: PropTypes.string,
@@ -126,7 +141,7 @@ MonacoEditor.propTypes = {
 
 MonacoEditor.defaultProps = {
   width: '100%',
-  height: '500',
+  height: '100%',
   value: null,
   defaultValue: '',
   language: 'javascript',
