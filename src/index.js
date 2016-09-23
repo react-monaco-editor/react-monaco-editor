@@ -5,7 +5,6 @@ function noop() {}
 class MonacoEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.__value = props.value;
   }
   componentDidMount() {
     this.afterViewInit();
@@ -14,7 +13,7 @@ class MonacoEditor extends React.Component {
     this.destroyMonaco();
   }
   componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.__value) {
+    if (nextProps.value !== this.props.value) {
       this.__prevent_trigger_change_event = true;
       this.editor.setValue(nextProps.value);
       this.__prevent_trigger_change_event = false;
@@ -24,12 +23,11 @@ class MonacoEditor extends React.Component {
     const { onDidMount, onChange } = this.props;
     onDidMount(editor, monaco);
     editor.onDidChangeModelContent(event => {
-      const value = editor.getValue();
       // Only invoking when user input changed
       if (!this.__prevent_trigger_change_event) {
+        const value = editor.getValue();
         onChange(value, event);
       }
-      this.__value = value;
     });
   }
   afterViewInit() {
@@ -85,7 +83,8 @@ class MonacoEditor extends React.Component {
     }
   }
   initMonaco() {
-    const { value, language, theme, options } = this.props;
+    const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
+    const { language, theme, options } = this.props;
     const containerElement = this.refs.container;
     if (typeof monaco !== 'undefined') {
       this.editor = monaco.editor.create(containerElement, {
@@ -116,6 +115,7 @@ MonacoEditor.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   value: PropTypes.string,
+  defaultValue: PropTypes.string,
   language: PropTypes.string,
   theme: PropTypes.string,
   options: PropTypes.object,
@@ -127,7 +127,8 @@ MonacoEditor.propTypes = {
 MonacoEditor.defaultProps = {
   width: '100%',
   height: '500',
-  value: '',
+  value: null,
+  defaultValue: '',
   language: 'javascript',
   theme: 'vs',
   options: {},
