@@ -10,8 +10,8 @@ class CodeEditor extends React.Component {
       code: '// type your code... \n',
     }
   }
-  onDidMount(editor) {
-    console.log('onDidMount', editor, editor.getValue(), editor.getModel());
+  editorDidMount(editor) {
+    console.log('editorDidMount', editor, editor.getValue(), editor.getModel());
     this.editor = editor;
   }
   onChange(newValue, e) {
@@ -48,7 +48,7 @@ class CodeEditor extends React.Component {
               value={code}
               options={options}
               onChange={::this.onChange}
-              onDidMount={::this.onDidMount}
+              editorDidMount={::this.editorDidMount}
           />
         </div>
     );
@@ -59,9 +59,42 @@ class CodeEditor extends React.Component {
 class AnotherEditor extends React.Component {
   constructor(props) {
     super(props);
+    const jsonCode = [
+      '{',
+      '    "$schema": "http://myserver/foo-schema.json"',
+      "}"
+    ].join('\n');
     this.state = {
-      code: '// type your code...',
+      code: jsonCode,
     }
+  }
+  editorWillMount(monaco) {
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      schemas: [{
+        uri: "http://myserver/foo-schema.json",
+        schema: {
+          type: "object",
+          properties: {
+            p1: {
+              enum: [ "v1", "v2"]
+            },
+            p2: {
+              $ref: "http://myserver/bar-schema.json"
+            }
+          }
+        }
+      },{
+        uri: "http://myserver/bar-schema.json",
+        schema: {
+          type: "object",
+          properties: {
+            q1: {
+              enum: [ "x1", "x2"]
+            }
+          }
+        }
+      }]
+    });
   }
   render() {
     const code = this.state.code;
@@ -76,9 +109,10 @@ class AnotherEditor extends React.Component {
           <MonacoEditor
               width="800"
               height="600"
-              language="javascript"
+              language="json"
               defaultValue={code}
               requireConfig={requireConfig}
+              editorWillMount={::this.editorWillMount}
           />
         </div>
     );
