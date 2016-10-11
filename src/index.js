@@ -20,6 +20,10 @@ class MonacoEditor extends React.Component {
       this.__prevent_trigger_change_event = false;
     }
   }
+  editorWillMount(monaco) {
+    const { editorWillMount } = this.props;
+    editorWillMount(monaco);
+  }
   onDidMount(editor, monaco) {
     const { onDidMount, onChange } = this.props;
     onDidMount(editor, monaco);
@@ -90,14 +94,15 @@ class MonacoEditor extends React.Component {
     const { language, theme, options } = this.props;
     const containerElement = this.refs.container;
     if (typeof monaco !== 'undefined') {
+      // Before initializing monaco editor
+      this.editorWillMount(monaco);
       this.editor = monaco.editor.create(containerElement, {
         value,
         language,
         theme,
         ...options,
       });
-      
-      // After monaco editor has been initialized
+      // After initializing monaco editor
       this.onDidMount(this.editor, monaco);
     }
   }
@@ -135,6 +140,7 @@ MonacoEditor.propTypes = {
   theme: PropTypes.string,
   options: PropTypes.object,
   onDidMount: PropTypes.func,
+  editorWillMount: PropTypes.func,
   onChange: PropTypes.func,
   requireConfig: PropTypes.object,
 };
@@ -148,6 +154,7 @@ MonacoEditor.defaultProps = {
   theme: 'vs',
   options: {},
   onDidMount: noop,
+  editorWillMount: noop,
   onChange: noop,
   requireConfig: {},
 };
