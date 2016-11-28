@@ -40,23 +40,24 @@ class MonacoEditor extends React.Component {
   afterViewInit() {
     const { requireConfig } = this.props;
     const loaderUrl = requireConfig.url || 'vs/loader.js';
+    const context = this.props.context || window;
     const onGotAmdLoader = () => {
-      if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+      if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         // Do not use webpack
         if (requireConfig.paths && requireConfig.paths.vs) {
-          window.require.config(requireConfig);
+          context.require.config(requireConfig);
         }
       }
       
       // Load monaco
-      window.require(['vs/editor/editor.main'], () => {
+      context.require(['vs/editor/editor.main'], () => {
         this.initMonaco();
       });
 
       // Call the delayed callbacks when AMD loader has been loaded
-      if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
-        window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = false;
-        let loaderCallbacks = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__;
+      if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+        context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = false;
+        let loaderCallbacks = context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__;
         if (loaderCallbacks && loaderCallbacks.length) {
           let currentCallback = loaderCallbacks.shift();
           while (currentCallback) {
@@ -68,22 +69,22 @@ class MonacoEditor extends React.Component {
     };
     
     // Load AMD loader if necessary
-    if (window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
+    if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
       // We need to avoid loading multiple loader.js when there are multiple editors loading concurrently
       //  delay to call callbacks except the first one
-      window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ = window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
-      window.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
+      context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ = context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
+      context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
         context: this,
         fn: onGotAmdLoader
       });
     } else {
-      if (typeof window.require === 'undefined') {
-        var loaderScript = document.createElement('script');
+      if (typeof context.require === 'undefined') {
+        var loaderScript = context.document.createElement('script');
         loaderScript.type = 'text/javascript';
         loaderScript.src = loaderUrl;
         loaderScript.addEventListener('load', onGotAmdLoader);
-        document.body.appendChild(loaderScript);
-        window.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = true;
+        context.document.body.appendChild(loaderScript);
+        context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = true;
       } else {
         onGotAmdLoader();
       }
@@ -93,17 +94,18 @@ class MonacoEditor extends React.Component {
     const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
     const { language, theme, options } = this.props;
     const containerElement = this.refs.container;
-    if (typeof monaco !== 'undefined') {
+    const context = this.props.context || window;
+    if (typeof context.monaco !== 'undefined') {
       // Before initializing monaco editor
-      this.editorWillMount(monaco);
-      this.editor = monaco.editor.create(containerElement, {
+      this.editorWillMount(context.monaco);
+      this.editor = context.monaco.editor.create(containerElement, {
         value,
         language,
         theme,
         ...options,
       });
       // After initializing monaco editor
-      this.editorDidMount(this.editor, monaco);
+      this.editorDidMount(this.editor, context.monaco);
     }
   }
   destroyMonaco() {
