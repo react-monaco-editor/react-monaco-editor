@@ -146,7 +146,7 @@ Otherwise, it behaves in uncontrolled mode.
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
 - `editorDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
-- `requireConfig` optional, using to config loader url and relative path of module, refer to [require.config](http://requirejs.org/docs/api.html#config).
+- `requireConfig` optional, allow to config loader url and relative path of module, refer to [require.config](http://requirejs.org/docs/api.html#config).
 - `context` optional, allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
 
 ## Events & Methods
