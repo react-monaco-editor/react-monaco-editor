@@ -53,7 +53,7 @@
   "dependencies": {
     "react": "^15.1.0",
     "react-dom": "^15.2.1",
-    "monaco-editor": "~0.6.x"
+    "monaco-editor": "~0.7.x"
   },
   "pre-commit": [
     "lint"
