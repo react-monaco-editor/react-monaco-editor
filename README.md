@@ -196,7 +196,7 @@ class App extends React.Component {
     }
     render() {
         return (
-          <MonacoEditor language="json" />
+          <MonacoEditor language="json" editorWillMount={this.editorWillMount} />
         );
     }
 }
