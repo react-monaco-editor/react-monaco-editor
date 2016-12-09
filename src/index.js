@@ -29,12 +29,14 @@ class MonacoEditor extends React.Component {
     editorDidMount(editor, monaco);
     editor.onDidChangeModelContent(event => {
       const value = editor.getValue();
+      
+      // Always refer to the latest value
+      this.__current_value = value;
+      
       // Only invoking when user input changed
       if (!this.__prevent_trigger_change_event) {
         onChange(value, event);
       }
-      // Always refer to the latest value
-      this.__current_value = value;
     });
   }
   afterViewInit() {
