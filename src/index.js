@@ -13,10 +13,10 @@ class MonacoEditor extends React.Component {
   componentWillUnmount() {
     this.destroyMonaco();
   }
-  componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.__current_value) {
+  componentDidUpdate() {
+    if (this.props.value !== this.__current_value) {
       this.__prevent_trigger_change_event = true;
-      this.editor.setValue(nextProps.value);
+      this.editor.setValue(this.props.value);
       this.__prevent_trigger_change_event = false;
     }
   }
