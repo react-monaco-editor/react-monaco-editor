@@ -15,9 +15,14 @@ class MonacoEditor extends React.Component {
   }
   componentDidUpdate() {
     if (this.props.value !== this.__current_value) {
-      this.__prevent_trigger_change_event = true;
-      this.editor.setValue(this.props.value);
-      this.__prevent_trigger_change_event = false;
+      // Always refer to the latest value
+      this.__current_value = this.props.value;
+      // Consider the situation of rendering 1+ times before the editor mounted
+      if (this.editor) {
+        this.__prevent_trigger_change_event = true;
+        this.editor.setValue(this.__current_value);
+        this.__prevent_trigger_change_event = false;
+      }
     }
   }
   editorWillMount(monaco) {
