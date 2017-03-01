@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "files": [
@@ -49,8 +49,8 @@
     "eslint-plugin-react": "^3.6.3",
     "pre-commit": "^1.1.2",
     "rimraf": "^2.5.2",
-    "react": "^15.1.0",
-    "react-dom": "^15.2.1"
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
   },
   "dependencies": {
     "monaco-editor": "~0.7.x"
