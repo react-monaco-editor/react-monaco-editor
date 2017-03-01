@@ -13,7 +13,9 @@ class MonacoEditor extends React.Component {
   componentWillUnmount() {
     this.destroyMonaco();
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+
+    const context = this.props.context || window;
     if (this.props.value !== this.__current_value) {
       // Always refer to the latest value
       this.__current_value = this.props.value;
@@ -23,6 +25,9 @@ class MonacoEditor extends React.Component {
         this.editor.setValue(this.__current_value);
         this.__prevent_trigger_change_event = false;
       }
+    }
+    if( prevProps.language !== this.props.language ){
+      context.monaco.editor.setModelLanguage( this.editor.getModel(), this.props.language );
     }
   }
   editorWillMount(monaco) {
