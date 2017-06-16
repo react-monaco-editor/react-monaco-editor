@@ -36,7 +36,6 @@
   "homepage": "https://github.com/superRaytin/react-monaco-editor",
   "repository": "https://github.com/superRaytin/react-monaco-editor",
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.0.5",
@@ -48,9 +47,9 @@
     "eslint-config-rackt": "1.1.0",
     "eslint-plugin-react": "^3.6.3",
     "pre-commit": "^1.1.2",
-    "rimraf": "^2.5.2",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "rimraf": "^2.5.2"
   },
   "dependencies": {
     "monaco-editor": "~0.8.x"
