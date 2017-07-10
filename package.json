@@ -48,12 +48,12 @@
     "eslint-config-rackt": "1.1.0",
     "eslint-plugin-react": "^3.6.3",
     "pre-commit": "^1.1.2",
-    "rimraf": "^2.5.2",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "rimraf": "^2.5.2"
   },
   "dependencies": {
-    "monaco-editor": "~0.8.x"
+    "monaco-editor": "0.9.0"
   },
   "pre-commit": [
     "lint"
