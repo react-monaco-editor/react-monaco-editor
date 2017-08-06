@@ -52,6 +52,7 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "rimraf": "^2.5.2"
+  },
   "dependencies": {
     "monaco-editor": "~0.9.x",
     "react": "^15.4.1",
