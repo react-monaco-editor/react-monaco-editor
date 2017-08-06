@@ -112,7 +112,7 @@ class MonacoEditor extends React.Component {
     const { language, theme, options } = this.props;
     const containerElement = this.refs.container; // eslint-disable-line react/no-string-refs
     const context = this.props.context || window;
-    if (typeof context.monaco !== 'undefined') {
+    if (containerElement && typeof context.monaco !== 'undefined') {
       // Before initializing monaco editor
       this.editorWillMount(context.monaco);
       this.editor = context.monaco.editor.create(containerElement, {
