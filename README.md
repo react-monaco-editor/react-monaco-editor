@@ -93,7 +93,7 @@ module.exports = {
 };
 ```
 
-Fill `from` field with the actual path of `monaco-editor` package in node_modules.  
+Fill `from` field with the actual path of `monaco-editor` package in node_modules.
 
 ### Using with require.config (do not need Webpack)
 
@@ -138,7 +138,7 @@ If you specify `value` property, the component behaves in controlled mode.
 Otherwise, it behaves in uncontrolled mode.
 
 - `width` width of editor. Defaults to `100%`.
-- `height` height of editor. Defaults to `500`.
+- `height` height of editor. Defaults to `100%`.
 - `value` value of the auto created model in the editor.
 - `defaultValue` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
