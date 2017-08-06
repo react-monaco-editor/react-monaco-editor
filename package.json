@@ -49,10 +49,12 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.1.0",
     "pre-commit": "^1.1.2",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
     "rimraf": "^2.5.2"
   },
   "dependencies": {
-    "monaco-editor": "~0.8.x",
+    "monaco-editor": "~0.9.x",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },
