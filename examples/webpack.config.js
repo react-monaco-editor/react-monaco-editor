@@ -5,14 +5,15 @@ const path = require('path');
 const MonacoEditorSrc = path.join(__dirname, '..', 'src');
 
 module.exports = {
-  entry: {
-    jsx: './index.js',
-    html: './index.html',
-    vendor: [
-      'react',
-      'react-dom',
-    ],
-  },
+  // entry: {
+  //   jsx: './index.js',
+  //   html: './index.html',
+  //   vendor: [
+  //     'react',
+  //     'react-dom',
+  //   ],
+  // },
+  entry: './index.js',
   output: {
     path: path.join(__dirname, './lib/t'),
     filename: 'index.js',
@@ -56,6 +57,9 @@ module.exports = {
       {
         from: '../node_modules/monaco-editor/min/vs',
         to: 'vs',
+      },
+      {
+        from: './index.html'
       }
     ]),
   ],
