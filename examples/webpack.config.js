@@ -5,14 +5,7 @@ const path = require('path');
 const MonacoEditorSrc = path.join(__dirname, '..', 'src');
 
 module.exports = {
-  entry: {
-    jsx: './index.js',
-    html: './index.html',
-    vendor: [
-      'react',
-      'react-dom',
-    ],
-  },
+  entry: './index.js',
   output: {
     path: path.join(__dirname, './lib/t'),
     filename: 'index.js',
@@ -45,7 +38,6 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'common.js'),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development') },
     }),
@@ -54,7 +46,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: '../node_modules/monaco-editor/min/vs',
+        from: 'node_modules/monaco-editor/min/vs',
         to: 'vs',
       }
     ]),
