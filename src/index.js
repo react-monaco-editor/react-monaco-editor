@@ -150,12 +150,12 @@ class MonacoEditor extends React.Component {
 
 MonacoEditor.propTypes = {
   width: PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number,
+    PropTypes.string,
+    PropTypes.number,
   ]),
   height: PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number,
+    PropTypes.string,
+    PropTypes.number,
   ]),
   value: PropTypes.string,
   defaultValue: PropTypes.string,
