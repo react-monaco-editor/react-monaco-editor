@@ -49,15 +49,12 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint": "^4.4.0",
     "pre-commit": "^1.1.2",
-    "react": "^15.6.1",
     "rimraf": "^2.5.2"
   },
   "peerDependencies": {
     "monaco-editor": "0.9.x",
-    "react": "15.x"
-  },
-  "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1"
   },
   "pre-commit": [
     "lint"
