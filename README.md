@@ -62,6 +62,7 @@ class App extends React.Component {
         width="800"
         height="600"
         language="javascript"
+        theme="vs-dark"
         value={code}
         options={options}
         onChange={::this.onChange}
@@ -144,6 +145,7 @@ Otherwise, it behaves in uncontrolled mode.
 - `value` value of the auto created model in the editor.
 - `defaultValue` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
+- `theme` the theme if the editor
 - `options` refer to [Monaco interface IEditorOptions](https://github.com/Microsoft/monaco-editor/blob/master/website/playground/monaco.d.ts.txt#L1029).
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
