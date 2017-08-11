@@ -56,9 +56,13 @@ class MonacoEditor extends React.Component {
   }
 
   afterViewInit() {
+    const context = this.props.context || window;
+    if(context.monaco !== undefined){
+      this.initMonaco();
+      return;
+    }
     const { requireConfig } = this.props;
     const loaderUrl = requireConfig.url || 'vs/loader.js';
-    const context = this.props.context || window;
     const onGotAmdLoader = () => {
       if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         // Do not use webpack
