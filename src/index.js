@@ -56,9 +56,13 @@ class MonacoEditor extends React.Component {
   }
 
   afterViewInit() {
+    const context = this.props.context || window;
+    if (context.monaco !== undefined) {
+      this.initMonaco();
+      return;
+    }
     const { requireConfig } = this.props;
     const loaderUrl = requireConfig.url || 'vs/loader.js';
-    const context = this.props.context || window;
     const onGotAmdLoader = () => {
       if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         // Do not use webpack
@@ -121,7 +125,9 @@ class MonacoEditor extends React.Component {
         language,
         ...options,
       });
-      context.monaco.editor.setTheme(theme)
+      if (theme) {
+        context.monaco.editor.setTheme(theme)
+      }
       // After initializing monaco editor
       this.editorDidMount(this.editor, context.monaco);
     }
@@ -175,7 +181,7 @@ MonacoEditor.defaultProps = {
   value: null,
   defaultValue: '',
   language: 'javascript',
-  theme: 'vs',
+  theme: null,
   options: {},
   editorDidMount: noop,
   editorWillMount: noop,
