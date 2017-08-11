@@ -40,7 +40,6 @@ class CodeEditor extends React.Component {
       selectOnLineNumbers: true,
       roundedSelection: false,
       readOnly: false,
-      theme: 'vs',
       cursorStyle: 'line',
       automaticLayout: false,
     };

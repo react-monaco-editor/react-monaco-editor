@@ -121,7 +121,9 @@ class MonacoEditor extends React.Component {
         language,
         ...options,
       });
-      context.monaco.editor.setTheme(theme)
+      if (theme) {
+        context.monaco.editor.setTheme(theme)
+      }
       // After initializing monaco editor
       this.editorDidMount(this.editor, context.monaco);
     }
@@ -175,7 +177,7 @@ MonacoEditor.defaultProps = {
   value: null,
   defaultValue: '',
   language: 'javascript',
-  theme: 'vs',
+  theme: null,
   options: {},
   editorDidMount: noop,
   editorWillMount: noop,
