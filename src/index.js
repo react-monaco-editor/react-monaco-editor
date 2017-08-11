@@ -57,7 +57,7 @@ class MonacoEditor extends React.Component {
 
   afterViewInit() {
     const context = this.props.context || window;
-    if(context.monaco !== undefined){
+    if (context.monaco !== undefined) {
       this.initMonaco();
       return;
     }

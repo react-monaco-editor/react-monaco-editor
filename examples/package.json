@@ -32,7 +32,6 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "monaco-editor": "^0.9.0",
     "react-dom": "^15.6.1"
   }
 }
