@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "react",
+    "stage-0",
+    [
+      "env",
+      {
+        "targets": {
+          "electron": "1.7"
+        }
+      }
+    ]
+  ]
+}

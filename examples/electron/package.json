@@ -1,0 +1,36 @@
+{
+  "name": "react-monaco-editor-electron-example",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monaco Editor for React",
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
+  "authors": [
+    "Daniele Esposti <daniele.esposti@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-loader": "^6.2.4",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "progress-bar-webpack-plugin": "^1.10.0",
+    "webpack": "^1.15.0"
+  },
+  "dependencies": {
+    "electron": "^1.7.5",
+    "monaco-editor": "^0.10.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "scripts": {
+    "start": "npm run build && electron ./dist",
+    "build": "webpack"
+  }
+}
