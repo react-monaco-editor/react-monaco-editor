@@ -6,6 +6,7 @@ function noop() { }
 class MonacoEditor extends React.Component {
   constructor(props) {
     super(props);
+    this.containerElement = undefined;
     this.__current_value = props.value;
   }
 
@@ -114,12 +115,11 @@ class MonacoEditor extends React.Component {
   initMonaco() {
     const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
     const { language, theme, options } = this.props;
-    const containerElement = this.refs.container; // eslint-disable-line react/no-string-refs
     const context = this.props.context || window;
-    if (containerElement && typeof context.monaco !== 'undefined') {
+    if (this.containerElement && typeof context.monaco !== 'undefined') {
       // Before initializing monaco editor
       this.editorWillMount(context.monaco);
-      this.editor = context.monaco.editor.create(containerElement, {
+      this.editor = context.monaco.editor.create(this.containerElement, {
         value,
         language,
         ...options,
@@ -138,6 +138,10 @@ class MonacoEditor extends React.Component {
     }
   }
 
+  assignRef = (component) => {
+    this.containerElement = component;
+  }
+
   render() {
     const { width, height } = this.props;
     const fixedWidth = width.toString().indexOf('%') !== -1 ? width : `${width}px`;
@@ -146,9 +150,9 @@ class MonacoEditor extends React.Component {
       width: fixedWidth,
       height: fixedHeight,
     };
+
     return (
-      // eslint-disable-next-line react/no-string-refs
-      <div ref="container" style={style} className="react-monaco-editor-container" />
+      <div ref={this.assignRef} style={style} className="react-monaco-editor-container" />
     )
   }
 }
