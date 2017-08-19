@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 function noop() { }
+
 
 class MonacoEditor extends React.Component {
   constructor(props) {
@@ -55,18 +57,51 @@ class MonacoEditor extends React.Component {
     });
   }
 
-  afterViewInit() {
+  afterViewInit = () => {
     const context = this.props.context || window;
     if (context.monaco !== undefined) {
       this.initMonaco();
       return;
     }
-    const { requireConfig } = this.props;
-    const loaderUrl = requireConfig.url || 'vs/loader.js';
+    const requireConfig = this.props.requireConfig;
+
+    // Checking that the process is a renderer may be overly specific
+    const inElectron = context.process && context.process.type === 'renderer';
+
+    let loaderUrl = requireConfig.url || 'vs/loader.js';
+
+    if (inElectron) {
+      // Running in electron, need to deal with the difference between node require and AMDRequire
+      // Save a reference to node's require to set back up later
+      context.electronNodeRequire = context.require;
+      loaderUrl = '../node_modules/monaco-editor/min/vs/loader.js'
+    }
+
     const onGotAmdLoader = () => {
       if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         // Do not use webpack
-        if (requireConfig.paths && requireConfig.paths.vs) {
+        if (inElectron) {
+          // Have just loaded loader.js and now context.require is not node's require
+          const path = context.electronNodeRequire('path');
+          const monacoPath = path.join(context.__dirname, '../node_modules/monaco-editor/min');
+
+          let amdRequireBaseUrl = path.resolve(monacoPath).replace(/\\/g, '/');
+          if (amdRequireBaseUrl.length > 0 && amdRequireBaseUrl.charAt(0) !== '/') {
+            amdRequireBaseUrl = `/${amdRequireBaseUrl}`;
+          }
+          amdRequireBaseUrl = encodeURI(`file://${amdRequireBaseUrl}`);
+
+          context.require.config({
+            baseUrl: amdRequireBaseUrl
+          });
+
+          context.window.module = undefined;
+          // workaround monaco-typescript not understanding the environment
+          context.window.process.browser = true;
+        }
+
+        if (requireConfig.paths && requireConfig.paths.vs && !inElectron) {
+          // will need to switch to nodeRequire here
           context.require.config(requireConfig);
         }
       }
@@ -80,15 +115,17 @@ class MonacoEditor extends React.Component {
       if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
         context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__ = false;
         const loaderCallbacks = context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__;
+
         if (loaderCallbacks && loaderCallbacks.length) {
           let currentCallback = loaderCallbacks.shift();
+
           while (currentCallback) {
             currentCallback.fn.call(currentCallback.context);
             currentCallback = loaderCallbacks.shift();
           }
         }
       }
-    };
+    }
 
     // Load AMD loader if necessary
     if (context.__REACT_MONACO_EDITOR_LOADER_ISPENDING__) {
@@ -100,7 +137,7 @@ class MonacoEditor extends React.Component {
         context: this,
         fn: onGotAmdLoader
       });
-    } else if (typeof context.require === 'undefined') {
+    } else if (typeof context.require === 'undefined' || inElectron) {
       const loaderScript = context.document.createElement('script');
       loaderScript.type = 'text/javascript';
       loaderScript.src = loaderUrl;
