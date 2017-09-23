@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "files": [
@@ -56,7 +56,7 @@
     "react": "15.x"
   },
   "dependencies": {
-    "monaco-editor": "^0.9.0",
+    "monaco-editor": "^0.10.0",
     "prop-types": "^15.5.10"
   },
   "pre-commit": [
