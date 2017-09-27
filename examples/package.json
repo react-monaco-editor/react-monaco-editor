@@ -28,13 +28,13 @@
     "file-loader": "^0.11.2",
     "react-hot-loader": "^1.3.0",
     "rimraf": "^2.5.2",
-    "webpack-dev-server": "^1.14.1",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "monaco-editor": "^0.9.0",
-    "react": "~15.6.1",
-    "react-dom": "^15.6.1",
+    "monaco-editor": "^0.10.0",
+    "react": "~16.0.0",
+    "react-dom": "^16.0.0",
     "react-monaco-editor": "latest"
   }
 }
