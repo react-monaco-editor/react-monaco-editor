@@ -27,8 +27,8 @@
   "dependencies": {
     "electron": "^1.7.5",
     "monaco-editor": "^0.10.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "scripts": {
     "start": "npm run build && electron ./dist",
