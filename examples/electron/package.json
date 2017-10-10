@@ -21,7 +21,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1",
     "progress-bar-webpack-plugin": "^1.10.0",
-    "webpack": "^1.15.0"
+    "webpack": "^1.15.0",
+    "webpack-dev-server": "^1.9.0"
   },
   "dependencies": {
     "electron": "^1.7.5",
@@ -31,6 +32,8 @@
   },
   "scripts": {
     "start": "npm run build && electron ./dist",
+    "start:dev": "ELECTRON_ENV=development electron ./",
+    "watch:dev": "webpack-dev-server",
     "build": "webpack"
   }
 }

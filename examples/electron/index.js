@@ -8,11 +8,13 @@ let win;
 
 const createWindow = () => {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow();
 
   // and load the index.html of the app.
+  const indexHtml = process.env.ELECTRON_ENV === 'development' ? 'index.dev.html' : 'index.html'
+
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, indexHtml),
     protocol: 'file:',
     slashes: true
   }));
