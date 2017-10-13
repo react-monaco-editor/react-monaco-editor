@@ -1,13 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 import MonacoEditor from 'react-monaco-editor'
-/* eslint-enable import/extensions */
-/* eslint-enable import/no-unresolved */
-/* eslint-enable import/no-extraneous-dependencies */
+/* eslint-enable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 
 
 const defaultCode = '// type your code... \n'
