@@ -5,13 +5,7 @@
 Open two terminals, in the first one run:
 
 ```bash
-npm run watch:dev
-```
-
-which starts the Webpack's dev server; in the second one:
-
-```bash
 npm run start:dev
 ```
 
-to launch Electron with code auto-reload enabled.
+which starts the Webpack's dev server and the Electron's instance with code auto-reload enabled.

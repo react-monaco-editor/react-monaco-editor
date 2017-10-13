@@ -1,4 +1,5 @@
 const path = require('path')
+const childProcess = require('child_process')
 const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
@@ -11,6 +12,9 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
+  },
+  devServer: {
+    after: () => { childProcess.exec('npm run run:dev') }
   },
   module: {
     loaders: [
@@ -26,13 +30,11 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: { 'react-monaco-editor': MonacoEditorSrc }
   },
   plugins: [
     new ProgressBarPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.SourceMapDevToolPlugin({ exclude: /node_modules/ }),
     new CopyWebpackPlugin([
       {
