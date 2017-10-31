@@ -1,5 +1,5 @@
 {
-  "name": "react-monaco-editor-sample",
+  "name": "react-monaco-editor-browser-example",
   "private": true,
   "version": "0.0.0",
   "description": "Monaco Editor for React",
