@@ -27,6 +27,8 @@
     "vscode"
   ],
   "authors": [
+    "Daniele Esposti <daniele.espsoti@gmail.com>",
+    "Dominik Moritz <domoritz@cs.washington.edu>",
     "Leon Shi <superRaytin@gmail.com>"
   ],
   "license": "MIT",
