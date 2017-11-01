@@ -210,6 +210,33 @@ class App extends React.Component {
 
 [Monaco only supports one theme](https://github.com/Microsoft/monaco-editor/issues/338).
 
+### How to use the diff editor
+
+```js
+import React from 'react';
+import MonacoDiffEditor from 'react-monaco-editor/diff';
+
+class App extends React.Component {
+  render() {
+    const code1 = "// your original code...";
+    const code2 = "// a different version...";
+    const options = {
+      //renderSideBySide: false
+    };
+    return (
+      <MonacoDiffEditor
+        width="800"
+        height="600"
+        language="javascript"
+        original={code1}
+        value={code2}
+        options={options}
+      />
+    );
+  }
+}
+```
+
 # License
 
 MIT, see the [LICENSE](/LICENSE.md) file for detail.
