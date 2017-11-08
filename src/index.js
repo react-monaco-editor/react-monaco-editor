@@ -63,7 +63,7 @@ class MonacoEditor extends React.Component {
       this.initMonaco();
       return;
     }
-    const requireConfig = this.props.requireConfig;
+    const { requireConfig } = this.props;
 
     // Checking that the process is a renderer may be overly specific
     const inElectron = context.process && context.process.type === 'renderer';
