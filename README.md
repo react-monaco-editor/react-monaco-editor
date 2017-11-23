@@ -214,7 +214,7 @@ class App extends React.Component {
 
 ```js
 import React from 'react';
-import MonacoDiffEditor from 'react-monaco-editor/diff';
+import { MonacoDiffEditor } from 'react-monaco-editor';
 
 class App extends React.Component {
   render() {
