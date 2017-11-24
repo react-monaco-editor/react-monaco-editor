@@ -1,3 +1,4 @@
 import MonacoEditor from './editor';
+import MonacoDiffEditor from './diff';
 
-export default MonacoEditor;
+export { MonacoEditor as default, MonacoDiffEditor };
