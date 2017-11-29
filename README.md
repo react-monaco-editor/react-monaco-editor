@@ -96,6 +96,8 @@ module.exports = {
 
 Fill `from` field with the actual path of `monaco-editor` package in node_modules.
 
+You may need to add a `<base href="/">` tag to your page to ensure that monaco loads sub-dependencies from the correct location. Otherwise you might encounter 404's from nested paths when using a client-side router like react-router.
+
 ### Using with require.config (do not need Webpack)
 
 ```js
