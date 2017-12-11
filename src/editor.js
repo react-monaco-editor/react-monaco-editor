@@ -88,7 +88,7 @@ class MonacoEditor extends React.Component {
             const path = context.electronNodeRequire('path');
             const monacoPath = path.join(context.__dirname, '../node_modules/monaco-editor/min');
 
-            let amdRequireBaseUrl = path.resolve(monacoPath).replace(/\\/g, '/');
+            amdRequireBaseUrl = path.resolve(monacoPath).replace(/\\/g, '/');
             if (amdRequireBaseUrl.length > 0 && amdRequireBaseUrl.charAt(0) !== '/') {
               amdRequireBaseUrl = `/${amdRequireBaseUrl}`;
             }
