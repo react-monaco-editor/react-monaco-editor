@@ -152,7 +152,7 @@ Otherwise, it behaves in uncontrolled mode.
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
 - `editorDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
-- `requireConfig` optional, allow to config loader url and relative path of module, refer to [require.config](http://requirejs.org/docs/api.html#config).
+- `requireConfig` optional, allows configuration of the loader url and relative path of the module. Most properties are the same as those on [require.config](http://requirejs.org/docs/api.html#config). For Electron apps, `requireConfig.baseUrl` can be used to override the path to the folder that contains the `vs` directory, if necessary (defaults to '../node_modules/monaco-editor/min'). For _all_ apps, `requireConfig.url` can be used to override the path to the 'loader.js' file (defaults to 'vs/loader.js' for non-Electron apps, and to '../node_modules/monaco-editor/min/vs/loader.js' for Electron apps).
 - `context` optional, allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
 
 ## Events & Methods
