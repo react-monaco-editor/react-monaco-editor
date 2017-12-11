@@ -74,7 +74,7 @@ class MonacoEditor extends React.Component {
       // Running in electron, need to deal with the difference between node require and AMDRequire
       // Save a reference to node's require to set back up later
       context.electronNodeRequire = context.require;
-      loaderUrl = '../node_modules/monaco-editor/min/vs/loader.js'
+      loaderUrl = requireConfig.url || '../node_modules/monaco-editor/min/vs/loader.js'
     }
 
     const onGotAmdLoader = () => {
@@ -82,14 +82,18 @@ class MonacoEditor extends React.Component {
         // Do not use webpack
         if (inElectron) {
           // Have just loaded loader.js and now context.require is not node's require
-          const path = context.electronNodeRequire('path');
-          const monacoPath = path.join(context.__dirname, '../node_modules/monaco-editor/min');
+          let amdRequireBaseUrl = requireConfig.baseUrl;
 
-          let amdRequireBaseUrl = path.resolve(monacoPath).replace(/\\/g, '/');
-          if (amdRequireBaseUrl.length > 0 && amdRequireBaseUrl.charAt(0) !== '/') {
-            amdRequireBaseUrl = `/${amdRequireBaseUrl}`;
+          if (!amdRequireBaseUrl) {
+            const path = context.electronNodeRequire('path');
+            const monacoPath = path.join(context.__dirname, '../node_modules/monaco-editor/min');
+
+            let amdRequireBaseUrl = path.resolve(monacoPath).replace(/\\/g, '/');
+            if (amdRequireBaseUrl.length > 0 && amdRequireBaseUrl.charAt(0) !== '/') {
+              amdRequireBaseUrl = `/${amdRequireBaseUrl}`;
+            }
+            amdRequireBaseUrl = encodeURI(`file://${amdRequireBaseUrl}`);
           }
-          amdRequireBaseUrl = encodeURI(`file://${amdRequireBaseUrl}`);
 
           context.require.config({
             baseUrl: amdRequireBaseUrl
