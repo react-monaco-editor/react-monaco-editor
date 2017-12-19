@@ -32,6 +32,9 @@ class MonacoDiffEditor extends React.Component {
     if (prevProps.language !== this.props.language) {
       context.monaco.editor.setModelLanguage(this.editor.getModel(), this.props.language);
     }
+    if (prevProps.theme !== this.props.theme) {
+      context.monaco.editor.setTheme(this.props.theme);
+    }
   }
 
   componentWillUnmount() {
