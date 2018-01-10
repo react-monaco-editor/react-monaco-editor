@@ -137,16 +137,17 @@ The default value for `requriedConfig.url` is `vs/loader.js`.
 
 > You may need to note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
 
-### Using with @timkendrick/monaco-editor
+### Using with an alternative CommonJS build
 
-If you have a node-like browser environment that conflicts with Monaco's
-loader, you may have more luck with
+If you have a CommonJS-like browser environment, [you may have trouble
+loading monaco-editor](https://github.com/Microsoft/monaco-editor/issues/40).
 [@timkendrick/monaco-editor](https://github.com/timkendrick/monaco-editor)
-which is a CommonJS compatible distribution of monaco-editor. Instructions
-can be found in the project's
-[README](https://github.com/timkendrick/monaco-editor/blob/master/README.md).
+is an unofficial, expiremental build of monaco-editor that loads easily
+into a CommonJS-like environment. Instructions can be found in the
+project's [README](https://github.com/timkendrick/monaco-editor/blob/master/README.md).
 
-The external version is used in the [nextjs example](https://github.com/superRaytin/react-monaco-editor/tree/master/examples/nextjs).
+This is used in the
+[nextjs example](https://github.com/superRaytin/react-monaco-editor/tree/master/examples/nextjs).
 
 ## Properties
 
