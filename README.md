@@ -133,7 +133,7 @@ class App extends React.Component {
 
 Both them are valid ways to config loader url and relative path of module.
 
-The default value for `requriedConfig.url` is `vs/loader.js`.
+The default value for `requireConfig.url` is `vs/loader.js`.
 
 > You may need to note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
 
