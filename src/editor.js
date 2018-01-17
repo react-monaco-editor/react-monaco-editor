@@ -77,6 +77,7 @@ class MonacoEditor extends React.Component {
       // Running in electron, need to deal with the difference between node require and AMDRequire
       // Save a reference to node's require to set back up later
       context.electronNodeRequire = context.require;
+      delete context.require;
       loaderUrl = requireConfig.url || '../node_modules/monaco-editor/min/vs/loader.js'
     }
 
