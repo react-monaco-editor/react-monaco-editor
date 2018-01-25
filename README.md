@@ -17,8 +17,8 @@ To build the examples locally, run:
 
 ```
 npm install
-cd examples && npm install
-npm start
+cd examples/browser && npm install  # or examples/electron, or examples/nextjs
+npm start   # or for the next.js example, run `npm run dev`
 ```
 
 Then open `http://localhost:8886` in a browser.
@@ -136,6 +136,18 @@ Both them are valid ways to config loader url and relative path of module.
 The default value for `requireConfig.url` is `vs/loader.js`.
 
 > You may need to note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
+
+### Using with an alternative CommonJS build
+
+If you have a CommonJS-like browser environment, [you may have trouble
+loading monaco-editor](https://github.com/Microsoft/monaco-editor/issues/40).
+[@timkendrick/monaco-editor](https://github.com/timkendrick/monaco-editor)
+is an unofficial, expiremental build of monaco-editor that loads easily
+into a CommonJS-like environment. Instructions can be found in the
+project's [README](https://github.com/timkendrick/monaco-editor/blob/master/README.md).
+
+This is used in the
+[nextjs example](https://github.com/superRaytin/react-monaco-editor/tree/master/examples/nextjs).
 
 ## Properties
 
