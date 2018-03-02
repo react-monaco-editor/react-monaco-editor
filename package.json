@@ -3,9 +3,6 @@
   "version": "0.13.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
   "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
