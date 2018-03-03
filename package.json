@@ -6,7 +6,6 @@
   "files": [
     "lib"
   ],
-  "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib dist coverage",
