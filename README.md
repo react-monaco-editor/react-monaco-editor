@@ -15,7 +15,7 @@
 
 To build the examples locally, run:
 
-```
+```bash
 npm install
 cd examples/browser && npm install  # or examples/electron, or examples/nextjs
 npm start   # or for the next.js example, run `npm run dev`
@@ -25,7 +25,7 @@ Then open `http://localhost:8886` in a browser.
 
 ## Installation
 
-```
+```bash
 npm install react-monaco-editor
 ```
 
