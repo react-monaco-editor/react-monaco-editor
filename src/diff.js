@@ -35,7 +35,7 @@ class MonacoDiffEditor extends React.Component {
     if (prevProps.theme !== this.props.theme) {
       context.monaco.editor.setTheme(this.props.theme);
     }
-    if ((this.props.width !== prevProps.width) || (this.props.height !== prevProps.height)) {
+    if (this.editor && ((this.props.width !== prevProps.width) || (this.props.height !== prevProps.height))) {
       this.editor.layout();
     }
   }
