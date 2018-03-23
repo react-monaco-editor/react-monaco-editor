@@ -32,7 +32,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
-    "monaco-editor": "^0.10.0",
+    "monaco-editor": "^0.11.1",
     "react": "~16.0.0",
     "react-dom": "^16.0.0",
     "react-monaco-editor": "latest"
