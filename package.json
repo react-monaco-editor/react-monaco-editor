@@ -5,10 +5,11 @@
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
+    "preversion": "npm run lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib dist coverage",
     "lint": "eslint src",
-    "prepublish": "npm run build"
+    "prepublish": "npm run lint && npm run build"
   },
   "babel": {
     "presets": [
