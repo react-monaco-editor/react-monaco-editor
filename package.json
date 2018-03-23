@@ -42,6 +42,7 @@
     "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
