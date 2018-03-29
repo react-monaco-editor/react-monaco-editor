@@ -195,7 +195,7 @@ For example, you may want to configure some JSON schemas before editor mounted, 
 
 ```js
 class App extends React.Component {
-    editorWillMount(monaco) {
+    editorWillMount(editor, monaco) {
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
             schemas: [{
                 uri: "http://myserver/foo-schema.json",
