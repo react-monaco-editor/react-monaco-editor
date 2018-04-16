@@ -39,25 +39,25 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-env": "^2.4.1",
-    "babel-eslint": "^8.2.2",
-    "babel-loader": "^7.1.2",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.18.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "pre-commit": "^1.2.2",
-    "react": "^16.2.0",
+    "react": "^16.3.1",
     "rimraf": "^2.6.2"
   },
   "peerDependencies": {
     "react": "^15.x || ^16.x"
   },
   "dependencies": {
-    "monaco-editor": "^0.11.1",
-    "prop-types": "^15.5.10"
+    "monaco-editor": "^0.12.0",
+    "prop-types": "^15.6.1"
   },
   "pre-commit": [
     "lint"
