@@ -35,7 +35,7 @@ class CodeEditor extends React.Component {
   }
 
   render() {
-    const code = this.state.code;
+    const { code } = this.state;
     const options = {
       selectOnLineNumbers: true,
       roundedSelection: false,
@@ -106,7 +106,7 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
     });
   }
   render() {
-    const code = this.state.code;
+    const { code } = this.state;
     const requireConfig = {
       url: 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js',
       paths: {
