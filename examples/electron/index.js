@@ -6,21 +6,23 @@ const url = require('url');
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
+const isDev = process.env.ELECTRON_ENV === 'development';
+
 const createWindow = () => {
   // Create the browser window.
   win = new BrowserWindow();
 
   // and load the index.html of the app.
-  const indexHtml = process.env.ELECTRON_ENV === 'development' ? 'index.dev.html' : 'index.html'
-
   win.loadURL(url.format({
-    pathname: path.join(__dirname, indexHtml),
+    pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }));
 
-  // Open the DevTools.
-  // win.webContents.openDevTools();
+  // Open the DevTools in dev mode.
+  if (isDev) {
+    win.webContents.openDevTools();
+  }
 
   // Emitted when the window is closed.
   win.on('closed', () => {

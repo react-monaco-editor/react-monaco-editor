@@ -17,9 +17,9 @@
 To build the examples locally, run:
 
 ```bash
-npm install
-cd examples/browser && npm install  # or examples/electron, or examples/nextjs
-npm start   # or for the next.js example, run `npm run dev`
+yarn
+cd examples/browser
+yarn start
 ```
 
 Then open `http://localhost:8886` in a browser.
@@ -27,12 +27,10 @@ Then open `http://localhost:8886` in a browser.
 ## Installation
 
 ```bash
-npm install react-monaco-editor
+yarn add react-monaco-editor
 ```
 
-## Usage
-
-### Using with webpack
+## Using with Webpack
 
 ```js
 import React from 'react';
@@ -79,76 +77,16 @@ render(
 );
 ```
 
-Add a Webpack plugin `copy-webpack-plugin` to your `webpack.config.js`:
+Add the [Monaco Webpack plugin](https://github.com/Microsoft/monaco-editor-webpack-plugin) `monaco-editor-webpack-plugin` to your `webpack.config.js`:
 
 ```js
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 module.exports = {
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: 'node_modules/monaco-editor/min/vs',
-        to: 'vs',
-      }
-    ])
+    new MonacoWebpackPlugin()
   ]
 };
 ```
-
-Fill `from` field with the actual path of `monaco-editor` package in node_modules.
-
-You may need to add a `<base href="/">` tag to your page to ensure that monaco loads sub-dependencies from the correct location. Otherwise you might encounter 404's from nested paths when using a client-side router like react-router.
-
-### Using with require.config (do not need Webpack)
-
-```js
-class App extends React.Component {
-  render() {
-    const requireConfig = {
-      url: 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js',
-      paths: {
-        'vs': 'https://www.mycdn.com/monaco-editor/0.6.1/min/vs'
-      }
-    };
-    return (
-      <MonacoEditor
-        width="800"
-        height="600"
-        language="javascript"
-        value="// type your code..."
-        requireConfig={requireConfig}
-      />
-    );
-  }
-}
-```
-
-`requireConfig` is optional, equal to:
-
-```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js"></script>
-<script>
-    require.config({ paths: { 'vs': 'https://www.mycdn.com/monaco-editor/0.6.1/min/vs' }});
-</script>
-```
-
-Both them are valid ways to config loader url and relative path of module.
-
-The default value for `requireConfig.url` is `vs/loader.js`.
-
-> You may need to note the [cross domain case](https://github.com/Microsoft/monaco-editor#integrate-cross-domain).
-
-### Using with an alternative CommonJS build
-
-If you have a CommonJS-like browser environment, [you may have trouble
-loading monaco-editor](https://github.com/Microsoft/monaco-editor/issues/40).
-[@timkendrick/monaco-editor](https://github.com/timkendrick/monaco-editor)
-is an unofficial, expiremental build of monaco-editor that loads easily
-into a CommonJS-like environment. Instructions can be found in the
-project's [README](https://github.com/timkendrick/monaco-editor/blob/master/README.md).
-
-This is used in the
-[nextjs example](https://github.com/superRaytin/react-monaco-editor/tree/master/examples/nextjs).
 
 ## Properties
 
@@ -165,7 +103,6 @@ Otherwise, it behaves in uncontrolled mode.
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
 - `editorDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
-- `requireConfig` optional, allows configuration of the loader url and relative path of the module. Most properties are the same as those on [require.config](http://requirejs.org/docs/api.html#config). For Electron apps, `requireConfig.baseUrl` can be used to override the path to the folder that contains the `vs` directory, if necessary (defaults to '../node_modules/monaco-editor/min'). For _all_ apps, `requireConfig.url` can be used to override the path to the 'loader.js' file (defaults to 'vs/loader.js' for non-Electron apps, and to '../node_modules/monaco-editor/min/vs/loader.js' for Electron apps).
 - `context` optional, allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
 
 ## Events & Methods
