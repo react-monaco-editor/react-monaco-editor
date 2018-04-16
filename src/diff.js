@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function noop() { }
+function noop() {}
 
 class MonacoDiffEditor extends React.Component {
   constructor(props) {
@@ -17,8 +17,10 @@ class MonacoDiffEditor extends React.Component {
 
   componentDidUpdate(prevProps) {
     const context = this.props.context || window;
-    if (this.props.value !== this.__current_value ||
-      this.props.original !== this.__current_original) {
+    if (
+      this.props.value !== this.__current_value ||
+      this.props.original !== this.__current_original
+    ) {
       // Always refer to the latest value
       this.__current_value = this.props.value;
       this.__current_original = this.props.original;
@@ -35,8 +37,10 @@ class MonacoDiffEditor extends React.Component {
     if (prevProps.theme !== this.props.theme) {
       context.monaco.editor.setTheme(this.props.theme);
     }
-    if (this.editor && (
-      (this.props.width !== prevProps.width) || (this.props.height !== prevProps.height))) {
+    if (
+      this.editor &&
+      (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
+    ) {
       this.editor.layout();
     }
   }
@@ -105,7 +109,8 @@ class MonacoDiffEditor extends React.Component {
       // We need to avoid loading multiple loader.js when there are multiple editors loading
       // concurrently, delay to call callbacks except the first one
       // eslint-disable-next-line max-len
-      context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ = context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
+      context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ =
+        context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__ || [];
       context.__REACT_MONACO_EDITOR_LOADER_CALLBACKS__.push({
         context: this,
         fn: onGotAmdLoader
@@ -125,12 +130,12 @@ class MonacoDiffEditor extends React.Component {
   updateModel(value, original) {
     const context = this.props.context || window;
     const { language } = this.props;
-    const originalModel = context.monaco.editor.createModel(original, language)
-    const modifiedModel = context.monaco.editor.createModel(value, language)
+    const originalModel = context.monaco.editor.createModel(original, language);
+    const modifiedModel = context.monaco.editor.createModel(value, language);
     this.editor.setModel({
       original: originalModel,
       modified: modifiedModel
-    })
+    });
   }
 
   initMonaco() {
@@ -142,10 +147,10 @@ class MonacoDiffEditor extends React.Component {
       this.editorWillMount(context.monaco);
       this.editor = context.monaco.editor.createDiffEditor(this.containerElement, options);
       if (theme) {
-        context.monaco.editor.setTheme(theme)
+        context.monaco.editor.setTheme(theme);
       }
       // After initializing monaco editor
-      this.updateModel(value, original)
+      this.updateModel(value, original);
       this.editorDidMount(this.editor, context.monaco);
     }
   }
@@ -158,7 +163,7 @@ class MonacoDiffEditor extends React.Component {
 
   assignRef = (component) => {
     this.containerElement = component;
-  }
+  };
 
   render() {
     const { width, height } = this.props;
@@ -166,24 +171,16 @@ class MonacoDiffEditor extends React.Component {
     const fixedHeight = height.toString().indexOf('%') !== -1 ? height : `${height}px`;
     const style = {
       width: fixedWidth,
-      height: fixedHeight,
+      height: fixedHeight
     };
 
-    return (
-      <div ref={this.assignRef} style={style} className="react-monaco-editor-container" />
-    )
+    return <div ref={this.assignRef} style={style} className="react-monaco-editor-container" />;
   }
 }
 
 MonacoDiffEditor.propTypes = {
-  width: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  height: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   original: PropTypes.string,
   value: PropTypes.string,
   defaultValue: PropTypes.string,
@@ -209,7 +206,7 @@ MonacoDiffEditor.defaultProps = {
   editorDidMount: noop,
   editorWillMount: noop,
   onChange: noop,
-  requireConfig: {},
+  requireConfig: {}
 };
 
 export default MonacoDiffEditor;

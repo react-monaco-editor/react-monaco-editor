@@ -8,7 +8,8 @@
     "preversion": "npm run lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib dist coverage",
-    "lint": "eslint src",
+    "prettier": "prettier-eslint --write src/*",
+    "lint": "npm run prettier -- --list-different",
     "prepublish": "npm run lint && npm run build"
   },
   "babel": {
@@ -49,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "pre-commit": "^1.2.2",
+    "prettier-eslint-cli": "^4.7.1",
     "react": "^16.3.1",
     "rimraf": "^2.6.2"
   },
