@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Monaco Editor for React",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --progress --colors --port 8886",
+    "start": "webpack-dev-server --hot --inline --progress --colors --port 8886"
   },
   "babel": {
     "presets": [
