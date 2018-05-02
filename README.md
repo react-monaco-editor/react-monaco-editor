@@ -18,7 +18,7 @@ To build the examples locally, run:
 
 ```bash
 yarn
-cd examples/browser
+cd examples
 yarn start
 ```
 
