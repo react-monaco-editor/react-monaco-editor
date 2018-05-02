@@ -38,7 +38,7 @@
   "repository": "https://github.com/superRaytin/react-monaco-editor",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-env": "^2.4.1",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -50,7 +50,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "prettier-eslint-cli": "^4.7.1",
-    "react": "^16.3.1",
+    "react": "^16.3.2",
     "rimraf": "^2.6.2"
   },
   "peerDependencies": {
