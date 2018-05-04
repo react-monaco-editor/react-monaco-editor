@@ -8,7 +8,7 @@
   "scripts": {
     "preversion": "npm run lint",
     "build": "babel src --out-dir lib",
-    "clean": "rimraf lib dist coverage",
+    "clean": "rimraf lib",
     "prettier": "prettier-eslint --write src/*",
     "lint": "npm run prettier -- --list-different",
     "prepublish": "npm run lint && npm run build"
@@ -39,7 +39,7 @@
   "repository": "https://github.com/superRaytin/react-monaco-editor",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-env": "^2.4.1",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -50,9 +50,8 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "pre-commit": "^1.2.2",
     "prettier-eslint-cli": "^4.7.1",
-    "react": "^16.3.1",
+    "react": "^16.3.2",
     "rimraf": "^2.6.2"
   },
   "peerDependencies": {
@@ -62,8 +61,5 @@
     "@types/react": "^16.3.13",
     "monaco-editor": "^0.12.0",
     "prop-types": "^15.6.1"
-  },
-  "pre-commit": [
-    "lint"
-  ]
+  }
 }
