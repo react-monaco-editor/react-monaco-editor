@@ -18,7 +18,8 @@ To build the examples locally, run:
 
 ```bash
 yarn
-cd examples
+cd example
+yarn
 yarn start
 ```
 

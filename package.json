@@ -9,7 +9,7 @@
     "preversion": "npm run lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
-    "prettier": "prettier-eslint --write src/*",
+    "format": "prettier-eslint --write src/*",
     "lint": "npm run prettier -- --list-different",
     "prepublish": "npm run lint && npm run build"
   },
