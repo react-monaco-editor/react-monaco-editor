@@ -10,7 +10,7 @@
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
     "format": "prettier-eslint --write src/*",
-    "lint": "npm run prettier -- --list-different",
+    "lint": "prettier-eslint --list-different src/*",
     "prepublish": "npm run lint && npm run build"
   },
   "babel": {
