@@ -11,7 +11,8 @@
     "clean": "rimraf lib",
     "format": "prettier-eslint --write src/*",
     "lint": "prettier-eslint --list-different src/*",
-    "prepublish": "npm run lint && npm run build"
+    "prepublish": "npm run lint && npm run build",
+    "test:typescript": "typings-tester --dir test/typescript"
   },
   "babel": {
     "presets": [
@@ -52,7 +53,9 @@
     "eslint-plugin-react": "^7.7.0",
     "prettier-eslint-cli": "^4.7.1",
     "react": "^16.3.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "typescript": "^2.8.3",
+    "typings-tester": "^0.3.1"
   },
   "peerDependencies": {
     "react": "^15.x || ^16.x"
