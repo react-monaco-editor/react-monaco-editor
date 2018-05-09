@@ -1,75 +1,63 @@
-import React from 'react';
-import * as monacoEditor from 'monaco-editor';
+import * as React from "react";
+import * as monacoEditor from "monaco-editor";
 
-declare class MonacoEditor extends React.Component<MonacoEditorProps> {
-  constructor(props: Partial<MonacoEditorProps>);
+export type ChangeHandler = (
+  value: string,
+  event: monacoEditor.editor.IModelContentChangedEvent
+) => void;
 
-  componentDidMount(): void;
-  componentDidUpdate(prevProps: Partial<MonacoEditorProps>): void;
-  componentWillUnmount(): void;
+export type EditorDidMount = (
+  editor: monacoEditor.editor.IStandaloneCodeEditor,
+  monaco: typeof monacoEditor
+) => void;
 
-  editorDidMount(editor: monacoEditor.editor.IEditor, monaco: typeof monacoEditor): void;
-  editorWillMount(monaco: any): void;
-
-  afterViewInit(): void;
-  initMonaco(): void;
-  destroyMonaco(): void;
-
-  render(): React.DOMElement<any, any>;
-
-  updateModel(value: string | null, original: string | null): void;
-}
+export type EditorWillMount = (monaco: typeof monacoEditor) => void;
 
 declare interface MonacoEditorProps {
-  width: string | number;
-  height: string | number;
-  value: string | null;
-  defaultValue: string;
-  language: string;
-  theme: string | null;
-  options: object;
-  editorDidMount: (editor, monaco) => void;
-  editorWillMount: (monaco) => void;
-  onChange: (value, event) => void;
-  requireConfig: object;
-  context: object;
+  width?: string | number;
+  height?: string | number;
+  value?: string | null;
+  defaultValue?: string;
+  language?: string;
+  theme?: string | null;
+  options?: monacoEditor.editor.IEditorConstructionOptions;
+  editorDidMount?: EditorDidMount;
+  editorWillMount?: EditorWillMount;
+  onChange?: ChangeHandler;
 }
+
+declare class MonacoEditor extends React.Component<MonacoEditorProps> {}
+
+// ============ Diff Editor ============
+
+export type DiffEditorDidMount = (
+  editor: monacoEditor.editor.IStandaloneDiffEditor,
+  monaco: typeof monacoEditor
+) => void;
+
+export type DiffEditorWillMount = (monaco: typeof monacoEditor) => void;
+
+export type DiffChangeHandler = (value: string) => void;
 
 declare interface MonacoDiffEditorProps {
-  width: string | number;
-  height: string | number;
-  original: string;
-  value: string;
-  defaultValue: string;
-  language: string;
-  theme: string;
-  options: object;
-  editorDidMount: (editor, monaco) => void;
-  editorWillMount: (monaco) => void;
-  onChange: (value, event) => void;
-  requireConfig: object;
-  context: object;
+  width?: string | number;
+  height?: string | number;
+  original?: string;
+  value?: string;
+  defaultValue?: string;
+  language?: string;
+  theme?: string;
+  options?: monacoEditor.editor.IDiffEditorConstructionOptions;
+  editorDidMount?: DiffEditorDidMount;
+  editorWillMount?: DiffEditorWillMount;
+  onChange?: DiffChangeHandler;
 }
 
-declare class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
-  constructor(props: Partial<MonacoDiffEditorProps>);
+declare class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {}
 
-  componentDidMount(): void;
-  componentDidUpdate(prevProps: Partial<MonacoDiffEditorProps>): void;
-  componentWillUnmount(): void;
-
-  editorWillMount(monaco): void;
-  editorDidMount(editor: monacoEditor.editor.IEditor, monaco: typeof monacoEditor): void;
-
-  afterViewInit(): void;
-  initMonaco(): void;
-  destroyMonaco(): void;
-
-  assignRef(component): void;
-
-  render(): React.DOMElement<any, any>;
-
-  updateModel(value: string | null, original: string | null): void;
-}
-
-export { MonacoEditor as default, MonacoEditorProps, MonacoDiffEditor, MonacoDiffEditorProps };
+export {
+  MonacoEditor as default,
+  MonacoEditorProps,
+  MonacoDiffEditor,
+  MonacoDiffEditorProps
+};

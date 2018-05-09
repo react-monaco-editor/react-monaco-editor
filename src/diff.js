@@ -56,7 +56,7 @@ class MonacoDiffEditor extends React.Component {
 
   editorDidMount(editor) {
     this.props.editorDidMount(editor, monaco);
-    editor.onDidUpdateDiff((event) => {
+    editor.onDidUpdateDiff(() => {
       const value = editor.getValue();
 
       // Always refer to the latest value
@@ -64,7 +64,7 @@ class MonacoDiffEditor extends React.Component {
 
       // Only invoking when user input changed
       if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(value, event);
+        this.props.onChange(value);
       }
     });
   }
