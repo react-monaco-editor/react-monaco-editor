@@ -1,22 +1,50 @@
 import * as React from "react";
-import { MonacoDiffEditor } from "../..";
+import {
+  MonacoDiffEditor,
+  DiffEditorDidMount,
+  DiffChangeHandler,
+  DiffEditorWillMount
+} from "../..";
 
-class App extends React.Component {
+type AppState = {
+  original: string;
+  code: string;
+};
+
+class App extends React.Component<{}, AppState> {
+  state = {
+    original: "// original code",
+    code: "// new code"
+  };
+
+  editorWillMount: DiffEditorWillMount = monaco => {
+    console.log("editorWillMount", monaco);
+  };
+
+  editorDidMount: DiffEditorDidMount = (editor, monaco) => {
+    console.log("editorDidMount", editor);
+    editor.focus();
+  };
+
+  onChange: DiffChangeHandler = newValue => {
+    console.log("onChange", newValue);
+  };
+
   render() {
-    const code1 = "// your original code...";
-    const code2 = "// a different version...";
-    const options = {
-      //renderSideBySide: false
-    };
+    const { original, code } = this.state;
 
     return (
       <MonacoDiffEditor
-        width="800"
-        height="600"
+        width={800}
+        height={600}
         language="javascript"
-        original={code1}
-        value={code2}
-        options={options}
+        theme="vs-dark"
+        original={original}
+        value={code}
+        options={{ renderSideBySide: true }}
+        onChange={this.onChange}
+        editorWillMount={this.editorWillMount}
+        editorDidMount={this.editorDidMount}
       />
     );
   }
