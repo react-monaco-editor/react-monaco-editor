@@ -1,4 +1,5 @@
 /examples/
+/example/
 .babelrc
 .eslintrc
 .gitignore
