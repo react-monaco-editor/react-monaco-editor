@@ -57,7 +57,7 @@ class MonacoDiffEditor extends React.Component {
   editorDidMount(editor) {
     this.props.editorDidMount(editor, monaco);
     editor.onDidUpdateDiff(() => {
-      const value = editor.getValue();
+      const value = editor.getModel().modified.getValue();
 
       // Always refer to the latest value
       this.__current_value = value;
