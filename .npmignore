@@ -2,6 +2,7 @@
 /example/
 .babelrc
 .eslintrc
+.eslintignore
 .gitignore
 .npmignore
 .travis.yml
