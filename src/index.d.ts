@@ -52,7 +52,7 @@ declare interface MonacoEditorBaseProps {
   context?: any;
 }
 
-declare interface MonacoEditorProps extends MonacoEditorBaseProps {
+export interface MonacoEditorProps extends MonacoEditorBaseProps {
   /**
    * Value of the auto created model in the editor.
    * If you specify value property, the component behaves in controlled mode. Otherwise, it behaves in uncontrolled mode.
@@ -80,7 +80,7 @@ declare interface MonacoEditorProps extends MonacoEditorBaseProps {
   onChange?: ChangeHandler;
 }
 
-declare class MonacoEditor extends React.Component<MonacoEditorProps> {}
+export default class MonacoEditor extends React.Component<MonacoEditorProps> {}
 
 // ============ Diff Editor ============
 
@@ -93,7 +93,7 @@ export type DiffEditorWillMount = (monaco: typeof monacoEditor) => void;
 
 export type DiffChangeHandler = (value: string) => void;
 
-declare interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
+export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
   /**
    * The original value to compare against.
    */
@@ -126,11 +126,4 @@ declare interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
   onChange?: DiffChangeHandler;
 }
 
-declare class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {}
-
-export {
-  MonacoEditor as default,
-  MonacoEditorProps,
-  MonacoDiffEditor,
-  MonacoDiffEditorProps
-};
+export class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {}
