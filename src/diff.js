@@ -51,7 +51,9 @@ class MonacoDiffEditor extends React.Component {
 
   editorWillMount() {
     const { editorWillMount } = this.props;
-    editorWillMount(monaco);
+    if (editorWillMount) {
+      editorWillMount(monaco);
+    }
   }
 
   editorDidMount(editor) {
@@ -84,7 +86,7 @@ class MonacoDiffEditor extends React.Component {
     const { original, theme, options } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
-      this.editorWillMount(monaco);
+      this.editorWillMount();
       this.editor = monaco.editor.createDiffEditor(this.containerElement, options);
       if (theme) {
         monaco.editor.setTheme(theme);
