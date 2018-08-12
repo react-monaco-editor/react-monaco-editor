@@ -26,17 +26,17 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.11",
+    "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
-    "monaco-editor-webpack-plugin": "^1.2.0",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3",
-    "webpack-dev-server": "^3.1.4"
+    "monaco-editor-webpack-plugin": "^1.5.1",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "react": "~16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "~16.4.2",
+    "react-dom": "^16.4.2",
     "react-monaco-editor": "latest"
   }
 }

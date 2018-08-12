@@ -53,9 +53,9 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
     "prettier-eslint-cli": "^4.7.1",
-    "react": "^16.4.0",
+    "react": "^16.4.2",
     "rimraf": "^2.6.2",
-    "typescript": "^2.9.1",
+    "typescript": "^3.0.1",
     "typings-tester": "^0.3.1"
   },
   "peerDependencies": {
@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@types/react": "*",
-    "monaco-editor": "^0.13.1",
-    "prop-types": "^15.6.1"
+    "monaco-editor": "^0.14.2",
+    "prop-types": "^15.6.2"
   }
 }
