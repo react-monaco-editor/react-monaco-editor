@@ -1,8 +1,9 @@
 import * as monaco from 'monaco-editor';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { processSize } from './utils'
 
-function noop() {}
+function noop() { }
 
 class MonacoEditor extends React.Component {
   constructor(props) {
@@ -95,8 +96,8 @@ class MonacoEditor extends React.Component {
 
   render() {
     const { width, height } = this.props;
-    const fixedWidth = width.toString().indexOf('%') !== -1 ? width : `${width}px`;
-    const fixedHeight = height.toString().indexOf('%') !== -1 ? height : `${height}px`;
+    const fixedWidth = processSize(width);
+    const fixedHeight = processSize(height);
     const style = {
       width: fixedWidth,
       height: fixedHeight
