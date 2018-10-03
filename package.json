@@ -9,8 +9,8 @@
     "preversion": "npm run lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
-    "format": "prettier-eslint --write src/*",
-    "lint": "prettier-eslint --list-different src/*",
+    "format": "prettier-eslint --write src/**/*",
+    "lint": "prettier-eslint --list-different src/**/*",
     "prepublish": "npm run lint && npm run test && npm run build",
     "test": "npm run test:typescript",
     "test:typescript": "typings-tester --dir test/typescript"
