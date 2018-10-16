@@ -47,7 +47,8 @@ class MonacoEditor extends React.Component {
 
   editorWillMount() {
     const { editorWillMount } = this.props;
-    editorWillMount(monaco);
+    const options = editorWillMount(monaco);
+    return options || {};
   }
 
   editorDidMount(editor) {
@@ -70,7 +71,7 @@ class MonacoEditor extends React.Component {
     const { language, theme, options } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
-      this.editorWillMount();
+      Object.assign(options, this.editorWillMount());
       this.editor = monaco.editor.create(this.containerElement, {
         value,
         language,
