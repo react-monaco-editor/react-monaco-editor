@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as monacoEditor from "monaco-editor";
+import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 export type ChangeHandler = (
   value: string,
