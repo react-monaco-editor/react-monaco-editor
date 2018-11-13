@@ -6,13 +6,6 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --progress --colors --port 8886"
   },
-  "babel": {
-    "presets": [
-      "env",
-      "react",
-      "stage-0"
-    ]
-  },
   "authors": [
     "Leon Shi <superRaytin@gmail.com>",
     "Dominik Moritz <domoritz@gmail.com>"
@@ -26,17 +19,17 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^1.0.0",
-    "file-loader": "^1.1.11",
-    "monaco-editor-webpack-plugin": "^1.5.1",
-    "style-loader": "^0.22.1",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "monaco-editor-webpack-plugin": "^1.6.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "react": "~16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "~16.6.3",
+    "react-dom": "^16.6.3",
     "react-monaco-editor": "latest"
   }
 }
