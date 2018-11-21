@@ -112,6 +112,10 @@ Refer to [Monaco interface IEditor](https://microsoft.github.io/monaco-editor/ap
 
 ## Q & A
 
+### I don't get syntax highlighting / autocomplete / validation.
+
+Make sure to use the [Monaco Webpack plugin](https://github.com/Microsoft/monaco-editor-webpack-plugin) or follow the [instructions on how to load the ESM version of Monaco](https://github.com/Microsoft/monaco-editor/blob/master/docs/integrate-esm.md).
+
 ### How to interact with the MonacoEditor instance
 
 Using the first parameter of `editorDidMount`, or using a `ref` (e.g. `<MonacoEditor ref="monaco">`) after `editorDidMount` event has fired.
