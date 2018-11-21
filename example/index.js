@@ -46,8 +46,8 @@ class CodeEditor extends React.Component {
     return (
       <div>
         <div>
-          <button onClick={this.changeEditorValue}>Change value</button>
-          <button onClick={this.changeBySetState}>Change by setState</button>
+          <button onClick={this.changeEditorValue} type="button">Change value</button>
+          <button onClick={this.changeBySetState} type="button">Change by setState</button>
         </div>
         <hr />
         <MonacoEditor
@@ -63,7 +63,6 @@ class CodeEditor extends React.Component {
   }
 }
 
-// Using with require.config
 class AnotherEditor extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor(props) {
     super(props);
@@ -79,6 +78,7 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
 
   editorWillMount = (monaco) => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
       schemas: [{
         uri: 'http://myserver/foo-schema.json',
         schema: {
@@ -105,14 +105,9 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
       }]
     });
   }
+
   render() {
     const { code } = this.state;
-    const requireConfig = {
-      url: 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.1/require.min.js',
-      paths: {
-        vs: 'https://as.alipayobjects.com/g/cicada/monaco-editor-mirror/0.6.1/min/vs'
-      }
-    };
     return (
       <div>
         <MonacoEditor
@@ -120,7 +115,6 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
           height="600"
           language="json"
           defaultValue={code}
-          requireConfig={requireConfig}
           editorWillMount={this.editorWillMount}
         />
       </div>
