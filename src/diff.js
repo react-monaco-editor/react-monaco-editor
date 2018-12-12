@@ -54,9 +54,8 @@ class MonacoDiffEditor extends React.Component {
 
   editorWillMount() {
     const { editorWillMount } = this.props;
-    if (editorWillMount) {
-      editorWillMount(monaco);
-    }
+    const options = editorWillMount(monaco);
+    return options || {};
   }
 
   editorDidMount(editor) {
