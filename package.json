@@ -47,7 +47,7 @@
     "prettier-eslint-cli": "^4.7.1",
     "react": "^16.6.3",
     "rimraf": "^2.6.2",
-    "typescript": "^3.1.6",
+    "typescript": "^3.2.2",
     "typings-tester": "^0.3.2"
   },
   "peerDependencies": {
@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@types/react": "*",
-    "monaco-editor": "^0.15.1",
+    "monaco-editor": "^0.15.6",
     "prop-types": "^15.6.2"
   }
 }

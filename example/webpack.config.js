@@ -33,7 +33,9 @@ module.exports = {
     alias: { 'react-monaco-editor': MonacoEditorSrc }
   },
   plugins: [
-    new MonacoWebpackPlugin(),
+    new MonacoWebpackPlugin({
+      languages: ['json', 'javascript', 'typescript']
+    }),
   ],
   devServer: { contentBase: './' },
   node: {
