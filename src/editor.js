@@ -116,7 +116,8 @@ MonacoEditor.propTypes = {
   options: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  services: PropTypes.shape({})
 };
 
 MonacoEditor.defaultProps = {
