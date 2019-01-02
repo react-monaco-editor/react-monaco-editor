@@ -4,12 +4,15 @@ import MonacoEditor, {
   ChangeHandler,
   EditorWillMount
 } from "../..";
+import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 
 type AppState = {
   code: string;
 };
 
 class App extends React.Component<{}, AppState> {
+  private editor: MonacoEditor;
+
   state = {
     code: "// type your code..."
   };
@@ -25,6 +28,10 @@ class App extends React.Component<{}, AppState> {
 
   onChange: ChangeHandler = (newValue, e) => {
     console.log("onChange", newValue, e);
+
+    if (this.editor) {
+      const editor: monacoEditor.editor.IStandaloneCodeEditor = this.editor.editor;
+    }
   };
 
   render() {
