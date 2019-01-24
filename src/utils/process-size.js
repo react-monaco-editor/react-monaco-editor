@@ -1,3 +1,3 @@
 export function processSize(size) {
-  return !/^\d+$/.test(size) ? size : `${size}px`;
+  return !/^\d+$/.test(size.toString()) ? size : `${size}px`;
 }
