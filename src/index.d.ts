@@ -81,7 +81,7 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
 }
 
 export default class MonacoEditor extends React.Component<MonacoEditorProps> {
-  editor: monacoEditor.editor.IStandaloneCodeEditor;
+  editor?: monacoEditor.editor.IStandaloneCodeEditor;
 }
 
 // ============ Diff Editor ============
