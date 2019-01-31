@@ -29,7 +29,7 @@ class App extends React.Component<{}, AppState> {
   onChange: ChangeHandler = (newValue, e) => {
     console.log("onChange", newValue, e);
 
-    if (this.editor) {
+    if (this.editor && this.editor.editor) {
       const editor: monacoEditor.editor.IStandaloneCodeEditor = this.editor.editor;
     }
   };
