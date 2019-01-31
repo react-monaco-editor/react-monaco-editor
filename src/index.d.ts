@@ -80,7 +80,9 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
   onChange?: ChangeHandler;
 }
 
-export default class MonacoEditor extends React.Component<MonacoEditorProps> {}
+export default class MonacoEditor extends React.Component<MonacoEditorProps> {
+  editor?: monacoEditor.editor.IStandaloneCodeEditor;
+}
 
 // ============ Diff Editor ============
 
@@ -126,4 +128,6 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
   onChange?: DiffChangeHandler;
 }
 
-export class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {}
+export class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
+  editor?: monacoEditor.editor.IStandaloneDiffEditor;
+}
