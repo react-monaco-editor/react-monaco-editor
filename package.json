@@ -3,6 +3,7 @@
   "version": "0.22.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
+  "module": "src/index",
   "jsnext:main": "src/index.js",
   "types": "src/index.d.ts",
   "scripts": {
