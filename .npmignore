@@ -6,3 +6,4 @@
 .gitignore
 .npmignore
 .travis.yml
+yarn-error.log
