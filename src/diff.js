@@ -46,6 +46,9 @@ class MonacoDiffEditor extends React.Component {
     ) {
       this.editor.layout();
     }
+    if (prevProps.options !== this.props.options) {
+      this.editor.updateOptions(this.props.options)
+    }
   }
 
   componentWillUnmount() {
