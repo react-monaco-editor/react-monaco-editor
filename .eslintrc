@@ -1,19 +1,19 @@
 {
   "parser": "babel-eslint",
-  "extends": "eslint-config-airbnb",
+  "extends": ["eslint-config-airbnb", "plugin:react/recommended"],
   "rules": {
     "array-bracket-spacing": 0,
     "comma-dangle": 0,
     "valid-jsdoc": 2,
-    // Disable until Flow supports let and const
-    "no-var": 0,
+    "no-var": 1,
     "semi": 0,
     "no-underscore-dangle": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-no-undef": 2,
     "react/jsx-filename-extension": 0,
     "react/forbid-prop-types": 0,
-    "jsx-a11y/href-no-hash": 0
+    "jsx-a11y/href-no-hash": 0,
+    "react/destructuring-assignment": 0
   },
   "plugins": [
     "react"
@@ -23,5 +23,8 @@
   },
   "env": {
     "browser": true
+  },
+  "react": {
+    "version": "detect"
   }
 }

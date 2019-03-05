@@ -1,1 +1,1 @@
-export * from './process-size';
+export * from "./process-size";

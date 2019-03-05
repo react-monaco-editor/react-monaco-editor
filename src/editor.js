@@ -34,8 +34,8 @@ class MonacoEditor extends React.Component {
       monaco.editor.setTheme(this.props.theme);
     }
     if (
-      this.editor &&
-      (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
+      this.editor
+      && (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
     ) {
       this.editor.layout();
     }
@@ -46,6 +46,35 @@ class MonacoEditor extends React.Component {
 
   componentWillUnmount() {
     this.destroyMonaco();
+  }
+
+  assignRef = (component) => {
+    this.containerElement = component;
+  };
+
+  destroyMonaco() {
+    if (typeof this.editor !== 'undefined') {
+      this.editor.dispose();
+    }
+  }
+
+  initMonaco() {
+    const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
+    const { language, theme, options } = this.props;
+    if (this.containerElement) {
+      // Before initializing monaco editor
+      Object.assign(options, this.editorWillMount());
+      this.editor = monaco.editor.create(this.containerElement, {
+        value,
+        language,
+        ...options
+      });
+      if (theme) {
+        monaco.editor.setTheme(theme);
+      }
+      // After initializing monaco editor
+      this.editorDidMount(this.editor);
+    }
   }
 
   editorWillMount() {
@@ -68,35 +97,6 @@ class MonacoEditor extends React.Component {
       }
     });
   }
-
-  initMonaco() {
-    const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
-    const { language, theme, options } = this.props;
-    if (this.containerElement) {
-      // Before initializing monaco editor
-      Object.assign(options, this.editorWillMount());
-      this.editor = monaco.editor.create(this.containerElement, {
-        value,
-        language,
-        ...options
-      });
-      if (theme) {
-        monaco.editor.setTheme(theme);
-      }
-      // After initializing monaco editor
-      this.editorDidMount(this.editor);
-    }
-  }
-
-  destroyMonaco() {
-    if (typeof this.editor !== 'undefined') {
-      this.editor.dispose();
-    }
-  }
-
-  assignRef = (component) => {
-    this.containerElement = component;
-  };
 
   render() {
     const { width, height } = this.props;

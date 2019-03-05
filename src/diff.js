@@ -55,6 +55,10 @@ class MonacoDiffEditor extends React.Component {
     this.destroyMonaco();
   }
 
+  assignRef = (component) => {
+    this.containerElement = component;
+  };
+
   editorWillMount() {
     const { editorWillMount } = this.props;
     const options = editorWillMount(monaco);
@@ -107,10 +111,6 @@ class MonacoDiffEditor extends React.Component {
       this.editor.dispose();
     }
   }
-
-  assignRef = (component) => {
-    this.containerElement = component;
-  };
 
   render() {
     const { width, height } = this.props;
