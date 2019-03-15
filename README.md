@@ -125,7 +125,7 @@ All the properties below are optional.
 
 - `width` width of editor. Defaults to `100%`.
 - `height` height of editor. Defaults to `100%`.
-- `value` value of the auto created model in the editor. If specified, then the component behaves in controlled mode. Otherwise, it behaves in uncontrolled mode.
+- `value` value of the auto created model in the editor.
 - `defaultValue` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
 - `theme` the theme of the editor
