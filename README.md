@@ -121,8 +121,7 @@ const MONACO_DIR = path.resolve(__dirname, './node_modules/monaco-editor');
 
 ## Properties
 
-If you specify `value` property, the component behaves in controlled mode.
-Otherwise, it behaves in uncontrolled mode.
+All the properties below are optional.
 
 - `width` width of editor. Defaults to `100%`.
 - `height` height of editor. Defaults to `100%`.
@@ -134,7 +133,7 @@ Otherwise, it behaves in uncontrolled mode.
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
 - `editorDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
-- `context` optional, allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
+- `context` allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
 
 ## Events & Methods
 
