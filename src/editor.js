@@ -60,7 +60,7 @@ class MonacoEditor extends React.Component {
 
   initMonaco() {
     const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
-    const { language, theme, options } = this.props;
+    const { language, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
       Object.assign(options, this.editorWillMount());
@@ -68,7 +68,7 @@ class MonacoEditor extends React.Component {
         value,
         language,
         ...options
-      });
+      }, overrideServices);
       if (theme) {
         monaco.editor.setTheme(theme);
       }
