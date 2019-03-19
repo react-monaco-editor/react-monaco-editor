@@ -64,6 +64,12 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    */
   options?: monacoEditor.editor.IEditorConstructionOptions;
 
+
+  /**
+   * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.
+   */
+  overrideServices?: monacoEditor.editor.IEditorOverrideServices;
+
   /**
    * An event emitted when the editor has been mounted (similar to componentDidMount of React).
    */
@@ -111,6 +117,11 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
    * Refer to Monaco interface {monaco.editor.IDiffEditorConstructionOptions}.
    */
   options?: monacoEditor.editor.IDiffEditorConstructionOptions;
+
+  /**
+ * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.
+ */
+  overrideServices?: monacoEditor.editor.IEditorOverrideServices;
 
   /**
    * An event emitted when the editor has been mounted (similar to componentDidMount of React).

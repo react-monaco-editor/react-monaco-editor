@@ -119,6 +119,7 @@ MonacoEditor.propTypes = {
   language: PropTypes.string,
   theme: PropTypes.string,
   options: PropTypes.object,
+  overrideServices: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
   onChange: PropTypes.func
@@ -132,6 +133,7 @@ MonacoEditor.defaultProps = {
   language: 'javascript',
   theme: null,
   options: {},
+  overrideServices: {},
   editorDidMount: noop,
   editorWillMount: noop,
   onChange: noop
