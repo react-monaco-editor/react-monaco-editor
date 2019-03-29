@@ -1,4 +1,8 @@
-# react-monaco-editor
+<p align="center"><img src="https://user-images.githubusercontent.com/2723376/55211710-2f76e000-5228-11e9-887b-67faca78c4b9.png" width="150" height="150" /></p>
+
+<h1 align="center">react-monaco-editor</h1>
+
+<div align="center">
 
 > [Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
 
@@ -11,6 +15,8 @@
 [npm-url]: https://npmjs.org/package/react-monaco-editor
 [downloads-image]: http://img.shields.io/npm/dm/react-monaco-editor.svg
 [npm-image]: http://img.shields.io/npm/v/react-monaco-editor.svg
+
+</div>
 
 ## Examples
 
