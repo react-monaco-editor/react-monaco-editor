@@ -4,7 +4,7 @@
 
 <div align="center">
 
-> [Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
+[Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
 
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
