@@ -177,6 +177,7 @@ class App extends React.Component {
             validate: true,
             schemas: [{
                 uri: "http://myserver/foo-schema.json",
+                fileMatch: ['*'],
                 schema: {
                     type: "object",
                     properties: {
