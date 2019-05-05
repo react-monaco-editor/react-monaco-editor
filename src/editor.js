@@ -1,4 +1,4 @@
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monaco from 'monaco-editor/min/vs/editor/editor.main';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { processSize } from './utils'
