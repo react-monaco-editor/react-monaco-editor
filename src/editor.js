@@ -27,6 +27,7 @@ class MonacoEditor extends React.Component {
           range: this.editor.getModel().getFullModelRange(),
           text: this.__current_value
         }]);
+        this.editor.pushUndoStop();
         this.__prevent_trigger_change_event = false;
       }
     }
