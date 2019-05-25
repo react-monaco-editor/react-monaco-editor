@@ -1,7 +1,7 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { processSize } from './utils'
+import { processSize } from './utils';
 
 function noop() { }
 
@@ -23,7 +23,10 @@ class MonacoEditor extends React.Component {
       // Consider the situation of rendering 1+ times before the editor mounted
       if (this.editor) {
         this.__prevent_trigger_change_event = true;
-        this.editor.setValue(this.__current_value);
+        this.editor.executeEdits('', [{
+          range: this.editor.getModel().getFullModelRange(),
+          text: this.__current_value
+        }]);
         this.__prevent_trigger_change_event = false;
       }
     }
@@ -40,7 +43,7 @@ class MonacoEditor extends React.Component {
       this.editor.layout();
     }
     if (prevProps.options !== this.props.options) {
-      this.editor.updateOptions(this.props.options)
+      this.editor.updateOptions(this.props.options);
     }
   }
 
