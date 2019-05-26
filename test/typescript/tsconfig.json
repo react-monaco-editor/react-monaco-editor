@@ -3,6 +3,7 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "jsx": "react"
+    "jsx": "react",
+    "lib": ["dom", "es2015"]
   }
 }
