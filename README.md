@@ -8,7 +8,7 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
-[![Build Status](https://travis-ci.org/superRaytin/react-monaco-editor.svg?branch=master)](https://travis-ci.org/superRaytin/react-monaco-editor)
+[![Build Status](https://travis-ci.com/react-monaco-editor/react-monaco-editor.svg?branch=master)](https://travis-ci.com/react-monaco-editor/react-monaco-editor)
 
 [![react-monaco-editor](https://nodei.co/npm/react-monaco-editor.png)](https://npmjs.org/package/react-monaco-editor)
 
