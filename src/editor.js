@@ -23,12 +23,7 @@ class MonacoEditor extends React.Component {
       // Consider the situation of rendering 1+ times before the editor mounted
       if (this.editor) {
         this.__prevent_trigger_change_event = true;
-        this.editor.pushUndoStop();
-        this.editor.executeEdits('', [{
-          range: this.editor.getModel().getFullModelRange(),
-          text: this.__current_value
-        }], [new monaco.Range(1, 1, 1, 1)]);
-        this.editor.pushUndoStop();
+        this.editor.setValue(this.__current_value);
         this.__prevent_trigger_change_event = false;
       }
     }
