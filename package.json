@@ -29,10 +29,10 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/superRaytin/react-monaco-editor/issues"
+    "url": "https://github.com/react-monaco-editor/react-monaco-editor/issues"
   },
-  "homepage": "https://github.com/superRaytin/react-monaco-editor",
-  "repository": "https://github.com/superRaytin/react-monaco-editor",
+  "homepage": "https://github.com/react-monaco-editor/react-monaco-editor",
+  "repository": "https://github.com/react-monaco-editor/react-monaco-editor",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
