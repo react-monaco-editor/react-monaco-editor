@@ -10,6 +10,7 @@ class CodeEditor extends React.Component {
     super(props);
     this.state = {
       code: '// type your code... \n',
+      theme: 'vs-dark'
     }
   }
 
@@ -33,8 +34,16 @@ class CodeEditor extends React.Component {
     this.setState({ code: '// code changed by setState! \n' });
   }
 
+  setDarkTheme = () => {
+    this.setState({ theme: 'vs-dark' })
+  }
+
+  setLightTheme = () => {
+    this.setState({ theme: 'vs-light' })
+  }
+
   render() {
-    const { code } = this.state;
+    const { code, theme } = this.state;
     const options = {
       selectOnLineNumbers: true,
       roundedSelection: false,
@@ -47,6 +56,8 @@ class CodeEditor extends React.Component {
         <div>
           <button onClick={this.changeEditorValue} type="button">Change value</button>
           <button onClick={this.changeBySetState} type="button">Change by setState</button>
+          <button onClick={this.setDarkTheme} type="button">Set dark theme</button>
+          <button onClick={this.setLightTheme} type="button">Set light theme</button>
         </div>
         <hr />
         <MonacoEditor
@@ -56,6 +67,7 @@ class CodeEditor extends React.Component {
           options={options}
           onChange={this.onChange}
           editorDidMount={this.editorDidMount}
+          theme={theme}
         />
       </div>
     );

@@ -96,11 +96,11 @@ class MonacoDiffEditor extends React.Component {
       // Before initializing monaco editor
       this.editorWillMount();
       this.editor = monaco.editor.createDiffEditor(
-        this.containerElement, options, overrideServices
+        this.containerElement, {
+          ...options,
+          ...(theme ? { theme } : {})
+        }, overrideServices
       );
-      if (theme) {
-        monaco.editor.setTheme(theme);
-      }
       // After initializing monaco editor
       this.initModels(value, original);
       this.editorDidMount(this.editor);
