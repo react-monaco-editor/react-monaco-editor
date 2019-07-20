@@ -7,8 +7,6 @@ class MonacoDiffEditor extends React.Component {
   constructor(props) {
     super(props);
     this.containerElement = undefined;
-    this.__current_value = props.value;
-    this.__current_original = props.original;
   }
 
   componentDidMount() {
@@ -16,36 +14,43 @@ class MonacoDiffEditor extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      this.props.value !== this.__current_value
-      || this.props.original !== this.__current_original
-    ) {
-      // Always refer to the latest value
-      this.__current_value = this.props.value;
-      this.__current_original = this.props.original;
-      // Consider the situation of rendering 1+ times before the editor mounted
-      if (this.editor) {
-        this.__prevent_trigger_change_event = true;
-        this.updateModel(this.__current_value, this.__current_original);
-        this.__prevent_trigger_change_event = false;
-      }
+    const {
+      language, theme, height, options, width
+    } = this.props;
+
+    const { original, modified } = this.editor.getModel();
+
+    if (this.props.original !== original.getValue()) {
+      original.setValue(this.props.original);
     }
-    if (prevProps.language !== this.props.language) {
-      const { original, modified } = this.editor.getModel();
-      monaco.editor.setModelLanguage(original, this.props.language);
-      monaco.editor.setModelLanguage(modified, this.props.language);
+
+    if (this.props.value !== modified.getValue()) {
+      modified.pushEditOperations(
+        [],
+        [
+          {
+            range: modified.getFullModelRange(),
+            text: this.props.value,
+          },
+        ]
+      );
     }
-    if (prevProps.theme !== this.props.theme) {
-      monaco.editor.setTheme(this.props.theme);
+
+    if (prevProps.language !== language) {
+      monaco.editor.setModelLanguage(original, language);
+      monaco.editor.setModelLanguage(modified, language);
+    }
+    if (prevProps.theme !== theme) {
+      monaco.editor.setTheme(theme);
     }
     if (
       this.editor
-      && (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
+      && (width !== prevProps.width || height !== prevProps.height)
     ) {
       this.editor.layout();
     }
-    if (prevProps.options !== this.props.options) {
-      this.editor.updateOptions(this.props.options)
+    if (prevProps.options !== options) {
+      this.editor.updateOptions(options)
     }
   }
 
@@ -65,20 +70,14 @@ class MonacoDiffEditor extends React.Component {
 
   editorDidMount(editor) {
     this.props.editorDidMount(editor, monaco);
-    editor.onDidUpdateDiff(() => {
-      const value = editor.getModel().modified.getValue();
 
-      // Always refer to the latest value
-      this.__current_value = value;
-
-      // Only invoking when user input changed
-      if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(value);
-      }
+    const { modified } = editor.getModel();
+    this._subscription = modified.onDidChangeContent(() => {
+      this.props.onChange(modified.getValue());
     });
   }
 
-  updateModel(value, original) {
+  initModels(value, original) {
     const { language } = this.props;
     const originalModel = monaco.editor.createModel(original, language);
     const modifiedModel = monaco.editor.createModel(value, language);
@@ -99,7 +98,7 @@ class MonacoDiffEditor extends React.Component {
         monaco.editor.setTheme(theme);
       }
       // After initializing monaco editor
-      this.updateModel(value, original);
+      this.initModels(value, original);
       this.editorDidMount(this.editor);
     }
   }
@@ -107,6 +106,9 @@ class MonacoDiffEditor extends React.Component {
   destroyMonaco() {
     if (this.editor) {
       this.editor.dispose();
+    }
+    if (this._subscription) {
+      this._subscription.dispose();
     }
   }
 
