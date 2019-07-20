@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.26.2",
+  "version": "0.27.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index",
@@ -39,11 +39,11 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.2",
-    "eslint": "^6.0.1",
     "monaco-editor": "^0.17.1",
     "prettier-eslint-cli": "^5.0.0",
     "react": "^16.8.3",
@@ -52,8 +52,8 @@
     "typings-tester": "^0.3.2"
   },
   "peerDependencies": {
-    "react": "^15.x || ^16.x",
-    "monaco-editor": "*"
+    "monaco-editor": "*",
+    "react": "^15.x || ^16.x"
   },
   "dependencies": {
     "@types/react": "^16.8.23",
