@@ -92,11 +92,11 @@ class MonacoDiffEditor extends React.Component {
 
   initMonaco() {
     const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
-    const { original, theme, options } = this.props;
+    const { original, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
       this.editorWillMount();
-      this.editor = monaco.editor.createDiffEditor(this.containerElement, options);
+      this.editor = monaco.editor.createDiffEditor(this.containerElement, options, overrideServices);
       if (theme) {
         monaco.editor.setTheme(theme);
       }
@@ -134,6 +134,7 @@ MonacoDiffEditor.propTypes = {
   language: PropTypes.string,
   theme: PropTypes.string,
   options: PropTypes.object,
+  overrideServices: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
   onChange: PropTypes.func
@@ -148,6 +149,7 @@ MonacoDiffEditor.defaultProps = {
   language: 'javascript',
   theme: null,
   options: {},
+  overrideServices: {},
   editorDidMount: noop,
   editorWillMount: noop,
   onChange: noop
