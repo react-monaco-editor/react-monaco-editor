@@ -1,9 +1,10 @@
-/examples/
-/example/
 .babelrc
-.eslintrc
 .eslintignore
+.eslintrc
 .gitignore
 .npmignore
 .travis.yml
+/example/
+/examples/
+/test/
 yarn-error.log
