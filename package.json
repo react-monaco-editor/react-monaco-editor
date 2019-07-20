@@ -56,7 +56,7 @@
     "monaco-editor": "*"
   },
   "dependencies": {
-    "@types/react": "*",
+    "@types/react": "^16.8.23",
     "prop-types": "^15.7.2"
   }
 }
