@@ -1,9 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { render } from 'react-dom';
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import MonacoEditor, { MonacoDiffEditor } from 'react-monaco-editor';
-/* eslint-enable import/no-extraneous-dependencies */
 
 class CodeEditor extends React.Component {
   constructor(props) {
