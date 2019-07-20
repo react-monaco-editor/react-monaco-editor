@@ -7,7 +7,7 @@ class CodeEditor extends React.Component {
     super(props);
     this.state = {
       code: '// type your code... \n',
-      theme: 'vs-dark'
+      theme: 'vs-light'
     }
   }
 
