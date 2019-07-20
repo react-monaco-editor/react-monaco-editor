@@ -42,11 +42,6 @@ declare interface MonacoEditorBaseProps {
   theme?: string | null;
 
   /**
-   * Optional, allow to config loader url and relative path of module, refer to require.config.
-   */
-  requireConfig?: any;
-
-  /**
    * Optional, allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
    */
   context?: any;
