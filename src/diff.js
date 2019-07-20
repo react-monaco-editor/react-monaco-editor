@@ -1,9 +1,7 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { processSize } from './utils'
-
-function noop() { }
+import { processSize, noop } from './utils'
 
 class MonacoDiffEditor extends React.Component {
   constructor(props) {
@@ -19,8 +17,8 @@ class MonacoDiffEditor extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.value !== this.__current_value ||
-      this.props.original !== this.__current_original
+      this.props.value !== this.__current_value
+      || this.props.original !== this.__current_original
     ) {
       // Always refer to the latest value
       this.__current_value = this.props.value;
@@ -41,8 +39,8 @@ class MonacoDiffEditor extends React.Component {
       monaco.editor.setTheme(this.props.theme);
     }
     if (
-      this.editor &&
-      (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
+      this.editor
+      && (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
     ) {
       this.editor.layout();
     }
@@ -107,7 +105,7 @@ class MonacoDiffEditor extends React.Component {
   }
 
   destroyMonaco() {
-    if (typeof this.editor !== 'undefined') {
+    if (this.editor) {
       this.editor.dispose();
     }
   }

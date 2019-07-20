@@ -1,9 +1,7 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { processSize } from './utils';
-
-function noop() { }
+import { createId, processSize, noop } from './utils';
 
 class MonacoEditor extends React.Component {
   constructor(props) {
@@ -53,7 +51,7 @@ class MonacoEditor extends React.Component {
   };
 
   destroyMonaco() {
-    if (typeof this.editor !== 'undefined') {
+    if (this.editor) {
       this.editor.dispose();
     }
   }

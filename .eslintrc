@@ -23,8 +23,5 @@
   },
   "env": {
     "browser": true
-  },
-  "react": {
-    "version": "detect"
   }
 }
