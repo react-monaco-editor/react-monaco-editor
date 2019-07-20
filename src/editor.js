@@ -1,15 +1,12 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { processSize } from './utils';
-
-function noop() { }
+import { processSize, noop } from './utils';
 
 class MonacoEditor extends React.Component {
   constructor(props) {
     super(props);
     this.containerElement = undefined;
-    this.__current_value = props.value;
   }
 
   componentDidMount() {
@@ -17,30 +14,40 @@ class MonacoEditor extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.value !== this.__current_value) {
-      // Always refer to the latest value
-      this.__current_value = this.props.value;
-      // Consider the situation of rendering 1+ times before the editor mounted
-      if (this.editor) {
-        this.__prevent_trigger_change_event = true;
-        this.editor.setValue(this.__current_value);
-        this.__prevent_trigger_change_event = false;
-      }
+    const {
+      value, language, theme, height, options, width
+    } = this.props;
+
+    const { editor } = this;
+    const model = editor.getModel();
+
+    if (this.props.value !== model.getValue()) {
+      this.editor.pushUndoStop();
+      model.pushEditOperations(
+        [],
+        [
+          {
+            range: model.getFullModelRange(),
+            text: value,
+          },
+        ]
+      );
+      this.editor.pushUndoStop();
     }
-    if (prevProps.language !== this.props.language) {
-      monaco.editor.setModelLanguage(this.editor.getModel(), this.props.language);
+    if (prevProps.language !== language) {
+      monaco.editor.setModelLanguage(model, language);
     }
-    if (prevProps.theme !== this.props.theme) {
-      monaco.editor.setTheme(this.props.theme);
+    if (prevProps.theme !== theme) {
+      monaco.editor.setTheme(theme);
     }
     if (
-      this.editor
-      && (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
+      editor
+      && (width !== prevProps.width || height !== prevProps.height)
     ) {
-      this.editor.layout();
+      editor.layout();
     }
-    if (prevProps.options !== this.props.options) {
-      this.editor.updateOptions(this.props.options);
+    if (prevProps.options !== options) {
+      editor.updateOptions(options);
     }
   }
 
@@ -53,8 +60,11 @@ class MonacoEditor extends React.Component {
   };
 
   destroyMonaco() {
-    if (typeof this.editor !== 'undefined') {
+    if (this.editor) {
       this.editor.dispose();
+    }
+    if (this._subscription) {
+      this._subscription.dispose();
     }
   }
 
@@ -85,16 +95,9 @@ class MonacoEditor extends React.Component {
 
   editorDidMount(editor) {
     this.props.editorDidMount(editor, monaco);
-    editor.onDidChangeModelContent((event) => {
-      const value = editor.getValue();
 
-      // Always refer to the latest value
-      this.__current_value = value;
-
-      // Only invoking when user input changed
-      if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(value, event);
-      }
+    this._subscription = editor.onDidChangeModelContent(() => {
+      this.props.onChange(editor.getValue());
     });
   }
 

@@ -2,10 +2,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import MonacoEditor from 'react-monaco-editor';
+import MonacoEditor, { MonacoDiffEditor } from 'react-monaco-editor';
 /* eslint-enable import/no-extraneous-dependencies */
 
-// Using with webpack
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -14,8 +13,8 @@ class CodeEditor extends React.Component {
     }
   }
 
-  onChange = (newValue, e) => {
-    console.log('onChange', newValue, e); // eslint-disable-line no-console
+  onChange = (newValue) => {
+    console.log('onChange', newValue); // eslint-disable-line no-console
   }
 
   editorDidMount = (editor) => {
@@ -51,7 +50,7 @@ class CodeEditor extends React.Component {
         </div>
         <hr />
         <MonacoEditor
-          height="500"
+          height="400"
           language="javascript"
           value={code}
           options={options}
@@ -112,10 +111,40 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
       <div>
         <MonacoEditor
           width="800"
-          height="600"
+          height="300"
           language="json"
           defaultValue={code}
           editorWillMount={this.editorWillMount}
+        />
+      </div>
+    );
+  }
+}
+
+class DiffEditor extends React.Component { // eslint-disable-line react/no-multi-comp
+  constructor(props) {
+    super(props);
+    this.state = {
+      code: 'const a = "Hello Monaco"',
+      original: 'const a = "Hello World"',
+    }
+  }
+
+  onChange = (newValue) => {
+    console.log('onChange', newValue); // eslint-disable-line no-console
+  }
+
+  render() {
+    const { code, original } = this.state;
+    return (
+      <div>
+        <MonacoDiffEditor
+          width="800"
+          height="300"
+          language="javascript"
+          value={code}
+          original={original}
+          onChange={this.onChange}
         />
       </div>
     );
@@ -130,6 +159,9 @@ const App = () => (
     <hr />
     <h2>Another editor (uncontrolled mode)</h2>
     <AnotherEditor />
+    <hr />
+    <h2>Another editor (showing a diff)</h2>
+    <DiffEditor />
   </div>
 )
 
