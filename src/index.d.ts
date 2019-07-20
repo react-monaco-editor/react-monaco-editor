@@ -119,8 +119,8 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
   options?: monacoEditor.editor.IDiffEditorConstructionOptions;
 
   /**
- * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.
- */
+   * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.
+   */
   overrideServices?: monacoEditor.editor.IEditorOverrideServices;
 
   /**
