@@ -1,7 +1,7 @@
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { processSize, noop } from './utils'
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import PropTypes from "prop-types";
+import React from "react";
+import { noop, processSize } from "./utils";
 
 class MonacoDiffEditor extends React.Component {
   constructor(props) {
@@ -14,9 +14,7 @@ class MonacoDiffEditor extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      language, theme, height, options, width
-    } = this.props;
+    const { language, theme, height, options, width } = this.props;
 
     const { original, modified } = this.editor.getModel();
 
@@ -30,8 +28,8 @@ class MonacoDiffEditor extends React.Component {
         [
           {
             range: modified.getFullModelRange(),
-            text: this.props.value,
-          },
+            text: this.props.value
+          }
         ]
       );
     }
@@ -44,13 +42,13 @@ class MonacoDiffEditor extends React.Component {
       monaco.editor.setTheme(theme);
     }
     if (
-      this.editor
-      && (width !== prevProps.width || height !== prevProps.height)
+      this.editor &&
+      (width !== prevProps.width || height !== prevProps.height)
     ) {
       this.editor.layout();
     }
     if (prevProps.options !== options) {
-      this.editor.updateOptions(options)
+      this.editor.updateOptions(options);
     }
   }
 
@@ -58,7 +56,7 @@ class MonacoDiffEditor extends React.Component {
     this.destroyMonaco();
   }
 
-  assignRef = (component) => {
+  assignRef = component => {
     this.containerElement = component;
   };
 
@@ -88,18 +86,19 @@ class MonacoDiffEditor extends React.Component {
   }
 
   initMonaco() {
-    const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
-    const {
-      original, theme, options, overrideServices
-    } = this.props;
+    const value =
+      this.props.value !== null ? this.props.value : this.props.defaultValue;
+    const { original, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
       this.editorWillMount();
       this.editor = monaco.editor.createDiffEditor(
-        this.containerElement, {
+        this.containerElement,
+        {
           ...options,
           ...(theme ? { theme } : {})
-        }, overrideServices
+        },
+        overrideServices
       );
       // After initializing monaco editor
       this.initModels(value, original);
@@ -125,7 +124,13 @@ class MonacoDiffEditor extends React.Component {
       height: fixedHeight
     };
 
-    return <div ref={this.assignRef} style={style} className="react-monaco-editor-container" />;
+    return (
+      <div
+        ref={this.assignRef}
+        style={style}
+        className="react-monaco-editor-container"
+      />
+    );
   }
 }
 
@@ -145,12 +150,12 @@ MonacoDiffEditor.propTypes = {
 };
 
 MonacoDiffEditor.defaultProps = {
-  width: '100%',
-  height: '100%',
+  width: "100%",
+  height: "100%",
   original: null,
   value: null,
-  defaultValue: '',
-  language: 'javascript',
+  defaultValue: "",
+  language: "javascript",
   theme: null,
   options: {},
   overrideServices: {},

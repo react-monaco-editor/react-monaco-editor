@@ -1,43 +1,43 @@
-import React from 'react';
-import { render } from 'react-dom';
-import MonacoEditor, { MonacoDiffEditor } from 'react-monaco-editor';
+import React from "react";
+import { render } from "react-dom";
+import MonacoEditor, { MonacoDiffEditor } from "react-monaco-editor";
 
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: '// type your code... \n',
-      theme: 'vs-light'
-    }
+      code: "// type your code... \n",
+      theme: "vs-light"
+    };
   }
 
-  onChange = (newValue) => {
-    console.log('onChange', newValue); // eslint-disable-line no-console
-  }
+  onChange = newValue => {
+    console.log("onChange", newValue); // eslint-disable-line no-console
+  };
 
-  editorDidMount = (editor) => {
+  editorDidMount = editor => {
     // eslint-disable-next-line no-console
-    console.log('editorDidMount', editor, editor.getValue(), editor.getModel());
+    console.log("editorDidMount", editor, editor.getValue(), editor.getModel());
     this.editor = editor;
-  }
+  };
 
   changeEditorValue = () => {
     if (this.editor) {
-      this.editor.setValue('// code changed! \n');
+      this.editor.setValue("// code changed! \n");
     }
-  }
+  };
 
   changeBySetState = () => {
-    this.setState({ code: '// code changed by setState! \n' });
-  }
+    this.setState({ code: "// code changed by setState! \n" });
+  };
 
   setDarkTheme = () => {
-    this.setState({ theme: 'vs-dark' })
-  }
+    this.setState({ theme: "vs-dark" });
+  };
 
   setLightTheme = () => {
-    this.setState({ theme: 'vs-light' })
-  }
+    this.setState({ theme: "vs-light" });
+  };
 
   render() {
     const { code, theme } = this.state;
@@ -45,16 +45,24 @@ class CodeEditor extends React.Component {
       selectOnLineNumbers: true,
       roundedSelection: false,
       readOnly: false,
-      cursorStyle: 'line',
-      automaticLayout: false,
+      cursorStyle: "line",
+      automaticLayout: false
     };
     return (
       <div>
         <div>
-          <button onClick={this.changeEditorValue} type="button">Change value</button>
-          <button onClick={this.changeBySetState} type="button">Change by setState</button>
-          <button onClick={this.setDarkTheme} type="button">Set dark theme</button>
-          <button onClick={this.setLightTheme} type="button">Set light theme</button>
+          <button onClick={this.changeEditorValue} type="button">
+            Change value
+          </button>
+          <button onClick={this.changeBySetState} type="button">
+            Change by setState
+          </button>
+          <button onClick={this.setDarkTheme} type="button">
+            Set dark theme
+          </button>
+          <button onClick={this.setLightTheme} type="button">
+            Set light theme
+          </button>
         </div>
         <hr />
         <MonacoEditor
@@ -71,48 +79,52 @@ class CodeEditor extends React.Component {
   }
 }
 
-class AnotherEditor extends React.Component { // eslint-disable-line react/no-multi-comp
+class AnotherEditor extends React.Component {
+  // eslint-disable-line react/no-multi-comp
   constructor(props) {
     super(props);
     const jsonCode = [
-      '{',
+      "{",
       '    "$schema": "http://myserver/foo-schema.json"',
-      '}'
-    ].join('\n');
+      "}"
+    ].join("\n");
     this.state = {
-      code: jsonCode,
-    }
+      code: jsonCode
+    };
   }
 
-  editorWillMount = (monaco) => {
+  editorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
-      schemas: [{
-        uri: 'http://myserver/foo-schema.json',
-        schema: {
-          type: 'object',
-          properties: {
-            p1: {
-              enum: [ 'v1', 'v2']
-            },
-            p2: {
-              $ref: 'http://myserver/bar-schema.json'
+      schemas: [
+        {
+          uri: "http://myserver/foo-schema.json",
+          schema: {
+            type: "object",
+            properties: {
+              p1: {
+                enum: ["v1", "v2"]
+              },
+              p2: {
+                $ref: "http://myserver/bar-schema.json"
+              }
+            }
+          }
+        },
+        {
+          uri: "http://myserver/bar-schema.json",
+          schema: {
+            type: "object",
+            properties: {
+              q1: {
+                enum: ["x1", "x2"]
+              }
             }
           }
         }
-      }, {
-        uri: 'http://myserver/bar-schema.json',
-        schema: {
-          type: 'object',
-          properties: {
-            q1: {
-              enum: [ 'x1', 'x2']
-            }
-          }
-        }
-      }]
+      ]
     });
-  }
+  };
 
   render() {
     const { code } = this.state;
@@ -130,18 +142,19 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
   }
 }
 
-class DiffEditor extends React.Component { // eslint-disable-line react/no-multi-comp
+class DiffEditor extends React.Component {
+  // eslint-disable-line react/no-multi-comp
   constructor(props) {
     super(props);
     this.state = {
       code: 'const a = "Hello Monaco"',
-      original: 'const a = "Hello World"',
-    }
+      original: 'const a = "Hello World"'
+    };
   }
 
-  onChange = (newValue) => {
-    console.log('onChange', newValue); // eslint-disable-line no-console
-  }
+  onChange = newValue => {
+    console.log("onChange", newValue); // eslint-disable-line no-console
+  };
 
   render() {
     const { code, original } = this.state;
@@ -172,9 +185,6 @@ const App = () => (
     <h2>Another editor (showing a diff)</h2>
     <DiffEditor />
   </div>
-)
-
-render(
-  <App />,
-  document.getElementById('root')
 );
+
+render(<App />, document.getElementById("root"));

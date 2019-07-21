@@ -1,7 +1,7 @@
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { processSize, noop } from './utils';
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import PropTypes from "prop-types";
+import React from "react";
+import { noop, processSize } from "./utils";
 
 class MonacoEditor extends React.Component {
   constructor(props) {
@@ -14,9 +14,7 @@ class MonacoEditor extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      value, language, theme, height, options, width
-    } = this.props;
+    const { value, language, theme, height, options, width } = this.props;
 
     const { editor } = this;
     const model = editor.getModel();
@@ -28,8 +26,8 @@ class MonacoEditor extends React.Component {
         [
           {
             range: model.getFullModelRange(),
-            text: value,
-          },
+            text: value
+          }
         ]
       );
       this.editor.pushUndoStop();
@@ -40,10 +38,7 @@ class MonacoEditor extends React.Component {
     if (prevProps.theme !== theme) {
       monaco.editor.setTheme(theme);
     }
-    if (
-      editor
-      && (width !== prevProps.width || height !== prevProps.height)
-    ) {
+    if (editor && (width !== prevProps.width || height !== prevProps.height)) {
       editor.layout();
     }
     if (prevProps.options !== options) {
@@ -55,7 +50,7 @@ class MonacoEditor extends React.Component {
     this.destroyMonaco();
   }
 
-  assignRef = (component) => {
+  assignRef = component => {
     this.containerElement = component;
   };
 
@@ -69,19 +64,22 @@ class MonacoEditor extends React.Component {
   }
 
   initMonaco() {
-    const value = this.props.value !== null ? this.props.value : this.props.defaultValue;
-    const {
-      language, theme, options, overrideServices
-    } = this.props;
+    const value =
+      this.props.value !== null ? this.props.value : this.props.defaultValue;
+    const { language, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
       Object.assign(options, this.editorWillMount());
-      this.editor = monaco.editor.create(this.containerElement, {
-        value,
-        language,
-        ...options,
-        ...(theme ? { theme } : {})
-      }, overrideServices);
+      this.editor = monaco.editor.create(
+        this.containerElement,
+        {
+          value,
+          language,
+          ...options,
+          ...(theme ? { theme } : {})
+        },
+        overrideServices
+      );
       // After initializing monaco editor
       this.editorDidMount(this.editor);
     }
@@ -110,7 +108,13 @@ class MonacoEditor extends React.Component {
       height: fixedHeight
     };
 
-    return <div ref={this.assignRef} style={style} className="react-monaco-editor-container" />;
+    return (
+      <div
+        ref={this.assignRef}
+        style={style}
+        className="react-monaco-editor-container"
+      />
+    );
   }
 }
 
@@ -129,11 +133,11 @@ MonacoEditor.propTypes = {
 };
 
 MonacoEditor.defaultProps = {
-  width: '100%',
-  height: '100%',
+  width: "100%",
+  height: "100%",
   value: null,
-  defaultValue: '',
-  language: 'javascript',
+  defaultValue: "",
+  language: "javascript",
   theme: null,
   options: {},
   overrideServices: {},

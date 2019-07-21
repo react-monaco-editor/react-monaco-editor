@@ -1,7 +1,13 @@
 {
   "parser": "babel-eslint",
-  "extends": ["eslint-config-airbnb", "plugin:react/recommended"],
+  "extends": [
+    "prettier",
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
+    "prettier/prettier": 1,
     "array-bracket-spacing": 0,
     "comma-dangle": 0,
     "valid-jsdoc": 2,
@@ -15,9 +21,7 @@
     "jsx-a11y/href-no-hash": 0,
     "react/destructuring-assignment": 0
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react", "prettier"],
   "globals": {
     "monaco": true
   },
