@@ -138,10 +138,10 @@ All the properties below are optional.
 - `options` refer to [Monaco interface IEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html).
 - `overrideServices` refer to [Monaco Interface IEditorOverrideServices](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroverrideservices.html). It depends on monaco's internal implementations and may change over time, check github [issue](https://github.com/Microsoft/monaco-editor/issues/935#issuecomment-402174095) for more details.
 
-- `onChange(newValue, event)` an event emitted when the content of the current model has changed.
+- `onChange(newValue, event)` an event emitted when the content of the current model has changed. Note that this eventis emitted for programmatic and manual changes to the content.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
 - `editorDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
-- `context` allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
+- `context` allow to pass a different context then the global window onto which the Monaco instance will be loaded. Useful if you want to load the editor in an iframe.
 
 ## Events & Methods
 
