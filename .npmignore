@@ -4,6 +4,7 @@
 .gitignore
 .npmignore
 .travis.yml
+.vscode/
 /example/
 /examples/
 /test/
