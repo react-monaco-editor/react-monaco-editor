@@ -23,6 +23,8 @@ class MonacoDiffEditor extends React.Component {
     }
 
     if (this.props.value !== modified.getValue()) {
+      this.__prevent_trigger_change_event = true;
+      this.editor.pushUndoStop();
       modified.pushEditOperations(
         [],
         [
@@ -32,6 +34,8 @@ class MonacoDiffEditor extends React.Component {
           }
         ]
       );
+      this.editor.pushUndoStop();
+      this.__prevent_trigger_change_event = false;
     }
 
     if (prevProps.language !== language) {
@@ -71,7 +75,9 @@ class MonacoDiffEditor extends React.Component {
 
     const { modified } = editor.getModel();
     this._subscription = modified.onDidChangeContent(() => {
-      this.props.onChange(modified.getValue());
+      if (!this.__prevent_trigger_change_event) {
+        this.props.onChange(editor.getValue());
+      }
     });
   }
 

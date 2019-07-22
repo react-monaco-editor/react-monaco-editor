@@ -20,6 +20,7 @@ class MonacoEditor extends React.Component {
     const model = editor.getModel();
 
     if (this.props.value !== model.getValue()) {
+      this.__prevent_trigger_change_event = true;
       this.editor.pushUndoStop();
       model.pushEditOperations(
         [],
@@ -31,6 +32,7 @@ class MonacoEditor extends React.Component {
         ]
       );
       this.editor.pushUndoStop();
+      this.__prevent_trigger_change_event = false;
     }
     if (prevProps.language !== language) {
       monaco.editor.setModelLanguage(model, language);
@@ -95,7 +97,9 @@ class MonacoEditor extends React.Component {
     this.props.editorDidMount(editor, monaco);
 
     this._subscription = editor.onDidChangeModelContent(() => {
-      this.props.onChange(editor.getValue());
+      if (!this.__prevent_trigger_change_event) {
+        this.props.onChange(editor.getValue());
+      }
     });
   }
 
