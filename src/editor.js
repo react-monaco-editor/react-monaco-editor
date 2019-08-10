@@ -58,6 +58,7 @@ class MonacoEditor extends React.Component {
 
   destroyMonaco() {
     if (this.editor) {
+      this.editor.getModel().dispose();
       this.editor.dispose();
     }
     if (this._subscription) {
