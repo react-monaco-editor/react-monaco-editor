@@ -3,13 +3,10 @@ import { render } from "react-dom";
 import MonacoEditor, { MonacoDiffEditor } from "react-monaco-editor";
 
 class CodeEditor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: "// type your code... \n",
-      theme: "vs-light"
-    };
-  }
+  state = {
+    code: "// type your code... \n",
+    theme: "vs-light"
+  };
 
   onChange = newValue => {
     console.log("onChange", newValue); // eslint-disable-line no-console
@@ -80,19 +77,12 @@ class CodeEditor extends React.Component {
 }
 
 class AnotherEditor extends React.Component {
-  // eslint-disable-line react/no-multi-comp
-  constructor(props) {
-    super(props);
-    const jsonCode = [
-      "{",
-      '    "$schema": "http://myserver/foo-schema.json"',
-      "}"
-    ].join("\n");
-    this.state = {
-      code: jsonCode,
-      language: "json"
-    };
-  }
+  state = {
+    code: ["{", '    "$schema": "http://myserver/foo-schema.json"', "}"].join(
+      "\n"
+    ),
+    language: "json"
+  };
 
   changeLanguage = () => {
     this.setState((prev) => ({
@@ -161,14 +151,10 @@ class AnotherEditor extends React.Component {
 }
 
 class DiffEditor extends React.Component {
-  // eslint-disable-line react/no-multi-comp
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: 'const a = "Hello Monaco"',
-      original: 'const a = "Hello World"'
-    };
-  }
+  state = {
+    code: 'const a = "Hello Monaco"',
+    original: 'const a = "Hello World"'
+  };
 
   onChange = newValue => {
     console.log("onChange", newValue); // eslint-disable-line no-console
@@ -191,7 +177,6 @@ class DiffEditor extends React.Component {
   }
 }
 
-// eslint-disable-next-line react/no-multi-comp
 const App = () => (
   <div>
     <h2>Monaco Editor Sample (controlled mode)</h2>
