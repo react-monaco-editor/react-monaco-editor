@@ -1,6 +1,7 @@
 .babelrc
 .eslintignore
 .eslintrc
+.github/
 .gitignore
 .npmignore
 .travis.yml
