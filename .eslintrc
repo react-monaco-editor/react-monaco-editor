@@ -19,7 +19,8 @@
     "react/jsx-filename-extension": 0,
     "react/forbid-prop-types": 0,
     "jsx-a11y/href-no-hash": 0,
-    "react/destructuring-assignment": 0
+    "react/destructuring-assignment": 0,
+    "max-classes-per-file": 0
   },
   "plugins": ["react", "prettier"],
   "globals": {
