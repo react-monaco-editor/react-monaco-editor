@@ -89,9 +89,14 @@ class AnotherEditor extends React.Component {
       "}"
     ].join("\n");
     this.state = {
-      code: jsonCode
+      code: jsonCode,
+      language: "json"
     };
   }
+
+  changeLanguage = () => {
+    this.setState((prev) => ({ language: prev.language === "json" ? "javascript" : "json" }));
+  };
 
   editorWillMount = monaco => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
@@ -127,16 +132,24 @@ class AnotherEditor extends React.Component {
   };
 
   render() {
-    const { code } = this.state;
+    const { code, language } = this.state;
     return (
       <div>
-        <MonacoEditor
-          width="800"
-          height="300"
-          language="json"
-          defaultValue={code}
-          editorWillMount={this.editorWillMount}
-        />
+        <div>
+          <span>Language: {this.state.language}</span>
+          <button onClick={this.changeLanguage} type="button">
+            Change by setState
+          </button>
+        </div>
+        <div>
+          <MonacoEditor
+            width="800"
+            height="300"
+            language={language}
+            defaultValue={code}
+            editorWillMount={this.editorWillMount}
+          />
+        </div>
       </div>
     );
   }

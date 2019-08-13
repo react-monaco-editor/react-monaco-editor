@@ -50,7 +50,8 @@ declare interface MonacoEditorBaseProps {
 export interface MonacoEditorProps extends MonacoEditorBaseProps {
   /**
    * Value of the auto created model in the editor.
-   * If you specify value property, the component behaves in controlled mode. Otherwise, it behaves in uncontrolled mode.
+   * If you specify `null` or `undefined` for this property, the component behaves in uncontrolled mode.
+   * Otherwise, it behaves in controlled mode.
    */
   value?: string | null;
 
