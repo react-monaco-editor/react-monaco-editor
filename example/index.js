@@ -95,7 +95,9 @@ class AnotherEditor extends React.Component {
   }
 
   changeLanguage = () => {
-    this.setState((prev) => ({ language: prev.language === "json" ? "javascript" : "json" }));
+    this.setState((prev) => ({
+      language: prev.language === "json" ? "javascript" : "json"
+    }));
   };
 
   editorWillMount = monaco => {
@@ -136,7 +138,10 @@ class AnotherEditor extends React.Component {
     return (
       <div>
         <div>
-          <span>Language: {this.state.language}</span>
+          <span>
+            Language:
+            {this.state.language}
+          </span>
           <button onClick={this.changeLanguage} type="button">
             Change by setState
           </button>
