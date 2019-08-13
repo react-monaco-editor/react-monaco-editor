@@ -22,7 +22,7 @@ class MonacoDiffEditor extends React.Component {
       original.setValue(this.props.original);
     }
 
-    if (this.props.value !== modified.getValue()) {
+    if (this.props.value != null && this.props.value !== modified.getValue()) {
       this.__prevent_trigger_change_event = true;
       this.editor.pushUndoStop();
       modified.pushEditOperations(
@@ -93,7 +93,7 @@ class MonacoDiffEditor extends React.Component {
 
   initMonaco() {
     const value =
-      this.props.value !== null ? this.props.value : this.props.defaultValue;
+      this.props.value != null ? this.props.value : this.props.defaultValue;
     const { original, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor

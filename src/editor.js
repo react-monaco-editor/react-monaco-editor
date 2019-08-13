@@ -19,7 +19,7 @@ class MonacoEditor extends React.Component {
     const { editor } = this;
     const model = editor.getModel();
 
-    if (this.props.value !== model.getValue()) {
+    if (this.props.value != null && this.props.value !== model.getValue()) {
       this.__prevent_trigger_change_event = true;
       this.editor.pushUndoStop();
       model.pushEditOperations(
@@ -67,7 +67,7 @@ class MonacoEditor extends React.Component {
 
   initMonaco() {
     const value =
-      this.props.value !== null ? this.props.value : this.props.defaultValue;
+      this.props.value != null ? this.props.value : this.props.defaultValue;
     const { language, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
