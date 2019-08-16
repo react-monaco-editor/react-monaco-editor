@@ -17,16 +17,16 @@ class MonacoEditor extends React.Component {
     const { value, language, theme, height, options, width } = this.props;
 
     const { editor } = this;
-    const model = editor.getModel();
+    this.model = editor.getModel();
 
-    if (this.props.value != null && this.props.value !== model.getValue()) {
+    if (this.props.value != null && this.props.value !== this.model.getValue()) {
       this.__prevent_trigger_change_event = true;
       this.editor.pushUndoStop();
-      model.pushEditOperations(
+      this.model.pushEditOperations(
         [],
         [
           {
-            range: model.getFullModelRange(),
+            range: this.model.getFullModelRange(),
             text: value
           }
         ]
@@ -35,7 +35,7 @@ class MonacoEditor extends React.Component {
       this.__prevent_trigger_change_event = false;
     }
     if (prevProps.language !== language) {
-      monaco.editor.setModelLanguage(model, language);
+      monaco.editor.setModelLanguage(this.model, language);
     }
     if (prevProps.theme !== theme) {
       monaco.editor.setTheme(theme);
@@ -57,6 +57,9 @@ class MonacoEditor extends React.Component {
   };
 
   destroyMonaco() {
+    if (this.model) {
+      this.model.dispose();
+    }
     if (this.editor) {
       this.editor.dispose();
     }
