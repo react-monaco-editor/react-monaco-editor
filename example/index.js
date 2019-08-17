@@ -3,10 +3,13 @@ import { render } from "react-dom";
 import MonacoEditor, { MonacoDiffEditor } from "react-monaco-editor";
 
 class CodeEditor extends React.Component {
-  state = {
-    code: "// type your code... \n",
-    theme: "vs-light"
-  };
+  constructor() {
+    super();
+    this.state = {
+      code: "// type your code... \n",
+      theme: "vs-light"
+    };
+  }
 
   onChange = newValue => {
     console.log("onChange", newValue); // eslint-disable-line no-console
@@ -77,12 +80,15 @@ class CodeEditor extends React.Component {
 }
 
 class AnotherEditor extends React.Component {
-  state = {
-    code: ["{", '    "$schema": "http://myserver/foo-schema.json"', "}"].join(
-      "\n"
-    ),
-    language: "json"
-  };
+  constructor() {
+    super();
+    this.state = {
+      code: ["{", '    "$schema": "http://myserver/foo-schema.json"', "}"].join(
+        "\n"
+      ),
+      language: "json"
+    };
+  }
 
   changeLanguage = () => {
     this.setState(prev => ({
@@ -152,10 +158,13 @@ class AnotherEditor extends React.Component {
 }
 
 class DiffEditor extends React.Component {
-  state = {
-    code: 'const a = "Hello Monaco"',
-    original: 'const a = "Hello World"'
-  };
+  constructor() {
+    super();
+    this.state = {
+      code: 'const a = "Hello Monaco"',
+      original: 'const a = "Hello World"'
+    };
+  }
 
   onChange = newValue => {
     console.log("onChange", newValue); // eslint-disable-line no-console
