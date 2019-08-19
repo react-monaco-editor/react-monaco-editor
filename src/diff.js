@@ -76,7 +76,7 @@ class MonacoDiffEditor extends React.Component {
     const { modified } = editor.getModel();
     this._subscription = modified.onDidChangeContent(() => {
       if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(editor.getValue());
+        this.props.onChange(modified.getValue());
       }
     });
   }
