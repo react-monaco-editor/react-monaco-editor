@@ -137,7 +137,7 @@ class AnotherEditor extends React.Component {
           <button onClick={this.changeLanguage} type="button">
             Change by setState
           </button>
-          <span style={{ "marginLeft": "3em" }}>
+          <span style={{ marginLeft: "3em" }}>
             Language:
             {this.state.language}
           </span>
