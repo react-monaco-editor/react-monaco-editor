@@ -174,6 +174,10 @@ class DiffEditor extends React.Component {
     const { code, original } = this.state;
     return (
       <div>
+        <button onClick={() => this.setState({ code })} type="button">
+          Reset
+        </button>
+        <hr />
         <MonacoDiffEditor
           width="800"
           height="300"
