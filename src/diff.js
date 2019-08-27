@@ -24,7 +24,7 @@ class MonacoDiffEditor extends React.Component {
 
     if (this.props.value != null && this.props.value !== modified.getValue()) {
       this.__prevent_trigger_change_event = true;
-      this.editor.pushUndoStop();
+      this.editor.modifiedEditor.pushUndoStop();
       modified.pushEditOperations(
         [],
         [
@@ -34,7 +34,7 @@ class MonacoDiffEditor extends React.Component {
           }
         ]
       );
-      this.editor.pushUndoStop();
+      this.editor.modifiedEditor.pushUndoStop();
       this.__prevent_trigger_change_event = false;
     }
 
