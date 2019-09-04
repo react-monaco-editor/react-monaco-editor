@@ -95,7 +95,7 @@ export type DiffEditorDidMount = (
 
 export type DiffEditorWillMount = (monaco: typeof monacoEditor) => void;
 
-export type DiffChangeHandler = (value: string) => void;
+export type DiffChangeHandler = ChangeHandler;
 
 export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
   /**
