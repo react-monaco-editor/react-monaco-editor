@@ -97,9 +97,9 @@ class MonacoEditor extends React.Component {
   editorDidMount(editor) {
     this.props.editorDidMount(editor, monaco);
 
-    this._subscription = editor.onDidChangeModelContent(() => {
+    this._subscription = editor.onDidChangeModelContent((event) => {
       if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(editor.getValue());
+        this.props.onChange(editor.getValue(), event);
       }
     });
   }
