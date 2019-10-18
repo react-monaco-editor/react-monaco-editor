@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.31.0",
+  "version": "0.31.1",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index",
