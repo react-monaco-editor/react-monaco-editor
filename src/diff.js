@@ -120,7 +120,7 @@ class MonacoDiffEditor extends React.Component {
       }
       if (modified) {
         modified.dispose();
-      } 
+      }
       this.editor.dispose();
     }
     if (this._subscription) {

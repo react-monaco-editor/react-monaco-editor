@@ -7,7 +7,7 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "prettier/prettier": 1,
+    "prettier/prettier": 2,
     "array-bracket-spacing": 0,
     "comma-dangle": 0,
     "valid-jsdoc": 2,
