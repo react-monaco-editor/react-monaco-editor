@@ -114,6 +114,7 @@ class MonacoDiffEditor extends React.Component {
 
   destroyMonaco() {
     if (this.editor) {
+      this.editor.dispose();
       const { original, modified } = this.editor.getModel();
       if (original) {
         original.dispose();
@@ -121,7 +122,6 @@ class MonacoDiffEditor extends React.Component {
       if (modified) {
         modified.dispose();
       }
-      this.editor.dispose();
     }
     if (this._subscription) {
       this._subscription.dispose();
