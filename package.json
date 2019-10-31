@@ -59,7 +59,7 @@
     "react": "^15.x || ^16.x"
   },
   "dependencies": {
-    "@types/react": "^16.0.0",
+    "@types/react": "^15.x || ^16.x",
     "prop-types": "^15.0.0"
   }
 }
