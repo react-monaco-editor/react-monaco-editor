@@ -1,5 +1,5 @@
 language: node_js
-node_js: "12"
+node_js: "13"
 script:
   - pushd example && yarn && popd
   - yarn lint
