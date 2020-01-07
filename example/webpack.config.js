@@ -1,7 +1,7 @@
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const path = require("path");
 
-const MonacoEditorSrc = path.join(__dirname, "..", "src");
+// const MonacoEditorSrc = path.join(__dirname, "..", "src");
 
 module.exports = {
   entry: "./index.js",
@@ -33,12 +33,17 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.ttf$/,
+        use: ["file-loader"]
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".json"],
-    alias: { "react-monaco-editor": MonacoEditorSrc }
+    extensions: [".js", ".json"]
+    // Remove alias until https://github.com/microsoft/monaco-editor-webpack-plugin/issues/68 is fixed
+    // alias: { "react-monaco-editor": MonacoEditorSrc }
   },
   plugins: [
     new MonacoWebpackPlugin({
