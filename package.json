@@ -34,24 +34,24 @@
   "homepage": "https://github.com/react-monaco-editor/react-monaco-editor",
   "repository": "https://github.com/react-monaco-editor/react-monaco-editor",
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.6.0",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
     "monaco-editor": "^0.17.1",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "react": "^16.8.3",
     "rimraf": "^3.0.0",
-    "typescript": "^3.6.4",
+    "typescript": "^3.7.4",
     "typings-tester": "^0.3.2"
   },
   "peerDependencies": {
@@ -60,6 +60,6 @@
   },
   "dependencies": {
     "@types/react": "^15.x || ^16.x",
-    "prop-types": "^15.0.0"
+    "prop-types": "^15.7.2"
   }
 }
