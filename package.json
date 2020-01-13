@@ -39,6 +39,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
+    "@types/react": "^15.x || ^16.x",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -59,7 +60,6 @@
     "react": "^15.x || ^16.x"
   },
   "dependencies": {
-    "@types/react": "^15.x || ^16.x",
     "prop-types": "^15.7.2"
   }
 }
