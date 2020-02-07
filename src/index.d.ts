@@ -6,16 +6,13 @@ export type ChangeHandler = (
   event: monacoEditor.editor.IModelContentChangedEvent
 ) => void;
 
-export type EditorDidMount = (
-  editor: monacoEditor.editor.IStandaloneCodeEditor,
-  monaco: typeof monacoEditor
-) => void;
 
-type EditorCreateOptions = NonNullable<Parameters<typeof monacoEditor.editor.create>[1]>;
-
-type EditorConstructionOptions = EditorCreateOptions extends { language?: string }
-  ? monacoEditor.editor.IStandaloneEditorConstructionOptions
-  : monacoEditor.editor.IEditorConstructionOptions;
+/**
+ * @remarks
+ * This will be `IStandaloneEditorConstructionOptions` in newer versions of monaco-editor, or
+ * `IEditorConstructionOptions` in versions before that was introduced.
+ */
+export type EditorConstructionOptions = NonNullable<Parameters<typeof monacoEditor.editor.create>[1]>;
 
 export type EditorWillMount = (monaco: typeof monacoEditor) => void | EditorConstructionOptions;
                                                   
