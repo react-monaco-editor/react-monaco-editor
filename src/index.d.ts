@@ -6,6 +6,10 @@ export type ChangeHandler = (
   event: monacoEditor.editor.IModelContentChangedEvent
 ) => void;
 
+export type EditorDidMount = (
+  editor: monacoEditor.editor.IStandaloneCodeEditor,
+  monaco: typeof monacoEditor
+) => void;
 
 /**
  * @remarks
