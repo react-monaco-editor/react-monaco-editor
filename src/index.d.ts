@@ -11,8 +11,15 @@ export type EditorDidMount = (
   monaco: typeof monacoEditor
 ) => void;
 
-export type EditorWillMount = (monaco: typeof monacoEditor) => void | monacoEditor.editor.IEditorConstructionOptions;
+/**
+ * @remarks
+ * This will be `IStandaloneEditorConstructionOptions` in newer versions of monaco-editor, or
+ * `IEditorConstructionOptions` in versions before that was introduced.
+ */
+export type EditorConstructionOptions = NonNullable<Parameters<typeof monacoEditor.editor.create>[1]>;
 
+export type EditorWillMount = (monaco: typeof monacoEditor) => void | EditorConstructionOptions;
+                                                  
 declare interface MonacoEditorBaseProps {
   /**
    * Width of editor. Defaults to 100%.
