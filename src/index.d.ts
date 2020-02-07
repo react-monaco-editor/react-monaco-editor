@@ -11,7 +11,7 @@ export type EditorDidMount = (
   monaco: typeof monacoEditor
 ) => void;
 
-export type EditorWillMount = (monaco: typeof monacoEditor) => void | monacoEditor.editor.IEditorConstructionOptions;
+export type EditorWillMount = (monaco: typeof monacoEditor) => void | monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
 declare interface MonacoEditorBaseProps {
   /**
