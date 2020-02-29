@@ -233,6 +233,27 @@ class App extends React.Component {
 }
 ```
 
+### Usage with `create-react-app`
+
+The easiest way to use the `react-monaco-editor` with `create-react-app` is to use the [react-app-rewired](https://github.com/timarney/react-app-rewired) project. For setting it up, the following steps are required:
+
+1. Install `react-app-rewired`: `npm install -D react-app-rewired`
+2. Replace `react-scripts` by `react-app-rewired` in the scripts section of your `packages.json`
+2. Create a `config-overrides.js` in the root directory of your project with the following content:
+
+```javascript
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+
+module.exports = function override(config, env) {
+  config.plugins.push(new MonacoWebpackPlugin({
+    languages: ['json']
+  }));
+  return config;
+}
+```
+
+For more information checkout the documentation of `react-app-rewired` [here](https://github.com/timarney/react-app-rewired).
+
 # License
 
 MIT, see the [LICENSE](/LICENSE.md) file for detail.
