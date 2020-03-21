@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.34.0",
+  "version": "0.35.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index",
@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "@types/react": "^15.x || ^16.x",
-    "prop-types": "^15.7.2",
-    "monaco-editor": "*"
+    "monaco-editor": "*",
+    "prop-types": "^15.7.2"
   }
 }
