@@ -9,13 +9,13 @@ module.exports = {
   devtool: "source-map",
   output: {
     path: path.join(__dirname, "./lib/t"),
-    filename: "index.js"
+    filename: "index.js",
   },
   module: {
     rules: [
       {
         test: /\.html$/,
-        use: ["file?name=[name].[ext]"]
+        use: ["file?name=[name].[ext]"],
       },
       {
         test: /\.(js|jsx)$/,
@@ -25,33 +25,33 @@ module.exports = {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env", "@babel/preset-react"],
-              plugins: ["@babel/plugin-proposal-class-properties"]
-            }
-          }
-        ]
+              plugins: ["@babel/plugin-proposal-class-properties"],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.ttf$/,
-        use: ["file-loader"]
-      }
-    ]
+        use: ["file-loader"],
+      },
+    ],
   },
   resolve: {
-    extensions: [".js", ".json"]
+    extensions: [".js", ".json"],
     // Remove alias until https://github.com/microsoft/monaco-editor-webpack-plugin/issues/68 is fixed
     // alias: { "react-monaco-editor": MonacoEditorSrc }
   },
   plugins: [
     new MonacoWebpackPlugin({
-      languages: ["json", "javascript", "typescript"]
-    })
+      languages: ["json", "javascript", "typescript"],
+    }),
   ],
   devServer: { contentBase: "./" },
   node: {
-    fs: "empty"
-  }
+    fs: "empty",
+  },
 };

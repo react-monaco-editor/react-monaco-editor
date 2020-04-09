@@ -27,8 +27,8 @@ class MonacoEditor extends React.Component {
         [
           {
             range: model.getFullModelRange(),
-            text: value
-          }
+            text: value,
+          },
         ]
       );
       this.editor.pushUndoStop();
@@ -52,7 +52,7 @@ class MonacoEditor extends React.Component {
     this.destroyMonaco();
   }
 
-  assignRef = component => {
+  assignRef = (component) => {
     this.containerElement = component;
   };
 
@@ -82,7 +82,7 @@ class MonacoEditor extends React.Component {
           value,
           language,
           ...options,
-          ...(theme ? { theme } : {})
+          ...(theme ? { theme } : {}),
         },
         overrideServices
       );
@@ -100,7 +100,7 @@ class MonacoEditor extends React.Component {
   editorDidMount(editor) {
     this.props.editorDidMount(editor, monaco);
 
-    this._subscription = editor.onDidChangeModelContent(event => {
+    this._subscription = editor.onDidChangeModelContent((event) => {
       if (!this.__prevent_trigger_change_event) {
         this.props.onChange(editor.getValue(), event);
       }
@@ -113,7 +113,7 @@ class MonacoEditor extends React.Component {
     const fixedHeight = processSize(height);
     const style = {
       width: fixedWidth,
-      height: fixedHeight
+      height: fixedHeight,
     };
 
     return (
@@ -137,7 +137,7 @@ MonacoEditor.propTypes = {
   overrideServices: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 MonacoEditor.defaultProps = {
@@ -151,7 +151,7 @@ MonacoEditor.defaultProps = {
   overrideServices: {},
   editorDidMount: noop,
   editorWillMount: noop,
-  onChange: noop
+  onChange: noop,
 };
 
 export default MonacoEditor;

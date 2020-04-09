@@ -30,8 +30,8 @@ class MonacoDiffEditor extends React.Component {
         [
           {
             range: modified.getFullModelRange(),
-            text: this.props.value
-          }
+            text: this.props.value,
+          },
         ]
       );
       this.editor.modifiedEditor.pushUndoStop();
@@ -60,7 +60,7 @@ class MonacoDiffEditor extends React.Component {
     this.destroyMonaco();
   }
 
-  assignRef = component => {
+  assignRef = (component) => {
     this.containerElement = component;
   };
 
@@ -74,7 +74,7 @@ class MonacoDiffEditor extends React.Component {
     this.props.editorDidMount(editor, monaco);
 
     const { modified } = editor.getModel();
-    this._subscription = modified.onDidChangeContent(event => {
+    this._subscription = modified.onDidChangeContent((event) => {
       if (!this.__prevent_trigger_change_event) {
         this.props.onChange(modified.getValue(), event);
       }
@@ -87,7 +87,7 @@ class MonacoDiffEditor extends React.Component {
     const modifiedModel = monaco.editor.createModel(value, language);
     this.editor.setModel({
       original: originalModel,
-      modified: modifiedModel
+      modified: modifiedModel,
     });
   }
 
@@ -102,7 +102,7 @@ class MonacoDiffEditor extends React.Component {
         this.containerElement,
         {
           ...options,
-          ...(theme ? { theme } : {})
+          ...(theme ? { theme } : {}),
         },
         overrideServices
       );
@@ -134,7 +134,7 @@ class MonacoDiffEditor extends React.Component {
     const fixedHeight = processSize(height);
     const style = {
       width: fixedWidth,
-      height: fixedHeight
+      height: fixedHeight,
     };
 
     return (
@@ -159,7 +159,7 @@ MonacoDiffEditor.propTypes = {
   overrideServices: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 MonacoDiffEditor.defaultProps = {
@@ -174,7 +174,7 @@ MonacoDiffEditor.defaultProps = {
   overrideServices: {},
   editorDidMount: noop,
   editorWillMount: noop,
-  onChange: noop
+  onChange: noop,
 };
 
 export default MonacoDiffEditor;

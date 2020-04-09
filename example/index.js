@@ -7,15 +7,15 @@ class CodeEditor extends React.Component {
     super();
     this.state = {
       code: "// type your code... \n",
-      theme: "vs-light"
+      theme: "vs-light",
     };
   }
 
-  onChange = newValue => {
+  onChange = (newValue) => {
     console.log("onChange", newValue); // eslint-disable-line no-console
   };
 
-  editorDidMount = editor => {
+  editorDidMount = (editor) => {
     // eslint-disable-next-line no-console
     console.log("editorDidMount", editor, editor.getValue(), editor.getModel());
     this.editor = editor;
@@ -46,7 +46,7 @@ class CodeEditor extends React.Component {
       roundedSelection: false,
       readOnly: false,
       cursorStyle: "line",
-      automaticLayout: false
+      automaticLayout: false,
     };
     return (
       <div>
@@ -86,17 +86,17 @@ class AnotherEditor extends React.Component {
       code: ["{", '    "$schema": "http://myserver/foo-schema.json"', "}"].join(
         "\n"
       ),
-      language: "json"
+      language: "json",
     };
   }
 
   changeLanguage = () => {
-    this.setState(prev => ({
-      language: prev.language === "json" ? "javascript" : "json"
+    this.setState((prev) => ({
+      language: prev.language === "json" ? "javascript" : "json",
     }));
   };
 
-  editorWillMount = monaco => {
+  editorWillMount = (monaco) => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
       validate: true,
       schemas: [
@@ -106,13 +106,13 @@ class AnotherEditor extends React.Component {
             type: "object",
             properties: {
               p1: {
-                enum: ["v1", "v2"]
+                enum: ["v1", "v2"],
               },
               p2: {
-                $ref: "http://myserver/bar-schema.json"
-              }
-            }
-          }
+                $ref: "http://myserver/bar-schema.json",
+              },
+            },
+          },
         },
         {
           uri: "http://myserver/bar-schema.json",
@@ -120,12 +120,12 @@ class AnotherEditor extends React.Component {
             type: "object",
             properties: {
               q1: {
-                enum: ["x1", "x2"]
-              }
-            }
-          }
-        }
-      ]
+                enum: ["x1", "x2"],
+              },
+            },
+          },
+        },
+      ],
     });
   };
 
@@ -162,11 +162,11 @@ class DiffEditor extends React.Component {
     super();
     this.state = {
       code: 'const a = "Hello Monaco"',
-      original: 'const a = "Hello World"'
+      original: 'const a = "Hello World"',
     };
   }
 
-  onChange = newValue => {
+  onChange = (newValue) => {
     console.log("onChange", newValue); // eslint-disable-line no-console
   };
 
