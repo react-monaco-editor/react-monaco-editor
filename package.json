@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@types/react": "^16.x",
-    "monaco-editor": "*",
+    "monaco-editor": "0.19.3",
     "prop-types": "^15.7.2"
   }
 }
