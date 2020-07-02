@@ -14,7 +14,14 @@ class MonacoEditor extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { value, language, theme, height, options, width } = this.props;
+    const {
+      value,
+      language,
+      theme,
+      height,
+      optionsWithoutModel,
+      width,
+    } = this.props;
 
     const { editor } = this;
     const model = editor.getModel();
@@ -43,8 +50,8 @@ class MonacoEditor extends React.Component {
     if (editor && (width !== prevProps.width || height !== prevProps.height)) {
       editor.layout();
     }
-    if (prevProps.options !== options) {
-      editor.updateOptions(options);
+    if (prevProps.optionsWithoutModel !== optionsWithoutModel) {
+      editor.updateOptions(optionsWithoutModel);
     }
   }
 
@@ -72,8 +79,16 @@ class MonacoEditor extends React.Component {
   initMonaco() {
     const value =
       this.props.value != null ? this.props.value : this.props.defaultValue;
-    const { language, theme, options, overrideServices } = this.props;
+    const {
+      language,
+      theme,
+      optionsWithoutModel,
+      model,
+      overrideServices,
+    } = this.props;
     if (this.containerElement) {
+      const options = { ...optionsWithoutModel, model };
+
       // Before initializing monaco editor
       Object.assign(options, this.editorWillMount());
       this.editor = monaco.editor.create(
@@ -133,7 +148,8 @@ MonacoEditor.propTypes = {
   defaultValue: PropTypes.string,
   language: PropTypes.string,
   theme: PropTypes.string,
-  options: PropTypes.object,
+  optionsWithoutModel: PropTypes.object,
+  model: PropTypes.object,
   overrideServices: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
@@ -147,7 +163,8 @@ MonacoEditor.defaultProps = {
   defaultValue: "",
   language: "javascript",
   theme: null,
-  options: {},
+  optionsWithoutModel: {},
+  model: undefined,
   overrideServices: {},
   editorDidMount: noop,
   editorWillMount: noop,
