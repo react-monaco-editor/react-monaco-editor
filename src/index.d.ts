@@ -63,9 +63,9 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
   value?: string | null;
 
   /**
-   * Refer to Monaco interface {monaco.editor.IEditorConstructionOptions}.
+   * Refer to Monaco interface {monaco.editor.IStandaloneEditorConstructionOptions}.
    */
-  options?: monacoEditor.editor.IEditorConstructionOptions;
+  options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
 
   /**
