@@ -1,5 +1,5 @@
 {
-  "name": "react-monaco-editor",
+  "name": "@hex-inc/react-monaco-editor",
   "version": "0.36.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
@@ -13,6 +13,7 @@
     "format": "eslint --fix '{src,test,example}/**/*.{ts,js}'",
     "lint": "eslint '{src,test,example}/**/*.{ts,js}'",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
+    "prepare": "npm run build",
     "test": "npm run test:typescript",
     "test:typescript": "typings-tester --dir test/typescript"
   },
@@ -58,7 +59,7 @@
   },
   "dependencies": {
     "@types/react": "^16.x",
-    "monaco-editor": "*",
+    "monaco-editor": "0.19.3",
     "prop-types": "^15.7.2"
   }
 }
