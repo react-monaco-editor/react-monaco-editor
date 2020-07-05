@@ -44,7 +44,7 @@ class App extends React.Component<{}, AppState> {
         language="javascript"
         theme="vs-dark"
         value={code}
-        options={{ selectOnLineNumbers: true }}
+        optionsWithoutModel={{ selectOnLineNumbers: true }}
         onChange={this.onChange}
         editorWillMount={this.editorWillMount}
         editorDidMount={this.editorDidMount}
