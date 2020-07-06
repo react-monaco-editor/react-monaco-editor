@@ -65,13 +65,7 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
   /**
    * Refer to Monaco interface {monaco.editor.IStandaloneEditorConstructionOptions}.
    */
-  optionsWithoutModel?: Omit<monacoEditor.editor.IStandaloneEditorConstructionOptions, "model">;
-
-  /**
-   * If you need to pass in a model, you can pass it in here. This will only be passed to
-   * the underlying editor once.
-   */
-  model?: monacoEditor.editor.IStandaloneEditorConstructionOptions["model"];
+  options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
   /**
    * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.

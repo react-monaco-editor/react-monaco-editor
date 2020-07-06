@@ -14,14 +14,7 @@ class MonacoEditor extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      value,
-      language,
-      theme,
-      height,
-      optionsWithoutModel,
-      width,
-    } = this.props;
+    const { value, language, theme, height, options, width } = this.props;
 
     const { editor } = this;
     const model = editor.getModel();
@@ -50,7 +43,10 @@ class MonacoEditor extends React.Component {
     if (editor && (width !== prevProps.width || height !== prevProps.height)) {
       editor.layout();
     }
-    if (prevProps.optionsWithoutModel !== optionsWithoutModel) {
+    if (prevProps.options !== options) {
+      // Don't pass in the model on update because monaco crashes if we pass the model
+      // a second time. See https://github.com/microsoft/monaco-editor/issues/2027
+      const { model: _model, ...optionsWithoutModel } = options;
       editor.updateOptions(optionsWithoutModel);
     }
   }
@@ -79,16 +75,8 @@ class MonacoEditor extends React.Component {
   initMonaco() {
     const value =
       this.props.value != null ? this.props.value : this.props.defaultValue;
-    const {
-      language,
-      theme,
-      optionsWithoutModel,
-      model,
-      overrideServices,
-    } = this.props;
+    const { language, theme, options, overrideServices } = this.props;
     if (this.containerElement) {
-      const options = { ...optionsWithoutModel, model };
-
       // Before initializing monaco editor
       Object.assign(options, this.editorWillMount());
       this.editor = monaco.editor.create(
@@ -148,8 +136,7 @@ MonacoEditor.propTypes = {
   defaultValue: PropTypes.string,
   language: PropTypes.string,
   theme: PropTypes.string,
-  optionsWithoutModel: PropTypes.object,
-  model: PropTypes.object,
+  options: PropTypes.object,
   overrideServices: PropTypes.object,
   editorDidMount: PropTypes.func,
   editorWillMount: PropTypes.func,
@@ -163,8 +150,7 @@ MonacoEditor.defaultProps = {
   defaultValue: "",
   language: "javascript",
   theme: null,
-  optionsWithoutModel: {},
-  model: undefined,
+  options: {},
   overrideServices: {},
   editorDidMount: noop,
   editorWillMount: noop,
