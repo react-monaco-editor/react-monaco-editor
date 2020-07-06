@@ -44,7 +44,10 @@ class MonacoEditor extends React.Component {
       editor.layout();
     }
     if (prevProps.options !== options) {
-      editor.updateOptions(options);
+      // Don't pass in the model on update because monaco crashes if we pass the model
+      // a second time. See https://github.com/microsoft/monaco-editor/issues/2027
+      const { model: _model, ...optionsWithoutModel } = options;
+      editor.updateOptions(optionsWithoutModel);
     }
   }
 

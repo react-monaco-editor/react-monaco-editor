@@ -67,7 +67,6 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    */
   options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
-
   /**
    * Refer to Monaco interface {monaco.editor.IEditorOverrideServices}.
    */
