@@ -3,6 +3,6 @@ node_js: "13"
 script:
   - pushd example && yarn && popd
   - yarn lint
-  - yarn test
   - yarn build
+  - yarn test
 cache: yarn
