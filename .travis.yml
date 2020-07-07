@@ -4,5 +4,4 @@ script:
   - pushd example && yarn && popd
   - yarn lint
   - yarn build
-  - yarn test
 cache: yarn

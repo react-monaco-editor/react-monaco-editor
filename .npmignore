@@ -7,6 +7,5 @@
 .vscode/
 /example/
 /examples/
-/test/
 tsconfig.json
 yarn-error.log

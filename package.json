@@ -11,9 +11,7 @@
     "clean": "rimraf lib",
     "format": "eslint --fix '{src,example}/**/*.{ts,tsx}'",
     "lint": "eslint '{src,example}/**/*.{ts,tsx}'",
-    "prepublishOnly": "npm run lint && npm run test && npm run build",
-    "test": "npm run test:typescript",
-    "test:typescript": "tsc -p test/typescript"
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "keywords": [
     "monaco",
