@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2015"
+  },
+  "exclude": [
+    "./test"
+  ],
+  "include": [
+    "./src"
+  ]
+}

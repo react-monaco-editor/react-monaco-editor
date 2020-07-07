@@ -3,8 +3,8 @@ import {
   MonacoDiffEditor,
   DiffEditorDidMount,
   DiffChangeHandler,
-  DiffEditorWillMount
-} from "../..";
+  DiffEditorWillMount,
+} from "../../lib";
 
 type AppState = {
   original: string;
@@ -14,10 +14,10 @@ type AppState = {
 class App extends React.Component<{}, AppState> {
   state = {
     original: "// original code",
-    code: "// new code"
+    code: "// new code",
   };
 
-  editorWillMount: DiffEditorWillMount = monaco => {
+  editorWillMount: DiffEditorWillMount = (monaco) => {
     console.log("editorWillMount", monaco);
   };
 
@@ -26,7 +26,7 @@ class App extends React.Component<{}, AppState> {
     editor.focus();
   };
 
-  onChange: DiffChangeHandler = newValue => {
+  onChange: DiffChangeHandler = (newValue) => {
     console.log("onChange", newValue);
   };
 

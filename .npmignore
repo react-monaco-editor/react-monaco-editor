@@ -1,4 +1,3 @@
-.babelrc
 .eslintignore
 .eslintrc
 .github/
@@ -9,4 +8,5 @@
 /example/
 /examples/
 /test/
+tsconfig.json
 yarn-error.log

@@ -2,8 +2,8 @@ import * as React from "react";
 import MonacoEditor, {
   EditorDidMount,
   ChangeHandler,
-  EditorWillMount
-} from "../..";
+  EditorWillMount,
+} from "../../lib";
 import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 
 type AppState = {
@@ -14,10 +14,10 @@ class App extends React.Component<{}, AppState> {
   private editor: MonacoEditor;
 
   state = {
-    code: "// type your code..."
+    code: "// type your code...",
   };
 
-  editorWillMount: EditorWillMount = monaco => {
+  editorWillMount: EditorWillMount = (monaco) => {
     console.log("editorWillMount", monaco);
   };
 
@@ -30,7 +30,8 @@ class App extends React.Component<{}, AppState> {
     console.log("onChange", newValue, e);
 
     if (this.editor && this.editor.editor) {
-      const editor: monacoEditor.editor.IStandaloneCodeEditor = this.editor.editor;
+      const editor: monacoEditor.editor.IStandaloneCodeEditor = this.editor
+        .editor;
     }
   };
 
