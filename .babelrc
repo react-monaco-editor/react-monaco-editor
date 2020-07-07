@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "@babel/preset-typescript",
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "targets": "> 0.25%, not dead"
+      }
+    ]
+  ]
+}
