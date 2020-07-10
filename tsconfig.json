@@ -7,7 +7,6 @@
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
-    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
