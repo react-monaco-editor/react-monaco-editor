@@ -75,10 +75,10 @@ class MonacoEditor extends React.Component {
   initMonaco() {
     const value =
       this.props.value != null ? this.props.value : this.props.defaultValue;
-    const { language, theme, options, overrideServices } = this.props;
+    const { language, theme, overrideServices } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
-      Object.assign(options, this.editorWillMount());
+      const options = { ...this.props.options, ...this.editorWillMount() };
       this.editor = monaco.editor.create(
         this.containerElement,
         {
