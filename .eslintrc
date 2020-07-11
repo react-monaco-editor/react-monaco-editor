@@ -32,7 +32,6 @@
     "jsx-a11y/href-no-hash": 0,
     "max-classes-per-file": 0,
     "no-underscore-dangle": 0,
-    "no-var": 1,
     "prettier/prettier": 2,
     "react/destructuring-assignment": 0,
     "react/forbid-prop-types": 0,
