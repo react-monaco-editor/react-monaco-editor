@@ -1,10 +1,49 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import PropTypes from "prop-types";
 import React from "react";
+import { MonacoDiffEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-class MonacoDiffEditor extends React.Component {
-  constructor(props) {
+class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
+  static propTypes = {
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    original: PropTypes.string,
+    value: PropTypes.string,
+    defaultValue: PropTypes.string,
+    language: PropTypes.string,
+    theme: PropTypes.string,
+    options: PropTypes.object,
+    overrideServices: PropTypes.object,
+    editorDidMount: PropTypes.func,
+    editorWillMount: PropTypes.func,
+    onChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    width: "100%",
+    height: "100%",
+    original: null,
+    value: null,
+    defaultValue: "",
+    language: "javascript",
+    theme: null,
+    options: {},
+    overrideServices: {},
+    editorDidMount: noop,
+    editorWillMount: noop,
+    onChange: noop,
+  };
+
+  editor?: monaco.editor.IStandaloneDiffEditor;
+
+  private containerElement?: HTMLDivElement;
+
+  private _subscription: monaco.IDisposable;
+
+  private __prevent_trigger_change_event?: boolean;
+
+  constructor(props: MonacoDiffEditorProps) {
     super(props);
     this.containerElement = undefined;
   }
@@ -13,7 +52,7 @@ class MonacoDiffEditor extends React.Component {
     this.initMonaco();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: MonacoDiffEditorProps) {
     const { language, theme, height, options, width } = this.props;
 
     const { original, modified } = this.editor.getModel();
@@ -24,7 +63,11 @@ class MonacoDiffEditor extends React.Component {
 
     if (this.props.value != null && this.props.value !== modified.getValue()) {
       this.__prevent_trigger_change_event = true;
+      // modifiedEditor is not in the public API for diff editors
+      // @ts-expect-error
       this.editor.modifiedEditor.pushUndoStop();
+      // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
+      // @ts-expect-error
       modified.pushEditOperations(
         [],
         [
@@ -34,6 +77,8 @@ class MonacoDiffEditor extends React.Component {
           },
         ]
       );
+      // modifiedEditor is not in the public API for diff editors
+      // @ts-expect-error
       this.editor.modifiedEditor.pushUndoStop();
       this.__prevent_trigger_change_event = false;
     }
@@ -60,7 +105,7 @@ class MonacoDiffEditor extends React.Component {
     this.destroyMonaco();
   }
 
-  assignRef = (component) => {
+  assignRef = (component: HTMLDivElement) => {
     this.containerElement = component;
   };
 
@@ -70,7 +115,7 @@ class MonacoDiffEditor extends React.Component {
     return options || {};
   }
 
-  editorDidMount(editor) {
+  editorDidMount(editor: monaco.editor.IStandaloneDiffEditor) {
     this.props.editorDidMount(editor, monaco);
 
     const { modified } = editor.getModel();
@@ -81,7 +126,7 @@ class MonacoDiffEditor extends React.Component {
     });
   }
 
-  initModels(value, original) {
+  initModels(value: string, original: string) {
     const { language } = this.props;
     const originalModel = monaco.editor.createModel(original, language);
     const modifiedModel = monaco.editor.createModel(value, language);
@@ -146,35 +191,5 @@ class MonacoDiffEditor extends React.Component {
     );
   }
 }
-
-MonacoDiffEditor.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  original: PropTypes.string,
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
-  language: PropTypes.string,
-  theme: PropTypes.string,
-  options: PropTypes.object,
-  overrideServices: PropTypes.object,
-  editorDidMount: PropTypes.func,
-  editorWillMount: PropTypes.func,
-  onChange: PropTypes.func,
-};
-
-MonacoDiffEditor.defaultProps = {
-  width: "100%",
-  height: "100%",
-  original: null,
-  value: null,
-  defaultValue: "",
-  language: "javascript",
-  theme: null,
-  options: {},
-  overrideServices: {},
-  editorDidMount: noop,
-  editorWillMount: noop,
-  onChange: noop,
-};
 
 export default MonacoDiffEditor;

@@ -1,10 +1,47 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import PropTypes from "prop-types";
 import React from "react";
+import { MonacoEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-class MonacoEditor extends React.Component {
-  constructor(props) {
+class MonacoEditor extends React.Component<MonacoEditorProps> {
+  static propTypes = {
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.string,
+    defaultValue: PropTypes.string,
+    language: PropTypes.string,
+    theme: PropTypes.string,
+    options: PropTypes.object,
+    overrideServices: PropTypes.object,
+    editorDidMount: PropTypes.func,
+    editorWillMount: PropTypes.func,
+    onChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    width: "100%",
+    height: "100%",
+    value: null,
+    defaultValue: "",
+    language: "javascript",
+    theme: null,
+    options: {},
+    overrideServices: {},
+    editorDidMount: noop,
+    editorWillMount: noop,
+    onChange: noop,
+  };
+
+  editor?: monaco.editor.IStandaloneCodeEditor;
+
+  private containerElement?: HTMLDivElement;
+
+  private _subscription: monaco.IDisposable;
+
+  private __prevent_trigger_change_event?: boolean;
+
+  constructor(props: MonacoEditorProps) {
     super(props);
     this.containerElement = undefined;
   }
@@ -13,7 +50,7 @@ class MonacoEditor extends React.Component {
     this.initMonaco();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: MonacoEditorProps) {
     const { value, language, theme, height, options, width } = this.props;
 
     const { editor } = this;
@@ -22,6 +59,8 @@ class MonacoEditor extends React.Component {
     if (this.props.value != null && this.props.value !== model.getValue()) {
       this.__prevent_trigger_change_event = true;
       this.editor.pushUndoStop();
+      // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
+      // @ts-expect-error
       model.pushEditOperations(
         [],
         [
@@ -55,7 +94,7 @@ class MonacoEditor extends React.Component {
     this.destroyMonaco();
   }
 
-  assignRef = (component) => {
+  assignRef = (component: HTMLDivElement) => {
     this.containerElement = component;
   };
 
@@ -100,7 +139,7 @@ class MonacoEditor extends React.Component {
     return options || {};
   }
 
-  editorDidMount(editor) {
+  editorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
     this.props.editorDidMount(editor, monaco);
 
     this._subscription = editor.onDidChangeModelContent((event) => {
@@ -128,33 +167,5 @@ class MonacoEditor extends React.Component {
     );
   }
 }
-
-MonacoEditor.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  value: PropTypes.string,
-  defaultValue: PropTypes.string,
-  language: PropTypes.string,
-  theme: PropTypes.string,
-  options: PropTypes.object,
-  overrideServices: PropTypes.object,
-  editorDidMount: PropTypes.func,
-  editorWillMount: PropTypes.func,
-  onChange: PropTypes.func,
-};
-
-MonacoEditor.defaultProps = {
-  width: "100%",
-  height: "100%",
-  value: null,
-  defaultValue: "",
-  language: "javascript",
-  theme: null,
-  options: {},
-  overrideServices: {},
-  editorDidMount: noop,
-  editorWillMount: noop,
-  onChange: noop,
-};
 
 export default MonacoEditor;

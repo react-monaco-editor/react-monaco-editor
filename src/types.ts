@@ -1,5 +1,4 @@
-import * as React from "react";
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 
 export type ChangeHandler = (
   value: string,
@@ -16,11 +15,15 @@ export type EditorDidMount = (
  * This will be `IStandaloneEditorConstructionOptions` in newer versions of monaco-editor, or
  * `IEditorConstructionOptions` in versions before that was introduced.
  */
-export type EditorConstructionOptions = NonNullable<Parameters<typeof monacoEditor.editor.create>[1]>;
+export type EditorConstructionOptions = NonNullable<
+  Parameters<typeof monacoEditor.editor.create>[1]
+>;
 
-export type EditorWillMount = (monaco: typeof monacoEditor) => void | EditorConstructionOptions;
-                                                  
-declare interface MonacoEditorBaseProps {
+export type EditorWillMount = (
+  monaco: typeof monacoEditor
+) => void | EditorConstructionOptions;
+
+export interface MonacoEditorBaseProps {
   /**
    * Width of editor. Defaults to 100%.
    */
@@ -88,10 +91,6 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
   onChange?: ChangeHandler;
 }
 
-export default class MonacoEditor extends React.Component<MonacoEditorProps> {
-  editor?: monacoEditor.editor.IStandaloneCodeEditor;
-}
-
 // ============ Diff Editor ============
 
 export type DiffEditorDidMount = (
@@ -99,7 +98,9 @@ export type DiffEditorDidMount = (
   monaco: typeof monacoEditor
 ) => void;
 
-export type DiffEditorWillMount = (monaco: typeof monacoEditor) => void;
+export type DiffEditorWillMount = (
+  monaco: typeof monacoEditor
+) => void | monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
 export type DiffChangeHandler = ChangeHandler;
 
@@ -139,8 +140,4 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
    * An event emitted when the content of the current model has changed.
    */
   onChange?: DiffChangeHandler;
-}
-
-export class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
-  editor?: monacoEditor.editor.IStandaloneDiffEditor;
 }

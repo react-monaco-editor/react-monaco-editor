@@ -1,32 +1,49 @@
 {
-  "parser": "babel-eslint",
   "extends": [
     "prettier",
     "airbnb",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "prettier",
+    "@typescript-eslint"
   ],
   "rules": {
-    "prettier/prettier": 2,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-unsafe-call": 0,
+    "@typescript-eslint/no-unsafe-member-access": 0,
+    "@typescript-eslint/no-unused-vars": 0,
     "array-bracket-spacing": 0,
+    "camelcase": 0,
     "comma-dangle": 0,
-    "valid-jsdoc": 2,
-    "no-var": 1,
-    "semi": 0,
-    "no-underscore-dangle": 0,
-    "react/jsx-uses-react": 1,
-    "react/jsx-no-undef": 2,
-    "react/jsx-filename-extension": 0,
-    "react/forbid-prop-types": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
     "jsx-a11y/href-no-hash": 0,
+    "max-classes-per-file": 0,
+    "no-underscore-dangle": 0,
+    "no-var": 1,
+    "prettier/prettier": 2,
     "react/destructuring-assignment": 0,
-    "max-classes-per-file": 0
-  },
-  "plugins": ["react", "prettier"],
-  "globals": {
-    "monaco": true
-  },
-  "env": {
-    "browser": true
+    "react/forbid-prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-no-undef": 2,
+    "react/jsx-uses-react": 1,
+    "react/static-property-placement": [
+      2,
+      "static public field"
+    ],
+    "semi": 0,
+    "valid-jsdoc": 2
   }
 }
