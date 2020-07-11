@@ -50,11 +50,6 @@ export interface MonacoEditorBaseProps {
    * You can create custom themes via `monaco.editor.defineTheme`.
    */
   theme?: string | null;
-
-  /**
-   * Optional, allow to pass a different context then the global window onto which the monaco instance will be loaded. Useful if you want to load the editor in an iframe.
-   */
-  context?: any;
 }
 
 export interface MonacoEditorProps extends MonacoEditorBaseProps {
