@@ -4,7 +4,7 @@
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index",
-  "types": "lib/types.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "preversion": "npm run lint",
     "build": "tsc",
