@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
-import PropTypes from "prop-types";
-import React from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 import { MonacoDiffEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
