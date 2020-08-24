@@ -33,6 +33,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
+    "@types/react": "^16.8.3",
     "eslint": "^7.4.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -46,10 +47,10 @@
     "typescript": "^3.9.6"
   },
   "peerDependencies": {
+    "@types/react": "^16.x",
     "react": "^16.x"
   },
   "dependencies": {
-    "@types/react": "^16.x",
     "monaco-editor": "*",
     "prop-types": "^15.7.2"
   }
