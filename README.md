@@ -146,6 +146,11 @@ All the properties below are optional.
 
 Refer to [Monaco interface IEditor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditor.html).
 
+The monaco interfaces available by import
+```js
+import { monaco } from 'react-monaco-editor';
+```
+
 ## Q & A
 
 ### I don't get syntax highlighting / autocomplete / validation.
