@@ -30,7 +30,7 @@ export interface MonacoEditorBaseProps {
   width?: string | number;
 
   /**
-   * Height of editor. Defaults to 500.
+   * Height of editor. Defaults to 100%.
    */
   height?: string | number;
 
