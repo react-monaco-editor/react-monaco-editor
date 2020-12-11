@@ -1,6 +1,6 @@
-import MonacoEditor from "./editor";
+import * as monaco from "monaco-editor";
 import MonacoDiffEditor from "./diff";
+import MonacoEditor from "./editor";
 
-export * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 export * from "./types";
-export { MonacoEditor as default, MonacoDiffEditor };
+export { MonacoEditor as default, MonacoDiffEditor, monaco };
