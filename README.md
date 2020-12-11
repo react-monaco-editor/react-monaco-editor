@@ -8,7 +8,7 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
-[![Build Status](https://travis-ci.com/react-monaco-editor/react-monaco-editor.svg?branch=master)](https://travis-ci.com/react-monaco-editor/react-monaco-editor)
+![Test](https://github.com/react-monaco-editor/react-monaco-editor/workflows/Test/badge.svg)
 
 [npm-url]: https://npmjs.org/package/react-monaco-editor
 [downloads-image]: http://img.shields.io/npm/dm/react-monaco-editor.svg
