@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Monaco Editor for React",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --progress --colors --port 8886"
+    "start": "webpack serve --hot --inline --progress --port 8886"
   },
   "authors": [
     "Leon Shi <superRaytin@gmail.com>",
@@ -17,12 +17,12 @@
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
-    "css-loader": "^4.2.2",
+    "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "monaco-editor-webpack-plugin": "^2.0.0",
-    "style-loader": "^1.2.1",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {

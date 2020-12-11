@@ -51,7 +51,4 @@ module.exports = {
     }),
   ],
   devServer: { contentBase: "./" },
-  node: {
-    fs: "empty",
-  },
 };
