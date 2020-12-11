@@ -11,11 +11,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "react",
-    "prettier",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
@@ -38,11 +34,10 @@
     "react/jsx-filename-extension": 0,
     "react/jsx-no-undef": 2,
     "react/jsx-uses-react": 1,
-    "react/static-property-placement": [
-      2,
-      "static public field"
-    ],
+    "react/static-property-placement": [2, "static public field"],
     "semi": 0,
-    "valid-jsdoc": 2
+    "valid-jsdoc": 2,
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"]
   }
 }
