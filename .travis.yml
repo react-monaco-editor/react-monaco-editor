@@ -1,7 +1,0 @@
-language: node_js
-node_js: "13"
-script:
-  - pushd example && yarn && popd
-  - yarn lint
-  - yarn build
-cache: yarn
