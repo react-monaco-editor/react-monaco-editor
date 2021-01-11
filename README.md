@@ -8,7 +8,7 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
-![Test](https://github.com/react-monaco-editor/react-monaco-editor/workflows/Test/badge.svg)
+![Test](https://github.com/react-monaco-editor/react-monaco-editor/workflows/Test/badge.svg) [![Meercode CI Score](https://meercode.io/badge/react-monaco-editor/react-monaco-editor?type=ci-score&branch=master)](https://meercode.io/react-monaco-editor/react-monaco-editor)
 
 [npm-url]: https://npmjs.org/package/react-monaco-editor
 [downloads-image]: http://img.shields.io/npm/dm/react-monaco-editor.svg
