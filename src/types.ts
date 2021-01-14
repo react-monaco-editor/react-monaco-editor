@@ -84,6 +84,11 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    * An event emitted when the content of the current model has changed.
    */
   onChange?: ChangeHandler;
+
+  /**
+   * A flag which tells if editor content updated via value prop should get selected (default true)
+   */
+  selectChangedValue?: boolean;
 }
 
 // ============ Diff Editor ============

@@ -17,6 +17,7 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
     editorDidMount: PropTypes.func,
     editorWillMount: PropTypes.func,
     onChange: PropTypes.func,
+    selectChangedValue: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -31,6 +32,7 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
     editorDidMount: noop,
     editorWillMount: noop,
     onChange: noop,
+    selectChangedValue: true,
   };
 
   editor?: monaco.editor.IStandaloneCodeEditor;
@@ -59,17 +61,21 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
     if (this.props.value != null && this.props.value !== model.getValue()) {
       this.__prevent_trigger_change_event = true;
       this.editor.pushUndoStop();
-      // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
-      // @ts-expect-error
-      model.pushEditOperations(
-        [],
-        [
-          {
-            range: model.getFullModelRange(),
-            text: value,
-          },
-        ]
-      );
+      if (this.props.selectChangedValue) {
+        // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
+        // @ts-expect-error
+        model.pushEditOperations(
+          [],
+          [
+            {
+              range: model.getFullModelRange(),
+              text: value,
+            },
+          ]
+        );
+      } else {
+        this.editor.setValue(value);
+      }
       this.editor.pushUndoStop();
       this.__prevent_trigger_change_event = false;
     }
