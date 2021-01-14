@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.41.3",
+  "version": "0.41.2",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index",
@@ -9,8 +9,8 @@
     "preversion": "npm run lint",
     "build": "tsc",
     "clean": "rimraf lib",
-    "format": "eslint --fix {src,example}/**/*.{ts,tsx}",
-    "lint": "eslint {src,example}/**/*.{ts,tsx}",
+    "format": "eslint --fix '{src,example}/**/*.{ts,tsx}'",
+    "lint": "eslint '{src,example}/**/*.{ts,tsx}'",
     "prepublishOnly": "npm run lint && npm run build"
   },
   "keywords": [
