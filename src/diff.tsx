@@ -66,6 +66,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
       // modifiedEditor is not in the public API for diff editors
       this.editor.getModifiedEditor().pushUndoStop();
       // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
+      // @ts-expect-error
       modified.pushEditOperations(
         [],
         [
