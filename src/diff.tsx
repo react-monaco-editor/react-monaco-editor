@@ -64,8 +64,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     if (this.props.value != null && this.props.value !== modified.getValue()) {
       this.__prevent_trigger_change_event = true;
       // modifiedEditor is not in the public API for diff editors
-      // @ts-expect-error
-      this.editor.modifiedEditor.pushUndoStop();
+      this.editor.getModifiedEditor().pushUndoStop();
       // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
       // @ts-expect-error
       modified.pushEditOperations(
@@ -78,8 +77,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
         ]
       );
       // modifiedEditor is not in the public API for diff editors
-      // @ts-expect-error
-      this.editor.modifiedEditor.pushUndoStop();
+      this.editor.getModifiedEditor().pushUndoStop();
       this.__prevent_trigger_change_event = false;
     }
 
