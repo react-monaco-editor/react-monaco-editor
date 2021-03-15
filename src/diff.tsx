@@ -97,11 +97,10 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
       this.editor.layout();
     }
     if (prevProps.options !== options) {
-      const prependedOptions: monaco.editor.IStandaloneEditorConstructionOptions = {};
-      if (className) {
-        prependedOptions.extraEditorClassName = className;
-      }
-      this.editor.updateOptions({ ...prependedOptions, ...options });
+      this.editor.updateOptions({
+        ...(className ? { extraEditorClassName: className } : {}),
+        ...options,
+      });
     }
   }
 
@@ -153,14 +152,10 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     if (this.containerElement) {
       // Before initializing monaco editor
       this.editorWillMount();
-      const prependedOptions: monaco.editor.IStandaloneEditorConstructionOptions = {};
-      if (className) {
-        prependedOptions.extraEditorClassName = className;
-      }
       this.editor = monaco.editor.createDiffEditor(
         this.containerElement,
         {
-          ...(className ? {extraEditorClassName: className} : {}),
+          ...(className ? { extraEditorClassName: className } : {}),
           ...options,
           ...(theme ? { theme } : {}),
         },

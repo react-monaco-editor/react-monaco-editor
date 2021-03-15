@@ -93,14 +93,13 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
       editor.layout();
     }
     if (prevProps.options !== options) {
-      const prependedOptions: monaco.editor.IStandaloneEditorConstructionOptions = {};
-      if (className) {
-        prependedOptions.extraEditorClassName = className;
-      }
       // Don't pass in the model on update because monaco crashes if we pass the model
       // a second time. See https://github.com/microsoft/monaco-editor/issues/2027
       const { model: _model, ...optionsWithoutModel } = options;
-      editor.updateOptions({ ...prependedOptions, ...optionsWithoutModel });
+      editor.updateOptions({
+        ...(className ? { extraEditorClassName: className } : {}),
+        ...optionsWithoutModel,
+      });
     }
   }
 
@@ -131,17 +130,13 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
     const { language, theme, overrideServices, className } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
-      const prependedOptions: monaco.editor.IStandaloneEditorConstructionOptions = {};
-      if (className) {
-        prependedOptions.extraEditorClassName = className;
-      }
       const options = { ...this.props.options, ...this.editorWillMount() };
       this.editor = monaco.editor.create(
         this.containerElement,
         {
           value,
           language,
-          ...prependedOptions,
+          ...(className ? { extraEditorClassName: className } : {}),
           ...options,
           ...(theme ? { theme } : {}),
         },
