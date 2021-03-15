@@ -160,7 +160,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
       this.editor = monaco.editor.createDiffEditor(
         this.containerElement,
         {
-          ...prependedOptions,
+          ...(className ? {extraEditorClassName: className} : {}),
           ...options,
           ...(theme ? { theme } : {}),
         },
