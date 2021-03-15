@@ -143,7 +143,13 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
   initMonaco() {
     const value =
       this.props.value != null ? this.props.value : this.props.defaultValue;
-    const { original, theme, options, overrideServices, className } = this.props;
+    const {
+      original,
+      theme,
+      options,
+      overrideServices,
+      className,
+    } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
       this.editorWillMount();
