@@ -50,6 +50,11 @@ export interface MonacoEditorBaseProps {
    * You can create custom themes via `monaco.editor.defineTheme`.
    */
   theme?: string | null;
+
+  /**
+   * Optional string classname to append to the editor.
+   */
+  className?: string | null;
 }
 
 export interface MonacoEditorProps extends MonacoEditorBaseProps {

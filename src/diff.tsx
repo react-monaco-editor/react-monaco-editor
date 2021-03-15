@@ -18,6 +18,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     editorDidMount: PropTypes.func,
     editorWillMount: PropTypes.func,
     onChange: PropTypes.func,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -33,6 +34,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     editorDidMount: noop,
     editorWillMount: noop,
     onChange: noop,
+    className: null,
   };
 
   editor?: monaco.editor.IStandaloneDiffEditor;
@@ -53,7 +55,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
   }
 
   componentDidUpdate(prevProps: MonacoDiffEditorProps) {
-    const { language, theme, height, options, width } = this.props;
+    const { language, theme, height, options, width, className } = this.props;
 
     const { original, modified } = this.editor.getModel();
 
@@ -95,7 +97,11 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
       this.editor.layout();
     }
     if (prevProps.options !== options) {
-      this.editor.updateOptions(options);
+      const prependedOptions: monaco.editor.IStandaloneEditorConstructionOptions = {};
+      if (className) {
+        prependedOptions.extraEditorClassName = className;
+      }
+      this.editor.updateOptions({ ...prependedOptions, ...options });
     }
   }
 
@@ -137,13 +143,18 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
   initMonaco() {
     const value =
       this.props.value != null ? this.props.value : this.props.defaultValue;
-    const { original, theme, options, overrideServices } = this.props;
+    const { original, theme, options, overrideServices, className } = this.props;
     if (this.containerElement) {
       // Before initializing monaco editor
       this.editorWillMount();
+      const prependedOptions: monaco.editor.IStandaloneEditorConstructionOptions = {};
+      if (className) {
+        prependedOptions.extraEditorClassName = className;
+      }
       this.editor = monaco.editor.createDiffEditor(
         this.containerElement,
         {
+          ...prependedOptions,
           ...options,
           ...(theme ? { theme } : {}),
         },
