@@ -3,24 +3,15 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: weekly
-    day: sunday
-    time: "23:00"
-    timezone: PST8PDT
+    interval: monthly
   open-pull-requests-limit: 10
 - package-ecosystem: npm
   directory: "/example/"
   schedule:
-    interval: weekly
-    day: sunday
-    time: "23:00"
-    timezone: PST8PDT
+    interval: monthly
   open-pull-requests-limit: 10
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
-    interval: weekly
-    day: sunday
-    time: "23:00"
-    timezone: PST8PDT
+    interval: monthly
   open-pull-requests-limit: 10
