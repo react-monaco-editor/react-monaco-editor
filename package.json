@@ -52,7 +52,7 @@
     "react": "^17.x"
   },
   "dependencies": {
-    "monaco-editor": "^0.25.2",
+    "monaco-editor": "^0.26.1",
     "prop-types": "^15.7.2"
   }
 }
