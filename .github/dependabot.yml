@@ -9,7 +9,7 @@ updates:
     timezone: PST8PDT
   open-pull-requests-limit: 10
 - package-ecosystem: npm
-  directory: "/example"
+  directory: "/example/"
   schedule:
     interval: weekly
     day: sunday
