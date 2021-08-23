@@ -12,16 +12,16 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.14.8",
+    "@babel/core": "^7.15.0",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
-    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
-    "monaco-editor-webpack-plugin": "^4.1.1",
+    "monaco-editor-webpack-plugin": "^4.1.2",
     "style-loader": "^3.2.1",
-    "webpack": "^5.47.1",
-    "webpack-cli": "^4.7.2",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
