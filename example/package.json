@@ -22,7 +22,7 @@
     "style-loader": "^3.3.0",
     "webpack": "^5.55.1",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^4.3.0"
   },
   "dependencies": {
     "react": "^17.0.2",
