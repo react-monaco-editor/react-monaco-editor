@@ -49,10 +49,10 @@
   },
   "peerDependencies": {
     "@types/react": "^17.x",
+    "monaco-editor": "^0.28.1",
     "react": "^17.x"
   },
   "dependencies": {
-    "monaco-editor": "^0.28.1",
     "prop-types": "^15.7.2"
   }
 }
