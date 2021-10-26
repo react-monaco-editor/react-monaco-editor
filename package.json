@@ -43,16 +43,17 @@
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.4.0",
+    "monaco-editor": "^0.28.1",
     "react": "^17.0.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "@types/react": "^17.x",
+    "monaco-editor": "^0.28.1",
     "react": "^17.x"
   },
   "dependencies": {
-    "monaco-editor": "^0.28.1",
     "prop-types": "^15.7.2"
   }
 }
