@@ -14,8 +14,9 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
     theme: PropTypes.string,
     options: PropTypes.object,
     overrideServices: PropTypes.object,
-    editorDidMount: PropTypes.func,
     editorWillMount: PropTypes.func,
+    editorDidMount: PropTypes.func,
+    editorWillUnmount: PropTypes.func,
     onChange: PropTypes.func,
     className: PropTypes.string,
   };
@@ -29,8 +30,9 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
     theme: null,
     options: {},
     overrideServices: {},
-    editorDidMount: noop,
     editorWillMount: noop,
+    editorDidMount: noop,
+    editorWillUnmount: noop,
     onChange: noop,
     className: null,
   };
@@ -106,6 +108,7 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
 
   destroyMonaco() {
     if (this.editor) {
+      this.editorWillUnmount(this.editor);
       this.editor.dispose();
       const model = this.editor.getModel();
       if (model) {
@@ -154,6 +157,11 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
         this.props.onChange(editor.getValue(), event);
       }
     });
+  }
+
+  editorWillUnmount(editor: monaco.editor.IStandaloneCodeEditor) {
+    const { editorWillUnmount } = this.props;
+    editorWillUnmount(editor, monaco);
   }
 
   render() {

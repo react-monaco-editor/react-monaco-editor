@@ -139,6 +139,7 @@ All the properties below are optional.
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
 - `editorWillMount(monaco)` an event emitted before the editor mounted (similar to `componentWillMount` of React).
 - `editorDidMount(editor, monaco)` an event emitted when the editor has been mounted (similar to `componentDidMount` of React).
+- `editorWillUnmount(editor, monaco)` an event emitted before the editor unmount (similar to `componentWillUnmount` of React).
 
 ## Events & Methods
 

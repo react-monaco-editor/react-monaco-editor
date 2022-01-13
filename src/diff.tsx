@@ -15,8 +15,9 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     theme: PropTypes.string,
     options: PropTypes.object,
     overrideServices: PropTypes.object,
-    editorDidMount: PropTypes.func,
     editorWillMount: PropTypes.func,
+    editorDidMount: PropTypes.func,
+    editorWillUnmount: PropTypes.func,
     onChange: PropTypes.func,
     className: PropTypes.string,
   };
@@ -31,8 +32,9 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     theme: null,
     options: {},
     overrideServices: {},
-    editorDidMount: noop,
     editorWillMount: noop,
+    editorDidMount: noop,
+    editorWillUnmount: noop,
     onChange: noop,
     className: null,
   };
@@ -129,6 +131,11 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
     });
   }
 
+  editorWillUnmount(editor: monaco.editor.IStandaloneDiffEditor) {
+    const { editorWillUnmount } = this.props;
+    editorWillUnmount(editor, monaco);
+  }
+
   initModels(value: string, original: string) {
     const { language } = this.props;
     const originalModel = monaco.editor.createModel(original, language);
@@ -164,6 +171,7 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
 
   destroyMonaco() {
     if (this.editor) {
+      this.editorWillUnmount(this.editor);
       this.editor.dispose();
       const { original, modified } = this.editor.getModel();
       if (original) {
