@@ -15,7 +15,7 @@ jobs:
     name: Test on Node
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
