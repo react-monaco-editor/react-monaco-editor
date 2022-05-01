@@ -133,7 +133,7 @@ All the properties below are optional.
 - `defaultValue` the initial value of the auto created model in the editor.
 - `language` the initial language of the auto created model in the editor.
 - `theme` the theme of the editor
-- `options` refer to [Monaco interface IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html).
+- `options` refer to [Monaco interface IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html).
 - `overrideServices` refer to [Monaco Interface IEditorOverrideServices](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroverrideservices.html). It depends on Monaco's internal implementations and may change over time, check github [issue](https://github.com/Microsoft/monaco-editor/issues/935#issuecomment-402174095) for more details.
 
 - `onChange(newValue, event)` an event emitted when the content of the current model has changed.
