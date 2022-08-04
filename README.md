@@ -89,7 +89,7 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 module.exports = {
   plugins: [
     new MonacoWebpackPlugin({
-      // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+      // available options are documented at https://github.com/microsoft/monaco-editor/blob/main/webpack-plugin/README.md#options
       languages: ['json']
     })
   ]
