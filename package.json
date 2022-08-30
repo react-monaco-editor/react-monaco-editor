@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-editor",
-  "version": "0.49.0",
+  "version": "0.50.0",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index",
@@ -31,22 +31,22 @@
   "homepage": "https://github.com/react-monaco-editor/react-monaco-editor",
   "repository": "https://github.com/react-monaco-editor/react-monaco-editor",
   "devDependencies": {
-    "@types/react": "^18.0.17",
-    "@typescript-eslint/eslint-plugin": "^5.34.0",
-    "@typescript-eslint/parser": "^5.34.0",
-    "eslint": "^8.22.0",
+    "@types/react": "^18.0.18",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "eslint": "^8.23.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react": "^7.31.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "monaco-editor": "^0.34.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "peerDependencies": {
     "@types/react": ">=17 <= 18",
