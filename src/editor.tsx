@@ -58,20 +58,6 @@ function MonacoEditor({
     editorWillUnmount(editor.current, monaco);
   }, [editorWillUnmount]);
 
-  const destroyMonaco = useCallback(() => {
-    if (editor.current) {
-      handleEditorWillUnmount();
-      editor.current.dispose();
-      const model = editor.current.getModel();
-      if (model) {
-        model.dispose();
-      }
-    }
-    if (_subscription.current) {
-      _subscription.current.dispose();
-    }
-  }, [handleEditorWillUnmount]);
-
   const initMonaco = useCallback(() => {
     const finalValue = value !== null ? value : defaultValue;
     if (containerElement.current) {
@@ -159,9 +145,19 @@ function MonacoEditor({
 
   useEffect(
     () => () => {
-      destroyMonaco();
+      if (editor.current) {
+        handleEditorWillUnmount();
+        editor.current.dispose();
+        const model = editor.current.getModel();
+        if (model) {
+          model.dispose();
+        }
+      }
+      if (_subscription.current) {
+        _subscription.current.dispose();
+      }
     },
-    [destroyMonaco]
+    [handleEditorWillUnmount]
   );
 
   return (

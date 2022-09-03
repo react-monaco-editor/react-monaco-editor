@@ -1,161 +1,81 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
-import * as PropTypes from "prop-types";
 import * as React from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { MonacoDiffEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
-  static propTypes = {
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    original: PropTypes.string,
-    value: PropTypes.string,
-    defaultValue: PropTypes.string,
-    language: PropTypes.string,
-    theme: PropTypes.string,
-    options: PropTypes.object,
-    overrideServices: PropTypes.object,
-    editorWillMount: PropTypes.func,
-    editorDidMount: PropTypes.func,
-    editorWillUnmount: PropTypes.func,
-    onChange: PropTypes.func,
-    className: PropTypes.string,
-  };
+function MonacoDiffEditor({
+  width,
+  height,
+  value,
+  defaultValue,
+  language,
+  theme,
+  options,
+  overrideServices,
+  editorWillMount,
+  editorDidMount,
+  editorWillUnmount,
+  onChange,
+  className,
+  original,
+}: MonacoDiffEditorProps) {
+  const containerElement = useRef<HTMLDivElement | null>(null);
 
-  static defaultProps = {
-    width: "100%",
-    height: "100%",
-    original: null,
-    value: null,
-    defaultValue: "",
-    language: "javascript",
-    theme: null,
-    options: {},
-    overrideServices: {},
-    editorWillMount: noop,
-    editorDidMount: noop,
-    editorWillUnmount: noop,
-    onChange: noop,
-    className: null,
-  };
+  const editor = useRef<monaco.editor.IStandaloneDiffEditor | null>(null);
 
-  editor?: monaco.editor.IStandaloneDiffEditor;
+  const _subscription = useRef<monaco.IDisposable | null>(null);
 
-  private containerElement?: HTMLDivElement;
+  const __prevent_trigger_change_event = useRef<boolean | null>(null);
 
-  private _subscription: monaco.IDisposable;
+  const fixedWidth = processSize(width);
 
-  private __prevent_trigger_change_event?: boolean;
+  const fixedHeight = processSize(height);
 
-  constructor(props: MonacoDiffEditorProps) {
-    super(props);
-    this.containerElement = undefined;
-  }
+  const style = useMemo(
+    () => ({
+      width: fixedWidth,
+      height: fixedHeight,
+    }),
+    [fixedWidth, fixedHeight]
+  );
 
-  componentDidMount() {
-    this.initMonaco();
-  }
+  const handleEditorWillMount = useCallback(() => {
+    const finalOptions = editorWillMount(monaco);
+    return finalOptions || {};
+  }, [editorWillMount]);
 
-  componentDidUpdate(prevProps: MonacoDiffEditorProps) {
-    const { language, theme, height, options, width, className } = this.props;
+  const handleEditorDidMount = useCallback(() => {
+    editorDidMount(editor.current, monaco);
 
-    const { original, modified } = this.editor.getModel();
-
-    if (this.props.original !== original.getValue()) {
-      original.setValue(this.props.original);
-    }
-
-    if (this.props.value != null && this.props.value !== modified.getValue()) {
-      this.__prevent_trigger_change_event = true;
-      // modifiedEditor is not in the public API for diff editors
-      this.editor.getModifiedEditor().pushUndoStop();
-      // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
-      // @ts-expect-error
-      modified.pushEditOperations(
-        [],
-        [
-          {
-            range: modified.getFullModelRange(),
-            text: this.props.value,
-          },
-        ]
-      );
-      // modifiedEditor is not in the public API for diff editors
-      this.editor.getModifiedEditor().pushUndoStop();
-      this.__prevent_trigger_change_event = false;
-    }
-
-    if (prevProps.language !== language) {
-      monaco.editor.setModelLanguage(original, language);
-      monaco.editor.setModelLanguage(modified, language);
-    }
-    if (prevProps.theme !== theme) {
-      monaco.editor.setTheme(theme);
-    }
-    if (
-      this.editor &&
-      (width !== prevProps.width || height !== prevProps.height)
-    ) {
-      this.editor.layout();
-    }
-    if (prevProps.options !== options) {
-      this.editor.updateOptions({
-        ...(className ? { extraEditorClassName: className } : {}),
-        ...options,
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    this.destroyMonaco();
-  }
-
-  assignRef = (component: HTMLDivElement) => {
-    this.containerElement = component;
-  };
-
-  editorWillMount() {
-    const { editorWillMount } = this.props;
-    const options = editorWillMount(monaco);
-    return options || {};
-  }
-
-  editorDidMount(editor: monaco.editor.IStandaloneDiffEditor) {
-    this.props.editorDidMount(editor, monaco);
-
-    const { modified } = editor.getModel();
-    this._subscription = modified.onDidChangeContent((event) => {
-      if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(modified.getValue(), event);
+    const { modified } = editor.current.getModel();
+    _subscription.current = modified.onDidChangeContent((event) => {
+      if (!__prevent_trigger_change_event.current) {
+        onChange(modified.getValue(), event);
       }
     });
-  }
+  }, [editorDidMount, onChange]);
 
-  editorWillUnmount(editor: monaco.editor.IStandaloneDiffEditor) {
-    const { editorWillUnmount } = this.props;
-    editorWillUnmount(editor, monaco);
-  }
+  const handleEditorWillUnmount = useCallback(() => {
+    editorWillUnmount(editor.current, monaco);
+  }, [editorWillUnmount]);
 
-  initModels(value: string, original: string) {
-    const { language } = this.props;
+  const initModels = useCallback(() => {
+    const finalValue = value != null ? value : defaultValue;
     const originalModel = monaco.editor.createModel(original, language);
-    const modifiedModel = monaco.editor.createModel(value, language);
-    this.editor.setModel({
+    const modifiedModel = monaco.editor.createModel(finalValue, language);
+    editor.current.setModel({
       original: originalModel,
       modified: modifiedModel,
     });
-  }
+  }, [defaultValue, language, original, value]);
 
-  initMonaco() {
-    const value =
-      this.props.value != null ? this.props.value : this.props.defaultValue;
-    const { original, theme, options, overrideServices, className } =
-      this.props;
-    if (this.containerElement) {
+  useEffect(() => {
+    if (containerElement.current) {
       // Before initializing monaco editor
-      this.editorWillMount();
-      this.editor = monaco.editor.createDiffEditor(
-        this.containerElement,
+      handleEditorWillMount();
+      editor.current = monaco.editor.createDiffEditor(
+        containerElement.current,
         {
           ...(className ? { extraEditorClassName: className } : {}),
           ...options,
@@ -164,45 +84,123 @@ class MonacoDiffEditor extends React.Component<MonacoDiffEditorProps> {
         overrideServices
       );
       // After initializing monaco editor
-      this.initModels(value, original);
-      this.editorDidMount(this.editor);
+      initModels();
+      handleEditorDidMount();
     }
-  }
+  }, [
+    className,
+    handleEditorDidMount,
+    handleEditorWillMount,
+    initModels,
+    options,
+    overrideServices,
+    theme,
+  ]);
 
-  destroyMonaco() {
-    if (this.editor) {
-      this.editorWillUnmount(this.editor);
-      this.editor.dispose();
-      const { original, modified } = this.editor.getModel();
-      if (original) {
-        original.dispose();
+  useEffect(() => {
+    if (editor.current) {
+      editor.current.updateOptions({
+        ...(className ? { extraEditorClassName: className } : {}),
+        ...options,
+      });
+    }
+  }, [className, options]);
+
+  useEffect(() => {
+    if (editor.current) {
+      editor.current.layout();
+    }
+  }, [width, height]);
+
+  useEffect(() => {
+    if (editor.current) {
+      const { original: originalEditor, modified } = editor.current.getModel();
+      monaco.editor.setModelLanguage(originalEditor, language);
+      monaco.editor.setModelLanguage(modified, language);
+    }
+  }, [language]);
+
+  useEffect(() => {
+    if (editor.current) {
+      const { modified } = editor.current.getModel();
+      __prevent_trigger_change_event.current = true;
+      // modifiedEditor is not in the public API for diff editors
+      editor.current.getModifiedEditor().pushUndoStop();
+      // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
+      // @ts-expect-error
+      modified.pushEditOperations(
+        [],
+        [
+          {
+            range: modified.getFullModelRange(),
+            text: value,
+          },
+        ]
+      );
+      // modifiedEditor is not in the public API for diff editors
+      editor.current.getModifiedEditor().pushUndoStop();
+      __prevent_trigger_change_event.current = false;
+    }
+  }, [value]);
+
+  useEffect(() => {
+    monaco.editor.setTheme(theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (editor.current) {
+      const { original: originalEditor } = editor.current.getModel();
+      if (original !== originalEditor.getValue()) {
+        originalEditor.setValue(original);
       }
-      if (modified) {
-        modified.dispose();
+    }
+  }, [original]);
+
+  useEffect(
+    () => () => {
+      if (editor.current) {
+        handleEditorWillUnmount();
+        editor.current.dispose();
+        const { original: originalEditor, modified } =
+          editor.current.getModel();
+        if (originalEditor) {
+          originalEditor.dispose();
+        }
+        if (modified) {
+          modified.dispose();
+        }
       }
-    }
-    if (this._subscription) {
-      this._subscription.dispose();
-    }
-  }
+      if (_subscription.current) {
+        _subscription.current.dispose();
+      }
+    },
+    [handleEditorWillUnmount]
+  );
 
-  render() {
-    const { width, height } = this.props;
-    const fixedWidth = processSize(width);
-    const fixedHeight = processSize(height);
-    const style = {
-      width: fixedWidth,
-      height: fixedHeight,
-    };
-
-    return (
-      <div
-        ref={this.assignRef}
-        style={style}
-        className="react-monaco-editor-container"
-      />
-    );
-  }
+  return (
+    <div
+      ref={containerElement}
+      style={style}
+      className="react-monaco-editor-container"
+    />
+  );
 }
+
+MonacoDiffEditor.defaultProps = {
+  width: "100%",
+  height: "100%",
+  original: null,
+  value: null,
+  defaultValue: "",
+  language: "javascript",
+  theme: null,
+  options: {},
+  overrideServices: {},
+  editorWillMount: noop,
+  editorDidMount: noop,
+  editorWillUnmount: noop,
+  onChange: noop,
+  className: null,
+};
 
 export default MonacoDiffEditor;
