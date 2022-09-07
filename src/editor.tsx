@@ -1,71 +1,104 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
-import * as PropTypes from "prop-types";
 import * as React from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { MonacoEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-class MonacoEditor extends React.Component<MonacoEditorProps> {
-  static propTypes = {
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    value: PropTypes.string,
-    defaultValue: PropTypes.string,
-    language: PropTypes.string,
-    theme: PropTypes.string,
-    options: PropTypes.object,
-    overrideServices: PropTypes.object,
-    editorWillMount: PropTypes.func,
-    editorDidMount: PropTypes.func,
-    editorWillUnmount: PropTypes.func,
-    onChange: PropTypes.func,
-    className: PropTypes.string,
-  };
+function MonacoEditor({
+  width,
+  height,
+  value,
+  defaultValue,
+  language,
+  theme,
+  options,
+  overrideServices,
+  editorWillMount,
+  editorDidMount,
+  editorWillUnmount,
+  onChange,
+  className,
+}: MonacoEditorProps) {
+  const containerElement = useRef<HTMLDivElement | null>(null);
 
-  static defaultProps = {
-    width: "100%",
-    height: "100%",
-    value: null,
-    defaultValue: "",
-    language: "javascript",
-    theme: null,
-    options: {},
-    overrideServices: {},
-    editorWillMount: noop,
-    editorDidMount: noop,
-    editorWillUnmount: noop,
-    onChange: noop,
-    className: null,
-  };
+  const editor = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  editor?: monaco.editor.IStandaloneCodeEditor;
+  const _subscription = useRef<monaco.IDisposable | null>(null);
 
-  private containerElement?: HTMLDivElement;
+  const __prevent_trigger_change_event = useRef<boolean | null>(null);
 
-  private _subscription: monaco.IDisposable;
+  const fixedWidth = processSize(width);
 
-  private __prevent_trigger_change_event?: boolean;
+  const fixedHeight = processSize(height);
 
-  constructor(props: MonacoEditorProps) {
-    super(props);
-    this.containerElement = undefined;
-  }
+  const style = useMemo(
+    () => ({
+      width: fixedWidth,
+      height: fixedHeight,
+    }),
+    [fixedWidth, fixedHeight]
+  );
 
-  componentDidMount() {
-    this.initMonaco();
-  }
+  const handleEditorWillMount = useCallback(() => {
+    const finalOptions = editorWillMount(monaco);
+    return finalOptions || {};
+  }, [editorWillMount]);
 
-  componentDidUpdate(prevProps: MonacoEditorProps) {
-    const { value, language, theme, height, options, width, className } =
-      this.props;
+  const handleEditorDidMount = useCallback(() => {
+    editorDidMount(editor.current, monaco);
 
-    const { editor } = this;
-    const model = editor.getModel();
+    _subscription.current = editor.current.onDidChangeModelContent((event) => {
+      if (!__prevent_trigger_change_event.current) {
+        onChange(editor.current.getValue(), event);
+      }
+    });
+  }, [editorDidMount, onChange]);
 
-    if (this.props.value != null && this.props.value !== model.getValue()) {
-      this.__prevent_trigger_change_event = true;
-      this.editor.pushUndoStop();
+  const handleEditorWillUnmount = useCallback(() => {
+    editorWillUnmount(editor.current, monaco);
+  }, [editorWillUnmount]);
+
+  const initMonaco = useCallback(() => {
+    const finalValue = value !== null ? value : defaultValue;
+    if (containerElement.current) {
+      // Before initializing monaco editor
+      const finalOptions = { ...options, ...handleEditorWillMount() };
+      editor.current = monaco.editor.create(
+        containerElement.current,
+        {
+          value: finalValue,
+          language,
+          ...(className ? { extraEditorClassName: className } : {}),
+          ...finalOptions,
+          ...(theme ? { theme } : {}),
+        },
+        overrideServices
+      );
+      // After initializing monaco editor
+      handleEditorDidMount();
+    }
+  }, [
+    className,
+    defaultValue,
+    handleEditorDidMount,
+    handleEditorWillMount,
+    language,
+    options,
+    overrideServices,
+    theme,
+    value,
+  ]);
+
+  useEffect(() => {
+    initMonaco();
+  }, [initMonaco]);
+
+  useEffect(() => {
+    if (editor.current) {
+      const model = editor.current.getModel();
+      __prevent_trigger_change_event.current = true;
+      editor.current.pushUndoStop();
       // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
-      // @ts-expect-error
       model.pushEditOperations(
         [],
         [
@@ -73,114 +106,83 @@ class MonacoEditor extends React.Component<MonacoEditorProps> {
             range: model.getFullModelRange(),
             text: value,
           },
-        ]
+        ],
+        undefined
       );
-      this.editor.pushUndoStop();
-      this.__prevent_trigger_change_event = false;
+      editor.current.pushUndoStop();
+      __prevent_trigger_change_event.current = false;
     }
-    if (prevProps.language !== language) {
+  }, [value]);
+
+  useEffect(() => {
+    if (editor.current) {
+      const model = editor.current.getModel();
       monaco.editor.setModelLanguage(model, language);
     }
-    if (prevProps.theme !== theme) {
-      monaco.editor.setTheme(theme);
-    }
-    if (editor && (width !== prevProps.width || height !== prevProps.height)) {
-      editor.layout();
-    }
-    if (prevProps.options !== options) {
+  }, [language]);
+
+  useEffect(() => {
+    if (editor.current) {
       // Don't pass in the model on update because monaco crashes if we pass the model
       // a second time. See https://github.com/microsoft/monaco-editor/issues/2027
       const { model: _model, ...optionsWithoutModel } = options;
-      editor.updateOptions({
+      editor.current.updateOptions({
         ...(className ? { extraEditorClassName: className } : {}),
         ...optionsWithoutModel,
       });
     }
-  }
+  }, [className, options]);
 
-  componentWillUnmount() {
-    this.destroyMonaco();
-  }
+  useEffect(() => {
+    if (editor.current) {
+      editor.current.layout();
+    }
+  }, [width, height]);
 
-  assignRef = (component: HTMLDivElement) => {
-    this.containerElement = component;
-  };
+  useEffect(() => {
+    monaco.editor.setTheme(theme);
+  }, [theme]);
 
-  destroyMonaco() {
-    if (this.editor) {
-      this.editorWillUnmount(this.editor);
-      this.editor.dispose();
-      const model = this.editor.getModel();
-      if (model) {
-        model.dispose();
+  useEffect(
+    () => () => {
+      if (editor.current) {
+        handleEditorWillUnmount();
+        editor.current.dispose();
+        const model = editor.current.getModel();
+        if (model) {
+          model.dispose();
+        }
       }
-    }
-    if (this._subscription) {
-      this._subscription.dispose();
-    }
-  }
-
-  initMonaco() {
-    const value =
-      this.props.value != null ? this.props.value : this.props.defaultValue;
-    const { language, theme, overrideServices, className } = this.props;
-    if (this.containerElement) {
-      // Before initializing monaco editor
-      const options = { ...this.props.options, ...this.editorWillMount() };
-      this.editor = monaco.editor.create(
-        this.containerElement,
-        {
-          value,
-          language,
-          ...(className ? { extraEditorClassName: className } : {}),
-          ...options,
-          ...(theme ? { theme } : {}),
-        },
-        overrideServices
-      );
-      // After initializing monaco editor
-      this.editorDidMount(this.editor);
-    }
-  }
-
-  editorWillMount() {
-    const { editorWillMount } = this.props;
-    const options = editorWillMount(monaco);
-    return options || {};
-  }
-
-  editorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
-    this.props.editorDidMount(editor, monaco);
-
-    this._subscription = editor.onDidChangeModelContent((event) => {
-      if (!this.__prevent_trigger_change_event) {
-        this.props.onChange(editor.getValue(), event);
+      if (_subscription.current) {
+        _subscription.current.dispose();
       }
-    });
-  }
+    },
+    [handleEditorWillUnmount]
+  );
 
-  editorWillUnmount(editor: monaco.editor.IStandaloneCodeEditor) {
-    const { editorWillUnmount } = this.props;
-    editorWillUnmount(editor, monaco);
-  }
-
-  render() {
-    const { width, height } = this.props;
-    const fixedWidth = processSize(width);
-    const fixedHeight = processSize(height);
-    const style = {
-      width: fixedWidth,
-      height: fixedHeight,
-    };
-
-    return (
-      <div
-        ref={this.assignRef}
-        style={style}
-        className="react-monaco-editor-container"
-      />
-    );
-  }
+  return (
+    <div
+      ref={containerElement}
+      style={style}
+      className="react-monaco-editor-container"
+    />
+  );
 }
+
+MonacoEditor.defaultProps = {
+  width: "100%",
+  height: "100%",
+  value: null,
+  defaultValue: "",
+  language: "javascript",
+  theme: null,
+  options: {},
+  overrideServices: {},
+  editorWillMount: noop,
+  editorDidMount: noop,
+  editorWillUnmount: noop,
+  onChange: noop,
+  className: null,
+};
 
 export default MonacoEditor;

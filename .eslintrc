@@ -11,7 +11,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "plugins": ["react", "prettier", "@typescript-eslint", "react-hooks"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
@@ -38,6 +38,8 @@
     "semi": 0,
     "valid-jsdoc": 2,
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
