@@ -39,7 +39,7 @@ yarn add react-monaco-editor
 
 ```js
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from "react-dom/client";
 import MonacoEditor from 'react-monaco-editor';
 
 class App extends React.Component {
@@ -76,10 +76,9 @@ class App extends React.Component {
   }
 }
 
-render(
-  <App />,
-  document.getElementById('root')
-);
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
 ```
 
 Add the [Monaco Webpack plugin](https://github.com/Microsoft/monaco-editor-webpack-plugin) `monaco-editor-webpack-plugin` to your `webpack.config.js`:
