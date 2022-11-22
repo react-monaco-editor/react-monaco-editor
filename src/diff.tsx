@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import * as React from "react";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { MonacoDiffEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
@@ -40,12 +40,12 @@ function MonacoDiffEditor({
     [fixedWidth, fixedHeight]
   );
 
-  const handleEditorWillMount = useCallback(() => {
+  const handleEditorWillMount = () => {
     const finalOptions = editorWillMount(monaco);
     return finalOptions || {};
-  }, [editorWillMount]);
+  };
 
-  const handleEditorDidMount = useCallback(() => {
+  const handleEditorDidMount = () => {
     editorDidMount(editor.current, monaco);
 
     const { modified } = editor.current.getModel();
@@ -54,13 +54,13 @@ function MonacoDiffEditor({
         onChange(modified.getValue(), event);
       }
     });
-  }, [editorDidMount, onChange]);
+  };
 
-  const handleEditorWillUnmount = useCallback(() => {
+  const handleEditorWillUnmount = () => {
     editorWillUnmount(editor.current, monaco);
-  }, [editorWillUnmount]);
+  };
 
-  const initModels = useCallback(() => {
+  const initModels = () => {
     const finalValue = value != null ? value : defaultValue;
     const originalModel = monaco.editor.createModel(original, language);
     const modifiedModel = monaco.editor.createModel(finalValue, language);
@@ -68,34 +68,30 @@ function MonacoDiffEditor({
       original: originalModel,
       modified: modifiedModel,
     });
-  }, [defaultValue, language, original, value]);
+  };
 
-  useEffect(() => {
-    if (containerElement.current) {
-      // Before initializing monaco editor
-      handleEditorWillMount();
-      editor.current = monaco.editor.createDiffEditor(
-        containerElement.current,
-        {
-          ...(className ? { extraEditorClassName: className } : {}),
-          ...options,
-          ...(theme ? { theme } : {}),
-        },
-        overrideServices
-      );
-      // After initializing monaco editor
-      initModels();
-      handleEditorDidMount();
-    }
-  }, [
-    className,
-    handleEditorDidMount,
-    handleEditorWillMount,
-    initModels,
-    options,
-    overrideServices,
-    theme,
-  ]);
+  useEffect(
+    () => {
+      if (containerElement.current) {
+        // Before initializing monaco editor
+        handleEditorWillMount();
+        editor.current = monaco.editor.createDiffEditor(
+          containerElement.current,
+          {
+            ...(className ? { extraEditorClassName: className } : {}),
+            ...options,
+            ...(theme ? { theme } : {}),
+          },
+          overrideServices
+        );
+        // After initializing monaco editor
+        initModels();
+        handleEditorDidMount();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     if (editor.current) {
@@ -174,7 +170,8 @@ function MonacoDiffEditor({
         _subscription.current.dispose();
       }
     },
-    [handleEditorWillUnmount]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   return (

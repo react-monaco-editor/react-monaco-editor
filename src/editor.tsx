@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import * as React from "react";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { MonacoEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
@@ -39,12 +39,12 @@ function MonacoEditor({
     [fixedWidth, fixedHeight]
   );
 
-  const handleEditorWillMount = useCallback(() => {
+  const handleEditorWillMount = () => {
     const finalOptions = editorWillMount(monaco);
     return finalOptions || {};
-  }, [editorWillMount]);
+  };
 
-  const handleEditorDidMount = useCallback(() => {
+  const handleEditorDidMount = () => {
     editorDidMount(editor.current, monaco);
 
     _subscription.current = editor.current.onDidChangeModelContent((event) => {
@@ -52,13 +52,13 @@ function MonacoEditor({
         onChange(editor.current.getValue(), event);
       }
     });
-  }, [editorDidMount, onChange]);
+  };
 
-  const handleEditorWillUnmount = useCallback(() => {
+  const handleEditorWillUnmount = () => {
     editorWillUnmount(editor.current, monaco);
-  }, [editorWillUnmount]);
+  };
 
-  const initMonaco = useCallback(() => {
+  const initMonaco = () => {
     const finalValue = value !== null ? value : defaultValue;
     if (containerElement.current) {
       // Before initializing monaco editor
@@ -77,21 +77,10 @@ function MonacoEditor({
       // After initializing monaco editor
       handleEditorDidMount();
     }
-  }, [
-    className,
-    defaultValue,
-    handleEditorDidMount,
-    handleEditorWillMount,
-    language,
-    options,
-    overrideServices,
-    theme,
-    value,
-  ]);
+  };
 
-  useEffect(() => {
-    initMonaco();
-  }, [initMonaco]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(initMonaco, []);
 
   useEffect(() => {
     if (editor.current) {
@@ -157,7 +146,8 @@ function MonacoEditor({
         _subscription.current.dispose();
       }
     },
-    [handleEditorWillUnmount]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   return (
