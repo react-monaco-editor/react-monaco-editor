@@ -70,24 +70,28 @@ function MonacoDiffEditor({
     });
   };
 
-  useEffect(() => {
-    if (containerElement.current) {
-      // Before initializing monaco editor
-      handleEditorWillMount();
-      editor.current = monaco.editor.createDiffEditor(
-        containerElement.current,
-        {
-          ...(className ? { extraEditorClassName: className } : {}),
-          ...options,
-          ...(theme ? { theme } : {}),
-        },
-        overrideServices
-      );
-      // After initializing monaco editor
-      initModels();
-      handleEditorDidMount();
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (containerElement.current) {
+        // Before initializing monaco editor
+        handleEditorWillMount();
+        editor.current = monaco.editor.createDiffEditor(
+          containerElement.current,
+          {
+            ...(className ? { extraEditorClassName: className } : {}),
+            ...options,
+            ...(theme ? { theme } : {}),
+          },
+          overrideServices
+        );
+        // After initializing monaco editor
+        initModels();
+        handleEditorDidMount();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     if (editor.current) {
@@ -166,6 +170,7 @@ function MonacoDiffEditor({
         _subscription.current.dispose();
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
