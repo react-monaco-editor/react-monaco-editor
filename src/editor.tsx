@@ -84,6 +84,10 @@ function MonacoEditor({
 
   useEffect(() => {
     if (editor.current) {
+      if (value === editor.current.getValue()) {
+        return;
+      }
+
       const model = editor.current.getModel();
       __prevent_trigger_change_event.current = true;
       editor.current.pushUndoStop();
