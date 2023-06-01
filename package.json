@@ -45,7 +45,7 @@
     "monaco-editor": "^0.38.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
-    "rimraf": "^4.1.2",
+    "rimraf": "^5.0.1",
     "typescript": "^5.0.3"
   },
   "peerDependencies": {
