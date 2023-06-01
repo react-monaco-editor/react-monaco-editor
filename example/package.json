@@ -19,7 +19,7 @@
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
     "monaco-editor-webpack-plugin": "^7.0.1",
-    "style-loader": "^3.3.2",
+    "style-loader": "^3.3.3",
     "webpack": "^5.85.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^3.11.2"
