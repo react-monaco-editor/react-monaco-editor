@@ -179,4 +179,6 @@ MonacoEditor.defaultProps = {
   className: null,
 };
 
+MonacoEditor.displayName = "MonacoEditor";
+
 export default MonacoEditor;
