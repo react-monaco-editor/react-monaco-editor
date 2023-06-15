@@ -200,4 +200,6 @@ MonacoDiffEditor.defaultProps = {
   className: null,
 };
 
+MonacoDiffEditor.displayName = "MonacoDiffEditor";
+
 export default MonacoDiffEditor;
