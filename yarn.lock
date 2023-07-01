@@ -1392,10 +1392,10 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-6.0.2.tgz#542844b6c4ce95b202c0995b0a471f1229de4c81"
   integrity sha512-MzWSV5nYVT7mVyWCwn2o7JH13w2TBRmmSqSRCKzTw+lmft9X4z+3wjvs06Tzijo5z4W/kahUCDpRXTF+ZrmF/w==
 
-monaco-editor@^0.38.0:
-  version "0.38.0"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.38.0.tgz#7b3cd16f89b1b8867fcd3c96e67fccee791ff05c"
-  integrity sha512-11Fkh6yzEmwx7O0YoLxeae0qEGFwmyPRlVxpg7oF9czOOCB/iCjdJrG5I67da5WiXK3YJCxoz9TJFE8Tfq/v9A==
+monaco-editor@^0.39.0:
+  version "0.39.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.39.0.tgz#3cf8e3718d6aac347d374516a6837d1c13d967d2"
+  integrity sha512-zhbZ2Nx93tLR8aJmL2zI1mhJpsl87HMebNBM6R8z4pLfs8pj604pIVIVwyF1TivcfNtIPpMXL+nb3DsBmE/x6Q==
 
 ms@2.1.2:
   version "2.1.2"
@@ -1734,6 +1734,7 @@ stop-iteration-iterator@^1.0.0:
     internal-slot "^1.0.4"
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
