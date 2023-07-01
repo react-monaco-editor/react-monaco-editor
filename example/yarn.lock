@@ -3662,9 +3662,9 @@ react-is@^16.13.1:
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-monaco-editor@latest:
-  version "0.52.0"
-  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.52.0.tgz#69a7c450a22830064d2fc1b446674b1b7da0f540"
-  integrity sha512-jhQSekf2JABbcpN45gKZlWfTS0QcBOZAbAWKGyfqy/KEcMXTwJpCOYGcn2Ur11SUUxWJUzhKjE2fx9BGBc5S8g==
+  version "0.53.0"
+  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.53.0.tgz#d3eecbdc0d882ecb4e46c17de6f8ca4e2ac31625"
+  integrity sha512-ZITzsauH4CsicCGddtpgjRACaKNTVEL2hnjYFx8QMuc8zmsgfgq7D2GcF8OQsa2URIdGm/Zl7YwY2fmWpvqs/g==
   dependencies:
     prop-types "^15.8.1"
 
