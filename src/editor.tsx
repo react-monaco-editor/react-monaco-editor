@@ -18,6 +18,7 @@ function MonacoEditor({
   editorWillUnmount,
   onChange,
   className,
+  uri,
 }: MonacoEditorProps) {
   const containerElement = useRef<HTMLDivElement | null>(null);
 
@@ -63,11 +64,11 @@ function MonacoEditor({
     if (containerElement.current) {
       // Before initializing monaco editor
       const finalOptions = { ...options, ...handleEditorWillMount() };
+      const model = monaco.editor.createModel(finalValue, language, uri);
       editor.current = monaco.editor.create(
         containerElement.current,
         {
-          value: finalValue,
-          language,
+          model,
           ...(className ? { extraEditorClassName: className } : {}),
           ...finalOptions,
           ...(theme ? { theme } : {}),

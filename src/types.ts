@@ -99,6 +99,8 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    * An event emitted when the content of the current model has changed.
    */
   onChange?: ChangeHandler;
+
+  uri?: monacoEditor.Uri;
 }
 
 // ============ Diff Editor ============
