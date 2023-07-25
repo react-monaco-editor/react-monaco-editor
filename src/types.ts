@@ -5,18 +5,28 @@ import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
  * This will be `IStandaloneEditorConstructionOptions` in newer versions of monaco-editor, or
  * `IEditorConstructionOptions` in versions before that was introduced.
  */
-export type EditorConstructionOptions = NonNullable<Parameters<typeof monacoEditor.editor.create>[1]>;
+export type EditorConstructionOptions = NonNullable<
+  Parameters<typeof monacoEditor.editor.create>[1]
+>;
 
-export type EditorWillMount = (monaco: typeof monacoEditor) => void | EditorConstructionOptions;
+export type EditorWillMount = (
+  monaco: typeof monacoEditor
+) => void | EditorConstructionOptions;
 
-export type EditorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) => void;
+export type EditorDidMount = (
+  editor: monacoEditor.editor.IStandaloneCodeEditor,
+  monaco: typeof monacoEditor
+) => void;
 
 export type EditorWillUnmount = (
   editor: monacoEditor.editor.IStandaloneCodeEditor,
   monaco: typeof monacoEditor
 ) => void | EditorConstructionOptions;
 
-export type ChangeHandler = (value: string, event: monacoEditor.editor.IModelContentChangedEvent) => void;
+export type ChangeHandler = (
+  value: string,
+  event: monacoEditor.editor.IModelContentChangedEvent
+) => void;
 
 export interface MonacoEditorBaseProps {
   /**
