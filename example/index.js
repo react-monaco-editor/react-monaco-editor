@@ -83,9 +83,7 @@ class AnotherEditor extends React.Component {
   constructor() {
     super();
     this.state = {
-      code: ["{", '    "$schema": "http://myserver/foo-schema.json"', "}"].join(
-        "\n"
-      ),
+      code: ["{", '    "$schema": "http://myserver/foo-schema.json"', "}"].join("\n"),
       language: "json",
     };
   }
@@ -157,6 +155,83 @@ class AnotherEditor extends React.Component {
   }
 }
 
+class CodeEditorWithUri extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      code: `{\n"p1": "v3",\n"q1": "Value"\n}`,
+    };
+  }
+
+  editorWillMount = (monaco) => {
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      schemas: [
+        {
+          uri: "http://myserver/foo-schema.json",
+          fileMatch: ["file:///test-editor-with-validation"],
+          schema: {
+            type: "object",
+            properties: {
+              p1: {
+                enum: ["v1", "v2"],
+              },
+              p2: {
+                $ref: "http://myserver/bar-schema.json",
+              },
+            },
+          },
+        },
+        {
+          uri: "http://myserver/bar-schema.json",
+          fileMatch: ["file:///test-editor-with-validation"],
+          schema: {
+            type: "object",
+            properties: {
+              q1: {
+                enum: ["x1", "x2"],
+              },
+            },
+          },
+        },
+      ],
+    });
+  };
+
+  render() {
+    const { code } = this.state;
+    const options = {
+      selectOnLineNumbers: true,
+      roundedSelection: false,
+      readOnly: false,
+      cursorStyle: "line",
+      automaticLayout: false,
+    };
+    return (
+      <div>
+        <MonacoEditor
+          height="400"
+          language="json"
+          value={code}
+          options={options}
+          onChange={this.onChange}
+          editorWillMount={this.editorWillMount}
+          uri={({ Uri }) => Uri.parse("test-editor")}
+        />
+        <MonacoEditor
+          height="400"
+          language="json"
+          value={code}
+          options={options}
+          onChange={this.onChange}
+          editorWillMount={this.editorWillMount}
+          uri={({ Uri }) => Uri.parse("test-editor-with-validation")}
+        />
+      </div>
+    );
+  }
+}
+
 class DiffEditor extends React.Component {
   constructor() {
     super();
@@ -198,6 +273,9 @@ const App = () => (
     <hr />
     <h2>Another editor (uncontrolled mode)</h2>
     <AnotherEditor />
+    <hr />
+    <h2>Editor with specific URI</h2>
+    <CodeEditorWithUri />
     <hr />
     <h2>Another editor (showing a diff)</h2>
     <DiffEditor />
