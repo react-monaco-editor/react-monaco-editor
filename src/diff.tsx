@@ -19,6 +19,8 @@ function MonacoDiffEditor({
   onChange,
   className,
   original,
+  originalUri,
+  modifiedUri,
 }: MonacoDiffEditorProps) {
   const containerElement = useRef<HTMLDivElement | null>(null);
 
@@ -62,8 +64,34 @@ function MonacoDiffEditor({
 
   const initModels = () => {
     const finalValue = value != null ? value : defaultValue;
-    const originalModel = monaco.editor.createModel(original, language);
-    const modifiedModel = monaco.editor.createModel(finalValue, language);
+    const originalModelUri = originalUri?.(monaco);
+    const modifiedModelUri = modifiedUri?.(monaco);
+    let originalModel = monaco.editor.getModel(originalModelUri);
+    let modifiedModel = monaco.editor.getModel(modifiedModelUri);
+
+    // Cannot create two models with the same URI,
+    // if model with the given URI is already created, just update it.
+    if (originalModel) {
+      originalModel.setValue(original);
+      monaco.editor.setModelLanguage(originalModel, language);
+    } else {
+      originalModel = monaco.editor.createModel(
+        finalValue,
+        language,
+        originalModelUri
+      );
+    }
+    if (modifiedModel) {
+      originalModel.setValue(finalValue);
+      monaco.editor.setModelLanguage(modifiedModel, language);
+    } else {
+      modifiedModel = monaco.editor.createModel(
+        finalValue,
+        language,
+        modifiedModelUri
+      );
+    }
+
     editor.current.setModel({
       original: originalModel,
       modified: modifiedModel,

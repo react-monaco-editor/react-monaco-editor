@@ -5,28 +5,18 @@ import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
  * This will be `IStandaloneEditorConstructionOptions` in newer versions of monaco-editor, or
  * `IEditorConstructionOptions` in versions before that was introduced.
  */
-export type EditorConstructionOptions = NonNullable<
-  Parameters<typeof monacoEditor.editor.create>[1]
->;
+export type EditorConstructionOptions = NonNullable<Parameters<typeof monacoEditor.editor.create>[1]>;
 
-export type EditorWillMount = (
-  monaco: typeof monacoEditor
-) => void | EditorConstructionOptions;
+export type EditorWillMount = (monaco: typeof monacoEditor) => void | EditorConstructionOptions;
 
-export type EditorDidMount = (
-  editor: monacoEditor.editor.IStandaloneCodeEditor,
-  monaco: typeof monacoEditor
-) => void;
+export type EditorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) => void;
 
 export type EditorWillUnmount = (
   editor: monacoEditor.editor.IStandaloneCodeEditor,
   monaco: typeof monacoEditor
 ) => void | EditorConstructionOptions;
 
-export type ChangeHandler = (
-  value: string,
-  event: monacoEditor.editor.IModelContentChangedEvent
-) => void;
+export type ChangeHandler = (value: string, event: monacoEditor.editor.IModelContentChangedEvent) => void;
 
 export interface MonacoEditorBaseProps {
   /**
@@ -100,7 +90,10 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    */
   onChange?: ChangeHandler;
 
-  uri?: monacoEditor.Uri;
+  /**
+   * let the language be inferred from the uri
+   */
+  uri?: (monaco: typeof monacoEditor) => monacoEditor.Uri;
 }
 
 // ============ Diff Editor ============
@@ -162,4 +155,14 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
    * An event emitted when the content of the current model has changed.
    */
   onChange?: DiffChangeHandler;
+
+  /**
+   * let the language be inferred from the uri
+   */
+  originalUri?: (monaco: typeof monacoEditor) => monacoEditor.Uri;
+
+  /**
+   * let the language be inferred from the uri
+   */
+  modifiedUri?: (monaco: typeof monacoEditor) => monacoEditor.Uri;
 }
