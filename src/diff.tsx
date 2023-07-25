@@ -66,8 +66,10 @@ function MonacoDiffEditor({
     const finalValue = value != null ? value : defaultValue;
     const originalModelUri = originalUri?.(monaco);
     const modifiedModelUri = modifiedUri?.(monaco);
-    let originalModel = monaco.editor.getModel(originalModelUri);
-    let modifiedModel = monaco.editor.getModel(modifiedModelUri);
+    let originalModel =
+      originalModelUri && monaco.editor.getModel(originalModelUri);
+    let modifiedModel =
+      modifiedModelUri && monaco.editor.getModel(modifiedModelUri);
 
     // Cannot create two models with the same URI,
     // if model with the given URI is already created, just update it.

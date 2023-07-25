@@ -66,7 +66,7 @@ function MonacoEditor({
       // Before initializing monaco editor
       const finalOptions = { ...options, ...handleEditorWillMount() };
       const modelUri = uri?.(monaco);
-      let model = monaco.editor.getModel(modelUri);
+      let model = modelUri && monaco.editor.getModel(modelUri);
       if (model) {
         // Cannot create two models with the same URI,
         // if model with the given URI is already created, just update it.
