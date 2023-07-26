@@ -18,6 +18,7 @@ function MonacoEditor({
   editorWillUnmount,
   onChange,
   className,
+  uri,
 }: MonacoEditorProps) {
   const containerElement = useRef<HTMLDivElement | null>(null);
 
@@ -60,14 +61,24 @@ function MonacoEditor({
 
   const initMonaco = () => {
     const finalValue = value !== null ? value : defaultValue;
+
     if (containerElement.current) {
       // Before initializing monaco editor
       const finalOptions = { ...options, ...handleEditorWillMount() };
+      const modelUri = uri?.(monaco);
+      let model = modelUri && monaco.editor.getModel(modelUri);
+      if (model) {
+        // Cannot create two models with the same URI,
+        // if model with the given URI is already created, just update it.
+        model.setValue(finalValue);
+        monaco.editor.setModelLanguage(model, language);
+      } else {
+        model = monaco.editor.createModel(finalValue, language, modelUri);
+      }
       editor.current = monaco.editor.create(
         containerElement.current,
         {
-          value: finalValue,
-          language,
+          model,
           ...(className ? { extraEditorClassName: className } : {}),
           ...finalOptions,
           ...(theme ? { theme } : {}),
@@ -141,6 +152,7 @@ function MonacoEditor({
       if (editor.current) {
         handleEditorWillUnmount();
         editor.current.dispose();
+
         const model = editor.current.getModel();
         if (model) {
           model.dispose();

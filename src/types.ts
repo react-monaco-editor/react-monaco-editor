@@ -99,6 +99,11 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
    * An event emitted when the content of the current model has changed.
    */
   onChange?: ChangeHandler;
+
+  /**
+   * Let the language be inferred from the uri
+   */
+  uri?: (monaco: typeof monacoEditor) => monacoEditor.Uri;
 }
 
 // ============ Diff Editor ============
@@ -160,4 +165,14 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
    * An event emitted when the content of the current model has changed.
    */
   onChange?: DiffChangeHandler;
+
+  /**
+   * Let the language be inferred from the uri
+   */
+  originalUri?: (monaco: typeof monacoEditor) => monacoEditor.Uri;
+
+  /**
+   * Let the language be inferred from the uri
+   */
+  modifiedUri?: (monaco: typeof monacoEditor) => monacoEditor.Uri;
 }
