@@ -39,7 +39,7 @@ function MonacoDiffEditor({
       width: fixedWidth,
       height: fixedHeight,
     }),
-    [fixedWidth, fixedHeight]
+    [fixedWidth, fixedHeight],
   );
 
   const handleEditorWillMount = () => {
@@ -80,7 +80,7 @@ function MonacoDiffEditor({
       originalModel = monaco.editor.createModel(
         finalValue,
         language,
-        originalModelUri
+        originalModelUri,
       );
     }
     if (modifiedModel) {
@@ -90,7 +90,7 @@ function MonacoDiffEditor({
       modifiedModel = monaco.editor.createModel(
         finalValue,
         language,
-        modifiedModelUri
+        modifiedModelUri,
       );
     }
 
@@ -112,7 +112,7 @@ function MonacoDiffEditor({
             ...options,
             ...(theme ? { theme } : {}),
           },
-          overrideServices
+          overrideServices,
         );
         // After initializing monaco editor
         initModels();
@@ -120,7 +120,7 @@ function MonacoDiffEditor({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   useEffect(() => {
@@ -161,7 +161,7 @@ function MonacoDiffEditor({
             range: modified.getFullModelRange(),
             text: value,
           },
-        ]
+        ],
       );
       // modifiedEditor is not in the public API for diff editors
       editor.current.getModifiedEditor().pushUndoStop();
@@ -201,7 +201,7 @@ function MonacoDiffEditor({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   );
 
   return (

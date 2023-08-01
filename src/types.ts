@@ -10,22 +10,22 @@ export type EditorConstructionOptions = NonNullable<
 >;
 
 export type EditorWillMount = (
-  monaco: typeof monacoEditor
+  monaco: typeof monacoEditor,
 ) => void | EditorConstructionOptions;
 
 export type EditorDidMount = (
   editor: monacoEditor.editor.IStandaloneCodeEditor,
-  monaco: typeof monacoEditor
+  monaco: typeof monacoEditor,
 ) => void;
 
 export type EditorWillUnmount = (
   editor: monacoEditor.editor.IStandaloneCodeEditor,
-  monaco: typeof monacoEditor
+  monaco: typeof monacoEditor,
 ) => void | EditorConstructionOptions;
 
 export type ChangeHandler = (
   value: string,
-  event: monacoEditor.editor.IModelContentChangedEvent
+  event: monacoEditor.editor.IModelContentChangedEvent,
 ) => void;
 
 export interface MonacoEditorBaseProps {
@@ -109,17 +109,17 @@ export interface MonacoEditorProps extends MonacoEditorBaseProps {
 // ============ Diff Editor ============
 
 export type DiffEditorWillMount = (
-  monaco: typeof monacoEditor
+  monaco: typeof monacoEditor,
 ) => void | monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
 export type DiffEditorDidMount = (
   editor: monacoEditor.editor.IStandaloneDiffEditor,
-  monaco: typeof monacoEditor
+  monaco: typeof monacoEditor,
 ) => void;
 
 export type DiffEditorWillUnmount = (
   editor: monacoEditor.editor.IStandaloneDiffEditor,
-  monaco: typeof monacoEditor
+  monaco: typeof monacoEditor,
 ) => void;
 
 export type DiffChangeHandler = ChangeHandler;
