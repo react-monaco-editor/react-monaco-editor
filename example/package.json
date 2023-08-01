@@ -18,7 +18,7 @@
     "@babel/preset-react": "^7.22.5",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
-    "monaco-editor-webpack-plugin": "^7.0.1",
+    "monaco-editor-webpack-plugin": "^7.1.0",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^4.10.0",
