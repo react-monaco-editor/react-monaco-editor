@@ -152,11 +152,6 @@ function MonacoEditor({
       if (editor.current) {
         handleEditorWillUnmount();
         editor.current.dispose();
-
-        const model = editor.current.getModel();
-        if (model) {
-          model.dispose();
-        }
       }
       if (_subscription.current) {
         _subscription.current.dispose();
