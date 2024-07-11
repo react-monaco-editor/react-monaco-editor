@@ -5,20 +5,20 @@ import { MonacoDiffEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
 function MonacoDiffEditor({
-  width,
-  height,
-  value,
-  defaultValue,
-  language,
-  theme,
-  options,
-  overrideServices,
-  editorWillMount,
-  editorDidMount,
-  editorWillUnmount,
-  onChange,
-  className,
-  original,
+  width = "100%",
+  height = "100%",
+  value = null,
+  defaultValue = "",
+  language = "javascript",
+  theme = null,
+  options = {},
+  overrideServices = {},
+  editorWillMount = noop,
+  editorDidMount = noop,
+  editorWillUnmount = noop,
+  onChange = noop,
+  className = null,
+  original = null,
   originalUri,
   modifiedUri,
 }: MonacoDiffEditorProps) {
@@ -212,23 +212,6 @@ function MonacoDiffEditor({
     />
   );
 }
-
-MonacoDiffEditor.defaultProps = {
-  width: "100%",
-  height: "100%",
-  original: null,
-  value: null,
-  defaultValue: "",
-  language: "javascript",
-  theme: null,
-  options: {},
-  overrideServices: {},
-  editorWillMount: noop,
-  editorDidMount: noop,
-  editorWillUnmount: noop,
-  onChange: noop,
-  className: null,
-};
 
 MonacoDiffEditor.displayName = "MonacoDiffEditor";
 
