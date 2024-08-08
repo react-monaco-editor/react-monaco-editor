@@ -2,7 +2,7 @@ import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import * as React from "react";
 import { useEffect, useMemo, useRef } from "react";
 import { MonacoEditorProps } from "./types";
-import { noop, processSize } from "./utils";
+import { noop, processSize, propCallbacks } from "./utils";
 
 function MonacoEditor({
   width,
@@ -32,6 +32,8 @@ function MonacoEditor({
 
   const fixedHeight = processSize(height);
 
+  propCallbacks.onChange = onChange;
+
   const style = useMemo(
     () => ({
       width: fixedWidth,
@@ -50,7 +52,7 @@ function MonacoEditor({
 
     _subscription.current = editor.current.onDidChangeModelContent((event) => {
       if (!__prevent_trigger_change_event.current) {
-        onChange(editor.current.getValue(), event);
+        propCallbacks.onChange?.(editor.current.getValue(), event);
       }
     });
   };
