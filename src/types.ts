@@ -54,7 +54,7 @@ export interface MonacoEditorBaseProps {
    * The current out-of-the-box available themes are: 'vs' (default), 'vs-dark', 'hc-black'.
    * You can create custom themes via `monaco.editor.defineTheme`.
    */
-  theme?:Theme | (string & {}) | null;
+  theme?: Theme | (string & NonNullable<unknown>) | null;
 
   /**
    * Optional string classname to append to the editor.
@@ -178,4 +178,4 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
 }
 
 // Default themes
-export type Theme = 'vs' |'vs-dark' | 'hc-black';
+export type Theme = "vs" | "vs-dark" | "hc-black";
