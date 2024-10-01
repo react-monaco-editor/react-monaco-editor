@@ -1795,10 +1795,10 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-7.0.2.tgz#58a82b7d81c7010da5bd4b2c0c85ac4b4ec5131e"
   integrity sha512-eL79dXrE1q9dBbDCLg7xfn/vl7MS4F1gvJAgjJrQli/jbQWdUttuVawphqpffoIYfRdq78LHx6GP4bU/EQ2ATA==
 
-monaco-editor@^0.51.0:
-  version "0.51.0"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.51.0.tgz#922a6103f6742b5a62fbb097276c5a6619d879db"
-  integrity sha512-xaGwVV1fq343cM7aOYB6lVE4Ugf0UyimdD/x5PWcWBMKENwectaEu77FAN7c5sFiyumqeJdX1RPTh1ocioyDjw==
+monaco-editor@^0.52.0:
+  version "0.52.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.52.0.tgz#d47c02b191eae208d68878d679b3ee7456031be7"
+  integrity sha512-OeWhNpABLCeTqubfqLMXGsqf6OmPU6pHM85kF3dhy6kq5hnhuVS1p3VrEW/XhWHc71P2tHyS5JFySD8mgs1crw==
 
 ms@2.1.2:
   version "2.1.2"
