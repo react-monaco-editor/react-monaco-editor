@@ -4,21 +4,20 @@ import { useEffect, useMemo, useRef } from "react";
 import { MonacoEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-
 function MonacoEditor({
-  width="100%",
-  height="100%",
-  value=null,
-  defaultValue="",
-  language="javascript",
-  theme=null,
-  options={},
-  overrideServices={},
-  editorWillMount=noop,
-  editorDidMount=noop,
-  editorWillUnmount=noop,
-  onChange=noop,
-  className=null,
+  width = "100%",
+  height = "100%",
+  value = null,
+  defaultValue = "",
+  language = "javascript",
+  theme = null,
+  options = {},
+  overrideServices = {},
+  editorWillMount = noop,
+  editorDidMount = noop,
+  editorWillUnmount = noop,
+  onChange = noop,
+  className = null,
   uri,
 }: MonacoEditorProps) {
   const containerElement = useRef<HTMLDivElement | null>(null);
