@@ -49,9 +49,9 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "@types/react": ">=16 <= 18",
+    "@types/react": ">=16 <=20",
     "monaco-editor": "^0.52.0",
-    "react": ">=16 <= 18"
+    "react": ">=16 <=20"
   },
   "dependencies": {
     "prop-types": "^15.8.1"
