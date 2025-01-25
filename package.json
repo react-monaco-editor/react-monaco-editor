@@ -45,15 +45,13 @@
     "monaco-editor": "^0.52.0",
     "prettier": "^3.0.0",
     "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rimraf": "^5.0.1",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "@types/react": ">=16 <= 18",
     "monaco-editor": "^0.52.0",
-    "react": ">=16 <= 18"
-  },
-  "dependencies": {
-    "prop-types": "^15.8.1"
+    "react": ">=16.8.0 <20.0.0",
+    "react-dom": ">=16.8.0 <20.0.0"
   }
 }
