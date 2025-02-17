@@ -157,9 +157,15 @@ Make sure to use the [Monaco Webpack plugin](https://github.com/Microsoft/monaco
 
 ### How to interact with the MonacoEditor instance
 
-Using the first parameter of `editorDidMount`, or using a `ref` (e.g. `<MonacoEditor ref="monaco">`) after `editorDidMount` event has fired.
+Using the first parameter of `editorDidMount`, or using a `ref` (e.g. `<MonacoEditor ref={monacoEditorRef}>`).
 
-Then you can invoke instance methods via `this.refs.monaco.editor`, e.g. `this.refs.monaco.editor.focus()` to focuses the MonacoEditor instance.
+```js
+const monacoEditorRef = useRef(null);
+return (<>
+  <button onClick={() => monacoEditorRef.current.editor.focus()}>Focus</button>
+  <MonacoEditor ref={monacoEditorRef} />
+</>)
+```
 
 ### How to get value of editor
 

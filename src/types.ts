@@ -179,3 +179,11 @@ export interface MonacoDiffEditorProps extends MonacoEditorBaseProps {
 
 // Default themes
 export type Theme = "vs" | "vs-dark" | "hc-black";
+
+export interface MonacoEditorHandle {
+  editor: monacoEditor.editor.IStandaloneCodeEditor;
+}
+
+export interface MonacoDiffEditorHandle {
+  editor: monacoEditor.editor.IStandaloneDiffEditor;
+}
