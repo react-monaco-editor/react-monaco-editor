@@ -1,25 +1,28 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import * as React from "react";
 import { useEffect, useMemo, useRef } from "react";
-import { MonacoEditorProps } from "./types";
+import { MonacoEditorHandle, MonacoEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-function MonacoEditor({
-  width = "100%",
-  height = "100%",
-  value = null,
-  defaultValue = "",
-  language = "javascript",
-  theme = null,
-  options = {},
-  overrideServices = {},
-  editorWillMount = noop,
-  editorDidMount = noop,
-  editorWillUnmount = noop,
-  onChange = noop,
-  className = null,
-  uri,
-}: MonacoEditorProps) {
+function MonacoEditor(
+  {
+    width = "100%",
+    height = "100%",
+    value = null,
+    defaultValue = "",
+    language = "javascript",
+    theme = null,
+    options = {},
+    overrideServices = {},
+    editorWillMount = noop,
+    editorDidMount = noop,
+    editorWillUnmount = noop,
+    onChange = noop,
+    className = null,
+    uri,
+  }: MonacoEditorProps,
+  ref: React.ForwardedRef<MonacoEditorHandle>,
+) {
   const containerElement = useRef<HTMLDivElement | null>(null);
 
   const editor = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
@@ -34,6 +37,12 @@ function MonacoEditor({
 
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
+
+  React.useImperativeHandle(ref, () => ({
+    get editor() {
+      return editor.current;
+    },
+  }));
 
   const style = useMemo(
     () => ({
@@ -173,6 +182,7 @@ function MonacoEditor({
   );
 }
 
-MonacoEditor.displayName = "MonacoEditor";
+const MonacoEditorForwarded = React.forwardRef(MonacoEditor);
+MonacoEditorForwarded.displayName = "MonacoEditor";
 
-export default MonacoEditor;
+export default MonacoEditorForwarded;
