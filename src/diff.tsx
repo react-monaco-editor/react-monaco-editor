@@ -1,27 +1,30 @@
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
 import * as React from "react";
 import { useEffect, useMemo, useRef } from "react";
-import { MonacoDiffEditorProps } from "./types";
+import { MonacoDiffEditorHandle, MonacoDiffEditorProps } from "./types";
 import { noop, processSize } from "./utils";
 
-function MonacoDiffEditor({
-  width = "100%",
-  height = "100%",
-  value = null,
-  defaultValue = "",
-  language = "javascript",
-  theme = null,
-  options = {},
-  overrideServices = {},
-  editorWillMount = noop,
-  editorDidMount = noop,
-  editorWillUnmount = noop,
-  onChange = noop,
-  className = null,
-  original = null,
-  originalUri,
-  modifiedUri,
-}: MonacoDiffEditorProps) {
+function MonacoDiffEditor(
+  {
+    width = "100%",
+    height = "100%",
+    value = null,
+    defaultValue = "",
+    language = "javascript",
+    theme = null,
+    options = {},
+    overrideServices = {},
+    editorWillMount = noop,
+    editorDidMount = noop,
+    editorWillUnmount = noop,
+    onChange = noop,
+    className = null,
+    original = null,
+    originalUri,
+    modifiedUri,
+  }: MonacoDiffEditorProps,
+  ref: React.ForwardedRef<MonacoDiffEditorHandle>,
+) {
   const containerElement = useRef<HTMLDivElement | null>(null);
 
   const editor = useRef<monaco.editor.IStandaloneDiffEditor | null>(null);
@@ -41,6 +44,12 @@ function MonacoDiffEditor({
     }),
     [fixedWidth, fixedHeight],
   );
+
+  React.useImperativeHandle(ref, () => ({
+    get editor() {
+      return editor.current;
+    },
+  }));
 
   const handleEditorWillMount = () => {
     const finalOptions = editorWillMount(monaco);
@@ -213,6 +222,8 @@ function MonacoDiffEditor({
   );
 }
 
-MonacoDiffEditor.displayName = "MonacoDiffEditor";
+const MonacoDiffEditorForwarded = React.forwardRef(MonacoDiffEditor);
 
-export default MonacoDiffEditor;
+MonacoDiffEditorForwarded.displayName = "MonacoDiffEditor";
+
+export default MonacoDiffEditorForwarded;
