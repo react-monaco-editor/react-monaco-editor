@@ -2964,7 +2964,7 @@ loglevel@^1.6.8:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.8.1.tgz#5c621f83d5b48c54ae93b6156353f555963377b4"
   integrity sha512-tCRIJM51SHjAayKwC+QAg8hT8vg6z7GSgLJKGvzuPb1Wc+hLzqtuVLxp6/HzSPOozuK+8ErAhy7U/sVzw8Dgfg==
 
-loose-envify@^1.1.0, loose-envify@^1.4.0:
+loose-envify@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -3204,7 +3204,7 @@ npm-run-path@^2.0.0:
   dependencies:
     path-key "^2.0.0"
 
-object-assign@^4.0.1, object-assign@^4.1.1:
+object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
@@ -3520,15 +3520,6 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-prop-types@^15.8.1:
-  version "15.8.1"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
-  integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
-  dependencies:
-    loose-envify "^1.4.0"
-    object-assign "^4.1.1"
-    react-is "^16.13.1"
-
 proxy-addr@~2.0.7:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.7.tgz#f19fe69ceab311eeb94b42e70e8c2070f9ba1025"
@@ -3607,17 +3598,10 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
-react-is@^16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
-  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
 react-monaco-editor@latest:
-  version "0.56.2"
-  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.56.2.tgz#9703424b7d956085c4b74450345cc83c8de9176c"
-  integrity sha512-Tp5U3QF9h92Cuf0eIhGd8Jyef8tPMlEJC2Dk1GeuR/hj6WoFn8AgjVX/2dv+3l5DvpMUpAECcFarc3eFKTBZ5w==
-  dependencies:
-    prop-types "^15.8.1"
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.58.0.tgz#da2285d27d29be1080b7558c25e0fc5050e3fdfb"
+  integrity sha512-e8JH0TQEzO96Wd/EXgzc9M9tQK1pxBECD+8GNob9slMURcCM36TiVrgc4topWCDGYxRuMj8IEkaX+s3eQcUUqw==
 
 react@^18.3.1:
   version "18.3.1"
