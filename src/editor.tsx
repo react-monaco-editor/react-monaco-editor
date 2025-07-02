@@ -106,7 +106,8 @@ function MonacoEditor(
   useEffect(initMonaco, []);
 
   useEffect(() => {
-    if (editor.current) {
+    // If value is null, we don't want to update the editor content because it is controlled by defaultValue.
+    if (editor.current && value !== null) {
       if (value === editor.current.getValue()) {
         return;
       }
