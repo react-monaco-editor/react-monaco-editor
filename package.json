@@ -46,7 +46,7 @@
     "prettier": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "rimraf": "^5.0.1",
+    "rimraf": "^6.0.1",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
