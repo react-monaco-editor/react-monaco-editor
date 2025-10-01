@@ -42,7 +42,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "monaco-editor": "^0.52.0",
+    "monaco-editor": "^0.53.0",
     "prettier": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -50,7 +50,7 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "monaco-editor": "^0.52.0",
+    "monaco-editor": "^0.53.0",
     "react": ">=16.8.0 <20.0.0",
     "react-dom": ">=16.8.0 <20.0.0"
   }
