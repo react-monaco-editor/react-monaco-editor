@@ -15,7 +15,7 @@
     "@babel/core": "^7.27.7",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/preset-env": "^7.27.2",
-    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-react": "^7.28.5",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "monaco-editor-webpack-plugin": "^7.1.0",
