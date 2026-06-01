@@ -3,15 +3,15 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: monthly
+    interval: yearly
   open-pull-requests-limit: 10
 - package-ecosystem: npm
   directory: "/example/"
   schedule:
-    interval: monthly
+    interval: yearly
   open-pull-requests-limit: 10
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
-    interval: monthly
+    interval: yearly
   open-pull-requests-limit: 10
